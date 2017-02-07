@@ -184,7 +184,7 @@ Global
 		$26.IncludeInstanceMembers = True
 		$26.IncludeStaticEntities = True
 		$0.DotNetNamingPolicy = $28
-		$28.DirectoryNamespaceAssociation = None
+		$28.DirectoryNamespaceAssociation = PrefixedFlat
 		$28.ResourceNamePolicy = FileFormatDefault
 	EndGlobalSection
 EndGlobal

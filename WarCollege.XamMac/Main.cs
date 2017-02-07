@@ -19,7 +19,8 @@
  */
 
 using AppKit;
-using Eto.Forms;
+using Eto;
+using Eto.Mac.Forms;
 
 namespace WarCollege.XamMac
 {
@@ -27,7 +28,13 @@ namespace WarCollege.XamMac
     {
         static void Main(string[] args)
         {
-            new Application(Eto.Platforms.XamMac2).Run(new MainForm());
+            Style.Add<FormHandler>("MainWindow", handler =>
+            {
+                handler.Control.CollectionBehavior |= NSWindowCollectionBehavior.FullScreenPrimary;
+            });
+
+            var app = new Program(Platforms.XamMac2);
+            app.Run();
         }
     }
 }

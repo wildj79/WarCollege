@@ -24,6 +24,7 @@ using Eto.Drawing;
 
 namespace WarCollege
 {
+
     public class MainForm : Form
     {
         public MainForm()
@@ -31,15 +32,18 @@ namespace WarCollege
             Title = "War College";
             ClientSize = new Size(800, 600);
             Content = new Label { Text = "Hello World!" };
+            Style = "MainWindow";
 
             Menu = new MenuBar
             {
-                QuitItem = new Command((sender, e) => Application.Instance.Quit())
-                {
-                    MenuText = "Quit",
-                    Shortcut = Application.Instance.CommonModifier | Keys.Q
-                }
+                QuitItem = new Commands.Quit(),
+                AboutItem = new Commands.About()
             };       
+        }
+
+        public bool PromptSave()
+        {
+            return true;
         }
     }
 }
