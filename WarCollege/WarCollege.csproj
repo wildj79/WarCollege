@@ -75,8 +75,6 @@
     <Folder Include="Logging\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\splash.jpg" />
-    <EmbeddedResource Include="Resources\splash2.jpg" />
     <EmbeddedResource Include="Resources\Strings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
