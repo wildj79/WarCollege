@@ -17,6 +17,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile></DocumentationFile>
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -31,6 +32,16 @@
     <Reference Include="Eto">
       <HintPath>..\packages\Eto.Forms.2.3.0\lib\net45\Eto.dll</HintPath>
     </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.4.3.0\lib\net45\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.4.3\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Extras.NLog">
+      <HintPath>..\packages\Autofac.Extras.NLog.1.3.0\lib\net45\Autofac.Extras.NLog.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -39,13 +50,44 @@
     <Compile Include="Commands\About.cs" />
     <Compile Include="Dialogs\About.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="SplashScreen.cs" />
+    <Compile Include="Resources\Strings.Designer.cs">
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Commands\Preferences.cs" />
+    <Compile Include="Config\IConfigSettings.cs" />
+    <Compile Include="Config\ConfigSettings.cs" />
+    <Compile Include="Config\UserPreferences.cs" />
+    <Compile Include="Config\IConfigManager.cs" />
+    <Compile Include="Config\ConfigManager.cs" />
+    <Compile Include="IocBootstraper.cs" />
+    <Compile Include="Dialogs\Preferences.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="NLog.xsd" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Commands\" />
     <Folder Include="Dialogs\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Config\" />
+    <Folder Include="Logging\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\splash.jpg" />
+    <EmbeddedResource Include="Resources\splash2.jpg" />
+    <EmbeddedResource Include="Resources\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+      <LogicalName>WarCollege.resources</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="settings.xml" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

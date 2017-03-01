@@ -18,25 +18,53 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using Autofac.Extras.NLog;
+using Autofac.Features.OwnedInstances;
 using Eto.Forms;
+using Autofac.Features.AttributeFilters;
 
 namespace WarCollege.Commands
 {
+    /// <summary>
+    /// About menu item command.
+    /// </summary>
     public class About : Command
     {
-        public About()
+        private readonly ILogger _logger;
+        private readonly Func<Owned<Dialog>> _dialogFactory;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.About"/> class.
+        /// </summary>
+        /// <param name="logger">General logging</param>
+        /// <param name="dialogFactory">Factory method for creating the about dailog</param>
+        public About(ILogger logger, 
+                     [KeyFilter("aboutDialog")] Func<Owned<Dialog>> dialogFactory)
         {
-            MenuText = "About War College";
-            ToolBarText = "About";
+            _logger = logger;
+            _dialogFactory = dialogFactory;
+            
+            MenuText = Resources.Strings.AboutMenuText;
+            ToolBarText = Resources.Strings.AboutToolBarText;
             // Image = Icon.FromResource("");
         }
 
+        /// <summary>
+        /// Handler for the Command.OnExecuted evnet.
+        /// </summary>
+        /// <param name="e">Generic event args</param>
+        /// <remarks>
+        /// Brings up the about us modal dialog.
+        /// </remarks>
         protected override void OnExecuted(EventArgs e)
         {
+            _logger.Trace("Start Commands.About.OnExecuted()");
             base.OnExecuted(e);
 
-            var about = new Dialogs.About();
-            about.ShowModal(Application.Instance.MainForm);
+            using (var about = _dialogFactory().Value)
+                about.ShowModal(Application.Instance.MainForm);
+
+            _logger.Trace("End Commands.About.OnExecuted()");
         }
     }
 }

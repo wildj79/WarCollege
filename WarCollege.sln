@@ -186,5 +186,26 @@ Global
 		$0.DotNetNamingPolicy = $28
 		$28.DirectoryNamespaceAssociation = PrefixedFlat
 		$28.ResourceNamePolicy = FileFormatDefault
+		$0.TextStylePolicy = $29
+		$29.inheritsSet = null
+		$29.scope = application/config+xml
+		$0.XmlFormattingPolicy = $30
+		$30.inheritsSet = null
+		$30.scope = application/config+xml
+		$0.TextStylePolicy = $31
+		$31.inheritsSet = null
+		$31.scope = application/xml
+		$0.XmlFormattingPolicy = $32
+		$32.inheritsSet = Mono
+		$32.inheritsScope = application/xml
+		$32.scope = application/xml
+		$0.TextStylePolicy = $33
+		$33.inheritsSet = null
+		$33.scope = text/microsoft-resx
+		$0.XmlFormattingPolicy = $34
+		$34.inheritsSet = null
+		$34.scope = text/microsoft-resx
+		$0.VersionControlPolicy = $35
+		$35.inheritsSet = Mono
 	EndGlobalSection
 EndGlobal

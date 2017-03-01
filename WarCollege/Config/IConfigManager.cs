@@ -1,4 +1,4 @@
-// War College - Copyright (c) 2017 James Allred (wildj79@gmail.com)
+﻿// War College - Copyright (c) 2017 James Allred (wildj79@gmail.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this 
 // software and associated documentation files (the "Software"), to deal in the Software
@@ -17,37 +17,29 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
 // OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using Autofac.Extras.NLog;
-using Eto.Forms;
-
-namespace WarCollege.Commands
+namespace WarCollege.Config
 {
     /// <summary>
-    /// Quit menu itme command.
+    /// Interface that represents the applications configuration management class
     /// </summary>
-    public class Quit : Command
+    public interface IConfigManager
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Quit"/> class.
+        /// Gets or sets the configuration file path.
         /// </summary>
-        public Quit()
-        {
-            MenuText = Resources.Strings.QuitMenuText;
-            ToolBarText = Resources.Strings.QuitToolBarText;
-            Shortcut = Application.Instance.CommonModifier | Keys.Q;
-        }
+        /// <value>The configuration file path.</value>
+        string ConfigFilePath { get; set; }
 
         /// <summary>
-        /// Handler for the Command.Executed event
+        /// Loads the applications configuration file.
         /// </summary>
-        /// <param name="e">Generic event arguments</param>
-        /// <remarks>Quits the application.</remarks>
-        protected override void OnExecuted(EventArgs e)
-        {
-            base.OnExecuted(e);
+        /// <returns>The application configuration settings.</returns>
+        IConfigSettings LoadConfig();
 
-            Application.Instance.Quit();
-        }
+        /// <summary>
+        /// Save the specified settings.
+        /// </summary>
+        /// <param name="settings">The application settings.</param>
+        void Save(IConfigSettings settings);
     }
 }

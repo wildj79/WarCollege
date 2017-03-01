@@ -19,44 +19,24 @@
 
 using System;
 using System.Reflection;
-using Eto.Forms;
 using Eto.Drawing;
+using Eto.Forms;
 
 namespace WarCollege.Dialogs
 {
     /// <summary>
-    /// The about dailog.
+    /// User preferences modal dialog
     /// </summary>
-    public class About : Dialog
+    public class Preferences : Dialog
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Dialogs.About"/> class.
+        /// Initializes a new instance of the <see cref="T:WarCollege.Dialogs.Preferences"/> class.
         /// </summary>
-        public About()
+        public Preferences()
         {
-            Title = Resources.Strings.AboutMenuText;
+            Title = Resources.Strings.HelloWorld;
             MinimumSize = new Size(300, 0);
             Resizable = false;
-
-            var labelTitle = new Label
-            {
-                Text = Resources.Strings.AppTitle,
-                Font = new Font(FontFamilies.Sans, 16),
-                TextAlignment = TextAlignment.Center
-            };
-
-            var version = Assembly.GetExecutingAssembly().GetName().Version;
-            var labelVersion = new Label
-            {
-                Text = string.Format(Resources.Strings.VersionText, version),
-                TextAlignment = TextAlignment.Center
-            };
-
-            var labelCopyright = new Label
-            {
-                Text = string.Format(Resources.Strings.CopyriteText, DateTime.Now.Year),
-                TextAlignment = TextAlignment.Center
-            };
 
             var button = new Button
             {
@@ -71,7 +51,7 @@ namespace WarCollege.Dialogs
                 Spacing = new Size(5, 5),
                 Rows =
                 {
-                    labelTitle, labelVersion, labelCopyright,
+                    new Label { Text = Resources.Strings.HelloWorld },
                     TableLayout.AutoSized(button, centered: true)
                 }
             };

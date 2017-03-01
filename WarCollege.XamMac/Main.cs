@@ -21,9 +21,14 @@
 using AppKit;
 using Eto;
 using Eto.Mac.Forms;
+using Eto.Mac.Forms.Controls;
+using Autofac;
 
 namespace WarCollege.XamMac
 {
+    /// <summary>
+    /// Main entry point for the Mac version of the application.
+    /// </summary>
     static class MainClass
     {
         static void Main(string[] args)
@@ -33,8 +38,20 @@ namespace WarCollege.XamMac
                 handler.Control.CollectionBehavior |= NSWindowCollectionBehavior.FullScreenPrimary;
             });
 
-            var app = new Program(Platforms.XamMac2);
-            app.Run();
+            Style.Add<ProgressBarHandler>("ProgressBar", (handler) =>
+            {
+                handler.Control.ControlTint = NSControlTint.Blue;
+                handler.Control.Bezeled = true;
+            });
+
+            var bootstrapper = new IocBootstraper();
+            var container = bootstrapper.Build();
+
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var app = scope.Resolve<Eto.Forms.Application>();
+                app.Run();
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-// War College - Copyright (c) 2017 James Allred (wildj79@gmail.com)
+﻿// War College - Copyright (c) 2017 James Allred (wildj79@gmail.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this 
 // software and associated documentation files (the "Software"), to deal in the Software
@@ -18,36 +18,28 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using Autofac.Extras.NLog;
-using Eto.Forms;
+using System.Xml.Serialization;
 
-namespace WarCollege.Commands
+namespace WarCollege.Config
 {
     /// <summary>
-    /// Quit menu itme command.
+    /// Config settings.
     /// </summary>
-    public class Quit : Command
+    [XmlRoot("settings")]
+    public class ConfigSettings : IConfigSettings
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Quit"/> class.
+        /// Initializes a new instance of the <see cref="T:WarCollege.Config.ConfigSettings"/> class.
         /// </summary>
-        public Quit()
-        {
-            MenuText = Resources.Strings.QuitMenuText;
-            ToolBarText = Resources.Strings.QuitToolBarText;
-            Shortcut = Application.Instance.CommonModifier | Keys.Q;
-        }
+        public ConfigSettings() { }
 
         /// <summary>
-        /// Handler for the Command.Executed event
+        /// Gets or sets the user preferences.
         /// </summary>
-        /// <param name="e">Generic event arguments</param>
-        /// <remarks>Quits the application.</remarks>
-        protected override void OnExecuted(EventArgs e)
-        {
-            base.OnExecuted(e);
+        /// <value>The user preferences.</value>
+        [XmlElement("preferences")]
+        public UserPreferences UserPreferences { get; set; }
 
-            Application.Instance.Quit();
-        }
+
     }
 }

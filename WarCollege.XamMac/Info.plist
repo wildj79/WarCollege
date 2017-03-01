@@ -5,7 +5,7 @@
 	<key>CFBundleName</key>
 	<string>War College</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.ae5kt.warcollege-xammac</string>
+	<string>org.megamek.warcollege</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -24,7 +24,5 @@
 	<string>${AuthorCopyright}</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
 </dict>
 </plist>

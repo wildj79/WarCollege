@@ -1,4 +1,4 @@
-// War College - Copyright (c) 2017 James Allred (wildj79@gmail.com)
+﻿// War College - Copyright (c) 2017 James Allred (wildj79@gmail.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this 
 // software and associated documentation files (the "Software"), to deal in the Software
@@ -18,36 +18,27 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
-using Autofac.Extras.NLog;
-using Eto.Forms;
+using System.Xml.Serialization;
+using System.ComponentModel;
 
-namespace WarCollege.Commands
+namespace WarCollege.Config
 {
     /// <summary>
-    /// Quit menu itme command.
+    /// User preferences.
     /// </summary>
-    public class Quit : Command
+    public class UserPreferences
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Quit"/> class.
+        /// Initializes a new instance of the <see cref="T:WarCollege.Config.UserPreferences"/> class.
         /// </summary>
-        public Quit()
-        {
-            MenuText = Resources.Strings.QuitMenuText;
-            ToolBarText = Resources.Strings.QuitToolBarText;
-            Shortcut = Application.Instance.CommonModifier | Keys.Q;
-        }
+        public UserPreferences() { }
 
         /// <summary>
-        /// Handler for the Command.Executed event
+        /// Gets or sets the locale.
         /// </summary>
-        /// <param name="e">Generic event arguments</param>
-        /// <remarks>Quits the application.</remarks>
-        protected override void OnExecuted(EventArgs e)
-        {
-            base.OnExecuted(e);
-
-            Application.Instance.Quit();
-        }
+        /// <value>The locale.</value>
+        [XmlAttribute("locale")]
+        [DefaultValue("en-US")]
+        public string Locale { get; set; }
     }
 }

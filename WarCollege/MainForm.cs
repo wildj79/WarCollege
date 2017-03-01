@@ -21,29 +21,116 @@
 using System;
 using Eto.Forms;
 using Eto.Drawing;
+using Autofac.Extras.NLog;
+using Autofac.Features.Indexed;
 
 namespace WarCollege
 {
-
+    /// <summary>
+    /// The main GUI window for the application.
+    /// </summary>
+    /// <remarks>
+    /// This is where the majority of the interaction with the user will
+    /// take place.
+    /// </remarks>
     public class MainForm : Form
     {
-        public MainForm()
+        #region Fields
+
+        private readonly ILogger _logger;
+        private readonly IIndex<string, Command> _commandFactory;
+
+        #endregion // Fields
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:WarCollege.MainForm"/> class.
+        /// </summary>
+        /// <param name="logger">General logging aparatus</param>
+        /// <param name="commandFactory">Factory method for creating menu commands</param>
+        public MainForm(ILogger logger, IIndex<string, Command> commandFactory)
         {
-            Title = "War College";
+            _logger = logger;
+            _commandFactory = commandFactory;
+
+            Title = Resources.Strings.AppTitle;
             ClientSize = new Size(800, 600);
-            Content = new Label { Text = "Hello World!" };
+            Content = new Label { Text = Resources.Strings.HelloWorld };
             Style = "MainWindow";
 
-            Menu = new MenuBar
-            {
-                QuitItem = new Commands.Quit(),
-                AboutItem = new Commands.About()
-            };       
+            GenerateMenu();
         }
 
+        #endregion // Constructors
+
+        #region Utilities
+
+        /// <summary>
+        /// Generates the main menu.
+        /// </summary>
+        private void GenerateMenu()
+        {
+            _logger.Trace("Starting MainForm.GenerateMenu()");
+
+            _logger.Debug("Building menu bar and the tool bar.");
+
+            var menu = new MenuBar
+            {
+                AboutItem = _commandFactory["aboutCommand"],
+                QuitItem = _commandFactory["quitCommand"]
+            };
+
+            //var file = menu.Items.GetSubmenu("&File");
+
+            menu.ApplicationItems.Add(_commandFactory["preferencesCommand"], 900);
+
+
+            Menu = menu;
+
+            _logger.Trace("End MainForm.GenerateMenu()");
+        }
+
+        #endregion // Utilities
+
+        #region Methods
+
+        /// <summary>
+        /// Handler for the Form.Load event.
+        /// </summary>
+        /// <param name="e">Generic event arguments</param>
+        /// <remarks>
+        /// Don't remove the <code>base.OnLoad(e)</code> call. The resource strings 
+        /// won't load correctly if you do.
+        /// </remarks>
+        protected override void OnLoad(EventArgs e)
+        {
+            _logger.Trace("Start MainForm.OnLoad()");
+            // SplashScreen.CloseForm();
+            base.OnLoad(e);
+
+            _logger.Trace("End MainForm.OnLoad()");
+        }
+
+        /// <summary>
+        /// Method used to determine if the user should be prompted before closing
+        /// the application.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c>, if the user has any unsaved changes that will be lost
+        /// when the application closes, <c>false</c> otherwise.
+        /// </returns>
         public bool PromptSave()
         {
+            _logger.Trace("Start MainForm.PromptSave()");
+
+
+
+            _logger.Trace("End MainForm.PromptSave()");
+
             return true;
         }
+
+        #endregion // Methods
     }
 }

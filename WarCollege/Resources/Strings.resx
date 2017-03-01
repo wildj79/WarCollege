@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <resheader name="resmimetype">
+        <value>text/microsoft-resx</value>
+    </resheader>
+    <resheader name="version">
+        <value>2.0</value>
+    </resheader>
+    <resheader name="reader">
+        <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+    <resheader name="writer">
+        <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    </resheader>
+	<data name="AppTitle" xml:space="preserve">
+		<value>War College</value>
+		<comment>This is the title of the application</comment>
+	</data>
+	<data name="HelloWorld">
+		<value>Hello World!</value>
+		<comment>This is only for development. Remove when done</comment>
+	</data>
+	<data name="QuitMenuText">
+		<value>&amp;Quit</value>
+        <comment>This is the text for the quit command as seen in the menu bar</comment>
+	</data>
+	<data name="QuitToolBarText">
+		<value>Quit</value>
+		<comment>This is the text for the quit command as seen in the tool bar</comment>
+	</data>
+	<data name="AboutMenuText">
+        <value>About War College</value>
+        <comment>This is the text for the about command as seen in the menu bar</comment>
+    </data>
+    <data name="AboutToolBarText">
+        <value>About</value>
+        <comment>This is the text for the about command as seen in the tool bar</comment>
+    </data>
+	<data name="PreferencesMenuText">
+        <value>Preferences...</value>
+        <comment>This is the text for the preferences command as seen in the menu bar</comment>
+    </data>
+    <data name="PreferencesToolBarText">
+        <value>Preferences</value>
+        <comment>This is the text for the preferences command as seen in the tool bar</comment>
+    </data>
+	<data name="CloseButton">
+		<value>Close</value>
+		<comment>Text that appears on form buttons that close a form</comment>
+	</data>
+	<data name="RandomData">
+        <value>gibberihs</value>
+        <comment>shut the front door</comment>
+    </data>
+	<data name="VersionText">
+		<value>Version: {0}</value>
+        <comment>this is text used to convey the application version to a user</comment>
+	</data>
+	<data name="CopyriteText" xml:space="preserve">
+		<value>Copyright &#x00A9; {0} James Allred</value>
+		<comment>Application copywrite information</comment>
+	</data>
+</root>

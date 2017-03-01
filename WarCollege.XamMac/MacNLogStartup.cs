@@ -1,4 +1,4 @@
-// War College - Copyright (c) 2017 James Allred (wildj79@gmail.com)
+﻿// War College - Copyright (c) 2017 James Allred (wildj79@gmail.com)
 //
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this 
 // software and associated documentation files (the "Software"), to deal in the Software
@@ -16,38 +16,23 @@
 // OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
 // OTHER DEALINGS IN THE SOFTWARE.
-
 using System;
-using Autofac.Extras.NLog;
-using Eto.Forms;
+using Autofac;
+using NLog;
+using NLog.Config;
+using Foundation;
+using System.IO;
 
-namespace WarCollege.Commands
+namespace WarCollege.XamMac
 {
-    /// <summary>
-    /// Quit menu itme command.
-    /// </summary>
-    public class Quit : Command
+    public class MacNLogStartup : IStartable
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Quit"/> class.
-        /// </summary>
-        public Quit()
+        public void Start()
         {
-            MenuText = Resources.Strings.QuitMenuText;
-            ToolBarText = Resources.Strings.QuitToolBarText;
-            Shortcut = Application.Instance.CommonModifier | Keys.Q;
-        }
+            string resourcePath = NSBundle.MainBundle.ResourcePath;
 
-        /// <summary>
-        /// Handler for the Command.Executed event
-        /// </summary>
-        /// <param name="e">Generic event arguments</param>
-        /// <remarks>Quits the application.</remarks>
-        protected override void OnExecuted(EventArgs e)
-        {
-            base.OnExecuted(e);
-
-            Application.Instance.Quit();
+            LogManager.Configuration = new XmlLoggingConfiguration(Path.Combine(resourcePath, "NLog.config"));
+            LogManager.Configuration.Variables["logDir"] = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "WarCollege");
         }
     }
 }
