@@ -1,6 +1,8 @@
 War College
 ===========
 
+[![Documentation Status](https://readthedocs.org/projects/warcollege/badge/?version=latest)](http://warcollege.readthedocs.io/en/latest/?badge=latest)
+
 A character creation utility for the Battletech A Time of War RPG rules set.
 
 This is still in the early stages of development, so don't expect much yet.
