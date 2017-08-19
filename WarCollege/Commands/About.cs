@@ -22,6 +22,7 @@ using Autofac.Extras.NLog;
 using Autofac.Features.OwnedInstances;
 using Eto.Forms;
 using Autofac.Features.AttributeFilters;
+using Eto.Drawing;
 
 namespace WarCollege.Commands
 {
@@ -46,7 +47,8 @@ namespace WarCollege.Commands
             
             MenuText = Resources.Strings.AboutMenuText;
             ToolBarText = Resources.Strings.AboutToolBarText;
-            // Image = Icon.FromResource("");
+            Image = Icon.FromResource("WarCollege.Resources.information.png");
+
         }
 
         /// <summary>

@@ -38,3 +38,9 @@ Thumbs.db
 
 # dotCover
 *.dotCover
+
+# Rider
+.idea/
+
+# sphinx build artifacts
+docs/build/

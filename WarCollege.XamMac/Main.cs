@@ -33,16 +33,16 @@ namespace WarCollege.XamMac
     {
         static void Main(string[] args)
         {
-            Style.Add<FormHandler>("MainWindow", handler =>
-            {
-                handler.Control.CollectionBehavior |= NSWindowCollectionBehavior.FullScreenPrimary;
-            });
+            //Style.Add<FormHandler>("MainWindow", handler =>
+            //{
+            //    handler.Control.CollectionBehavior |= NSWindowCollectionBehavior.FullScreenPrimary;
+            //});
 
-            Style.Add<ProgressBarHandler>("ProgressBar", (handler) =>
-            {
-                handler.Control.ControlTint = NSControlTint.Blue;
-                handler.Control.Bezeled = true;
-            });
+            //Style.Add<ProgressBarHandler>("ProgressBar", (handler) =>
+            //{
+            //    handler.Control.ControlTint = NSControlTint.Blue;
+            //    handler.Control.Bezeled = true;
+            //});
 
             var bootstrapper = new IocBootstraper();
             var container = bootstrapper.Build();
