@@ -1,4 +1,4 @@
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26228.9
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -7,10 +7,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarCollege.XamMac", "WarCollege.XamMac\WarCollege.XamMac.csproj", "{91631A03-D57E-4D1D-9752-A5E2280E6B94}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3EA32142-F96E-4721-B57B-2CD60EBD92DF}"
-	ProjectSection(SolutionItems) = preProject
-		LICENSE = LICENSE
-		README.md = README.md
-	EndProjectSection
+ProjectSection(SolutionItems) = preProject
+	..\LICENSE = ..\LICENSE
+	..\README.md = ..\README.md
+EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarCollege.Windows", "WarCollege.Windows\WarCollege.Windows.csproj", "{F68496B0-A7B0-4397-83CE-DEF3E25C7BD0}"
 EndProject
@@ -29,7 +29,6 @@ Global
 		{91631A03-D57E-4D1D-9752-A5E2280E6B94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91631A03-D57E-4D1D-9752-A5E2280E6B94}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F68496B0-A7B0-4397-83CE-DEF3E25C7BD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F68496B0-A7B0-4397-83CE-DEF3E25C7BD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F68496B0-A7B0-4397-83CE-DEF3E25C7BD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F68496B0-A7B0-4397-83CE-DEF3E25C7BD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
