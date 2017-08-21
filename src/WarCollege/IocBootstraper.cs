@@ -33,7 +33,7 @@ namespace WarCollege
         /// <summary>
         /// Registers NLog for use in the application.
         /// </summary>
-        /// <param name="builder">The Autofac <c>ContainerBuilder</c></param>
+        /// <param name="builder">The Autofac <see cref="T:Autofac.ContainerBuilder" /></param>
         protected virtual void RegisterLogging(ContainerBuilder builder)
         {
             builder.RegisterModule<NLogModule>();
@@ -51,11 +51,13 @@ namespace WarCollege
         {
             builder
                 .RegisterType<Config.ConfigManager>()
-                .As<Config.IConfigManager>();
+                .As<Config.IConfigManager>()
+                .SingleInstance();
 
             builder
                 .Register(ctx => ctx.Resolve<Config.IConfigManager>().LoadConfig())
-                .As<Config.IConfigSettings>();
+                .As<Config.IConfigSettings>()
+                .SingleInstance();
         }
 
         /// <summary>
@@ -76,6 +78,26 @@ namespace WarCollege
             builder
                 .RegisterType<Commands.Preferences>()
                 .Keyed<Eto.Forms.Command>("preferencesCommand")
+                .WithAttributeFiltering();
+
+            builder
+                .RegisterType<Commands.NewCharacter>()
+                .Keyed<Eto.Forms.Command>("newCharacterCommand")
+                .WithAttributeFiltering();
+
+            builder
+                .RegisterType<Commands.OpenCharacter>()
+                .Keyed<Eto.Forms.Command>("openCharacterCommand")
+                .WithAttributeFiltering();
+
+            builder
+                .RegisterType<Commands.SaveCharacter>()
+                .Keyed<Eto.Forms.Command>("saveCharacterCommand")
+                .WithAttributeFiltering();
+
+            builder
+                .RegisterType<Commands.SaveCharacterAs>()
+                .Keyed<Eto.Forms.Command>("saveCharacterAsCommand")
                 .WithAttributeFiltering();
         }
 

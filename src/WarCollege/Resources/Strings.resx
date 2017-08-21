@@ -44,6 +44,38 @@
         <value>Preferences</value>
         <comment>This is the text for the preferences command as seen in the tool bar</comment>
     </data>
+	<data name="NewMenuText">
+		<value>&amp;New Character</value>
+		<comment>This is the text for the new character command as seen in the menu bar</comment>
+	</data>
+	<data name="NewToolBarText">
+        <value>New Character</value>
+        <comment>This is the text for the new character command as seen in the tool bar</comment>
+    </data>
+	<data name="OpenMenuText">
+        <value>&amp;Open Character</value>
+        <comment>This is the text for the open character command as seen in the menu bar</comment>
+    </data>
+    <data name="OpenToolBarText">
+        <value>Open Character</value>
+        <comment>This is the text for the open character command as seen in the tool bar</comment>
+    </data>
+	<data name="SaveMenuText">
+        <value>&amp;Save Character</value>
+        <comment>This is the text for the save character command as seen in the menu bar</comment>
+    </data>
+    <data name="SaveToolBarText">
+        <value>Save Character</value>
+        <comment>This is the text for the save character command as seen in the tool bar</comment>
+    </data>
+	<data name="SaveAsMenuText">
+        <value>Save Character As</value>
+        <comment>This is the text for the save character as command as seen in the menu bar</comment>
+    </data>
+    <data name="SaveAsToolBarText">
+        <value>Save Character As</value>
+        <comment>This is the text for the save character as command as seen in the tool bar</comment>
+    </data>
 	<data name="CloseButton">
 		<value>Close</value>
 		<comment>Text that appears on form buttons that close a form</comment>

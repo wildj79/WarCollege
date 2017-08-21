@@ -33,10 +33,10 @@ namespace WarCollege.XamMac
     {
         static void Main(string[] args)
         {
-            //Style.Add<FormHandler>("MainWindow", handler =>
-            //{
-            //    handler.Control.CollectionBehavior |= NSWindowCollectionBehavior.FullScreenPrimary;
-            //});
+            Style.Add<FormHandler>("MainWindow", handler =>
+            {
+                handler.Control.CollectionBehavior |= NSWindowCollectionBehavior.FullScreenPrimary;
+            });
 
             //Style.Add<ProgressBarHandler>("ProgressBar", (handler) =>
             //{

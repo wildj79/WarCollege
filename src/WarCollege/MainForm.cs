@@ -81,10 +81,13 @@ namespace WarCollege
                 QuitItem = _commandFactory["quitCommand"]
             };
 
-            //var file = menu.Items.GetSubmenu("&File");
+            var file = menu.Items.GetSubmenu("&File");
+            file.Items.Add(_commandFactory["newCharacterCommand"]);
+            file.Items.Add(_commandFactory["openCharacterCommand"]);
+            file.Items.Add(_commandFactory["saveCharacterCommand"]);
+            file.Items.Add(_commandFactory["saveCharacterAsCommand"]);
 
             menu.ApplicationItems.Add(_commandFactory["preferencesCommand"], 900);
-
 
             Menu = menu;
 
@@ -124,7 +127,10 @@ namespace WarCollege
         {
             _logger.Trace("Start MainForm.PromptSave()");
 
+            var result = MessageBox.Show("You have unsaved changes, are you sure you want to quit?", "Are you sure...", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes);
 
+            if (result == DialogResult.No || result == DialogResult.Cancel)
+                return false;
 
             _logger.Trace("End MainForm.PromptSave()");
 

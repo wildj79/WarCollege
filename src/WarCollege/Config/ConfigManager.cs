@@ -52,7 +52,7 @@ namespace WarCollege.Config
             FileStream fs;
 
             if (isWrite)
-                fs = new FileStream(ConfigFilePath, FileMode.Append, FileAccess.ReadWrite, FileShare.ReadWrite);
+                fs = new FileStream(ConfigFilePath, FileMode.Create, FileAccess.Write, FileShare.Write);
             else
                 fs = new FileStream(ConfigFilePath, FileMode.Open, FileAccess.Read, FileShare.None);
 

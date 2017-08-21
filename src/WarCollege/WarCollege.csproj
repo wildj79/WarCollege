@@ -62,6 +62,10 @@
     <Compile Include="Config\ConfigManager.cs" />
     <Compile Include="IocBootstraper.cs" />
     <Compile Include="Dialogs\Preferences.cs" />
+    <Compile Include="Commands\NewCharacter.cs" />
+    <Compile Include="Commands\OpenCharacter.cs" />
+    <Compile Include="Commands\SaveCharacter.cs" />
+    <Compile Include="Commands\SaveCharacterAs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

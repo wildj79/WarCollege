@@ -90,6 +90,10 @@ namespace WarCollege
             var form = MainForm as MainForm;
             if (!form.PromptSave())
                 e.Cancel = true;
+
+            _logger.Debug("Save Location: " + _settings.UserPreferences.SaveLocation);
+
+            _configManager.Save(_settings);
         }
 
         /// <summary>
@@ -143,6 +147,7 @@ namespace WarCollege
 
             _logger.Debug("Config Settings:");
             _logger.Debug("Locale: {0}", _settings.UserPreferences.Locale);
+            _logger.Debug("Save Location: {0}", _settings.UserPreferences.SaveLocation);
 
             Name = "War College";
             MainForm = _formFactory(); // new MainForm();
