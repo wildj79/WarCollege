@@ -52,7 +52,7 @@ namespace WarCollege.Commands
             _logger.Trace("Start SaveCharacter.OnExecuted()");
             base.OnExecuted(e);
 
-            _logger.Debug(_configSettings.UserPreferences.SaveLocation);
+            _logger.Debug(_configSettings.UserPreferences.LastSaveLocation);
 
             _logger.Trace("End SaveCharacter.OnExecuted()");
         }

@@ -41,8 +41,8 @@ namespace WarCollege.Config
         [DefaultValue("en-US")]
         public string Locale { get; set; }
 
-        [XmlAttribute("save-location")]
+        [XmlAttribute("last-save-location")]
         [DefaultValue("")]
-        public string SaveLocation { get; set; }
+        public string LastSaveLocation { get; set; }
     }
 }

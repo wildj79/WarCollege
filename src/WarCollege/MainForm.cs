@@ -23,6 +23,7 @@ using Eto.Forms;
 using Eto.Drawing;
 using Autofac.Extras.NLog;
 using Autofac.Features.Indexed;
+using System.ComponentModel;
 
 namespace WarCollege
 {
@@ -113,6 +114,21 @@ namespace WarCollege
             base.OnLoad(e);
 
             _logger.Trace("End MainForm.OnLoad()");
+        }
+
+        protected override void OnClosing(CancelEventArgs e)
+        {
+            _logger.Trace("Start MainForm.OnClosing()");
+
+            //if (!PromptSave())
+            //    e.Cancel = true;
+
+            //_logger.Debug("Save Location: " + _settings.UserPreferences.LastSaveLocation);
+
+            //_configManager.Save(_settings);
+
+            _logger.Trace("End MainForm.OnClosing()");
+            base.OnClosing(e);
         }
 
         /// <summary>

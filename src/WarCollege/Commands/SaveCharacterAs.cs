@@ -50,19 +50,19 @@ namespace WarCollege.Commands
             _logger.Trace("Start SaveCharacterAs.OnExecuted()");
             base.OnExecuted(e);
 
-            if (string.IsNullOrWhiteSpace(_configSettings.UserPreferences.SaveLocation))
+            if (string.IsNullOrWhiteSpace(_configSettings.UserPreferences.LastSaveLocation))
             {
-                _configSettings.UserPreferences.SaveLocation = Eto.EtoEnvironment.GetFolderPath(Eto.EtoSpecialFolder.Documents);
+                _configSettings.UserPreferences.LastSaveLocation = Eto.EtoEnvironment.GetFolderPath(Eto.EtoSpecialFolder.Documents);
             }
 
 			var dialog = new SaveFileDialog();
-            dialog.Directory = new Uri(_configSettings.UserPreferences.SaveLocation);
+            dialog.Directory = new Uri(_configSettings.UserPreferences.LastSaveLocation);
 			var result = dialog.ShowDialog(null);
 
 			if (result == DialogResult.Ok)
 			{
 				_logger.Debug(dialog.FileName);
-                _configSettings.UserPreferences.SaveLocation = System.IO.Path.GetDirectoryName(dialog.FileName);
+                _configSettings.UserPreferences.LastSaveLocation = System.IO.Path.GetDirectoryName(dialog.FileName);
 			}
 
             _logger.Trace("End SaveCharacterAs.OnExecuted()");
