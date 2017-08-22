@@ -121,7 +121,7 @@ namespace WarCollege
             _logger.Trace("Start MainForm.OnClosing()");
 
             //if (!PromptSave())
-            //    e.Cancel = true;
+                //e.Cancel = true;
 
             //_logger.Debug("Save Location: " + _settings.UserPreferences.LastSaveLocation);
 

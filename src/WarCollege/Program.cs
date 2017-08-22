@@ -91,7 +91,7 @@ namespace WarCollege
 
             //var form = MainForm as MainForm;
             //if (!form.PromptSave())
-            //    e.Cancel = true;
+                //e.Cancel = true;
 
             //_logger.Debug("Save Location: " + _settings.UserPreferences.LastSaveLocation);
 
