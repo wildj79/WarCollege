@@ -87,6 +87,7 @@ namespace WarCollege
             file.Items.Add(_commandFactory["openCharacterCommand"]);
             file.Items.Add(_commandFactory["saveCharacterCommand"]);
             file.Items.Add(_commandFactory["saveCharacterAsCommand"]);
+            file.Items.Add(_commandFactory["saveAllCharactersCommand"]);
 
             menu.ApplicationItems.Add(_commandFactory["preferencesCommand"], 900);
 

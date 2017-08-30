@@ -23,6 +23,7 @@ using Autofac.Features.OwnedInstances;
 using Eto;
 using Eto.Forms;
 using WarCollege.Config;
+using Eto.Drawing;
 
 namespace WarCollege.Commands
 {
@@ -64,7 +65,7 @@ namespace WarCollege.Commands
             ToolBarText = Resources.Strings.PreferencesToolBarText;
             if (Platform.Instance.IsMac)
                 Shortcut = Application.Instance.CommonModifier | Keys.Comma;
-            // Image = Icon.FromResource("");
+            Image = Icon.FromResource("WarCollege.Resources.cog.png");
         }
 
         #endregion // Constructors

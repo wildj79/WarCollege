@@ -99,6 +99,11 @@ namespace WarCollege
                 .RegisterType<Commands.SaveCharacterAs>()
                 .Keyed<Eto.Forms.Command>("saveCharacterAsCommand")
                 .WithAttributeFiltering();
+
+            builder
+                .RegisterType<Commands.SaveAllCharacters>()
+                .Keyed<Eto.Forms.Command>("saveAllCharactersCommand")
+                .WithAttributeFiltering();
         }
 
         /// <summary>
