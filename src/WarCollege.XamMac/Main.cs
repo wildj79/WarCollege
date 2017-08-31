@@ -23,6 +23,7 @@ using Eto;
 using Eto.Mac.Forms;
 using Eto.Mac.Forms.Controls;
 using Autofac;
+using Eto.Mac.Forms.Menu;
 
 namespace WarCollege.XamMac
 {
@@ -43,6 +44,11 @@ namespace WarCollege.XamMac
             //    handler.Control.ControlTint = NSControlTint.Blue;
             //    handler.Control.Bezeled = true;
             //});
+
+            Style.Add<ButtonMenuItemHandler>(null, handler =>
+            {
+                handler.ShowImage = true;
+            });
 
             var bootstrapper = new IocBootstraper();
             var container = bootstrapper.Build();
