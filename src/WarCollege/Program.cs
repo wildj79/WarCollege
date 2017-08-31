@@ -46,7 +46,6 @@ namespace WarCollege
 
         private readonly ILogger _logger;
         private readonly Config.IConfigSettings _settings;
-        private readonly Func<Form> _formFactory;
         private readonly Config.IConfigManager _configManager;
 
         #endregion // Fields
@@ -66,12 +65,10 @@ namespace WarCollege
         /// <param name="configManager">The applications configuration manager</param>
         public Program(ILogger logger,
                        Config.IConfigSettings settings,
-                       Func<Form> formFactory,
                        Config.IConfigManager configManager)
         {
             _logger = logger;
             _settings = settings;
-            _formFactory = formFactory;
             _configManager = configManager;
         }
 
@@ -153,8 +150,6 @@ namespace WarCollege
             _logger.Debug("Save Location: {0}", _settings.UserPreferences.LastSaveLocation);
 
             Name = "War College";
-            MainForm = _formFactory(); // new MainForm();
-            MainForm.Show();
 
             _logger.Info("Application started");
 

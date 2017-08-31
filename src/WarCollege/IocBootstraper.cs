@@ -129,18 +129,20 @@ namespace WarCollege
         {
             var builder = new ContainerBuilder();
 
+            builder.RegisterType<Program>()
+                   .As<Eto.Forms.Application>()
+                   .SingleInstance()
+                   .OnActivated(x => x.Instance.Run(x.Context.Resolve<Eto.Forms.Form>()));
+
+            builder.RegisterType<MainForm>()
+                   .As<Eto.Forms.Form>();
+
             RegisterLogging(builder);
             RegisterConfig(builder);
             RegisterCommands(builder);
             RegisterDialogs(builder);
 
-            builder.RegisterType<Program>()
-                   .As<Eto.Forms.Application>()
-                   .InstancePerLifetimeScope();
-
-            builder.RegisterType<MainForm>()
-                   .As<Eto.Forms.Form>()
-                   .InstancePerLifetimeScope();
+            builder.RegisterBuildCallback(x => x.Resolve<Eto.Forms.Application>());
 
             return builder.Build();
         }

@@ -13,8 +13,8 @@ namespace WarCollege.Windows
 
             using (var scope = container.BeginLifetimeScope())
             {
-                var app = scope.Resolve<Eto.Forms.Application>();
-                app.Run();
+                //var app = scope.Resolve<Eto.Forms.Application>();
+                //app.Run();
             }
         }
     }
