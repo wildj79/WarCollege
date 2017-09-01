@@ -83,9 +83,6 @@
     <BundleResource Include="..\WarCollege\NLog.config">
       <Link>Resources\NLog.config</Link>
     </BundleResource>
-    <BundleResource Include="..\WarCollege\settings.xml">
-      <Link>Resources\settings.xml</Link>
-    </BundleResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
 </Project>

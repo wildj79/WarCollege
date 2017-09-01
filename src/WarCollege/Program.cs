@@ -45,8 +45,7 @@ namespace WarCollege
         #region Fields
 
         private readonly ILogger _logger;
-        private readonly Config.IConfigSettings _settings;
-        private readonly Config.IConfigManager _configManager;
+        private readonly Func<Form> _formFactory;
 
         #endregion // Fields
 
@@ -60,16 +59,11 @@ namespace WarCollege
         /// Initializes a new instance of the <see cref="T:WarCollege.Program"/> class.
         /// </summary>
         /// <param name="logger">Logging instance</param>
-        /// <param name="settings">Application Settings</param>
-        /// <param name="formFactory">Factory method to create the application forms</param>
-        /// <param name="configManager">The applications configuration manager</param>
-        public Program(ILogger logger,
-                       Config.IConfigSettings settings,
-                       Config.IConfigManager configManager)
+        /// <param name="formFactory">Factory delagate for creating the Main Form</param>
+        public Program(ILogger logger, Func<Form> formFactory)
         {
             _logger = logger;
-            _settings = settings;
-            _configManager = configManager;
+            _formFactory = formFactory;
         }
 
         #endregion // Constructors
@@ -143,13 +137,10 @@ namespace WarCollege
 
             _logger.Info("Starting the application");
 
-            _logger.Debug("Config file location: {0}", _configManager.ConfigFilePath);
-
-            _logger.Debug("Config Settings:");
-            _logger.Debug("Locale: {0}", _settings.UserPreferences.Locale);
-            _logger.Debug("Save Location: {0}", _settings.UserPreferences.LastSaveLocation);
-
             Name = "War College";
+
+            MainForm = _formFactory();
+            MainForm.Show();
 
             _logger.Info("Application started");
 

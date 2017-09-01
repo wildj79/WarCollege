@@ -31,7 +31,11 @@ namespace WarCollege.Config
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Config.UserPreferences"/> class.
         /// </summary>
-        public UserPreferences() { }
+        public UserPreferences() 
+        {
+            Locale = "en-US";
+            LastSaveLocation = string.Empty;
+        }
 
         /// <summary>
         /// Gets or sets the locale.
@@ -41,7 +45,7 @@ namespace WarCollege.Config
         [DefaultValue("en-US")]
         public string Locale { get; set; }
 
-        [XmlAttribute("last-save-location")]
+        [XmlElement("lastsavelocation")]
         [DefaultValue("")]
         public string LastSaveLocation { get; set; }
     }

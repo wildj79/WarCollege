@@ -40,6 +40,8 @@ namespace WarCollege
 
         private readonly ILogger _logger;
         private readonly IIndex<string, Command> _commandFactory;
+        private readonly Config.IConfigSettings _configSettings;
+        private readonly Config.IConfigManager _configManager;
 
         #endregion // Fields
 
@@ -50,10 +52,15 @@ namespace WarCollege
         /// </summary>
         /// <param name="logger">General logging aparatus</param>
         /// <param name="commandFactory">Factory method for creating menu commands</param>
-        public MainForm(ILogger logger, IIndex<string, Command> commandFactory)
+        public MainForm(ILogger logger,
+                        IIndex<string, Command> commandFactory,
+                        Config.IConfigSettings configSettings,
+                        Config.IConfigManager configManager)
         {
             _logger = logger;
             _commandFactory = commandFactory;
+            _configSettings = configSettings;
+            _configManager = configManager;
 
             Title = Resources.Strings.AppTitle;
             ClientSize = new Size(800, 600);
@@ -124,9 +131,9 @@ namespace WarCollege
             //if (!PromptSave())
                 //e.Cancel = true;
 
-            //_logger.Debug("Save Location: " + _settings.UserPreferences.LastSaveLocation);
+            _logger.Debug("Save Location: " + _configSettings.UserPreferences.LastSaveLocation);
 
-            //_configManager.Save(_settings);
+            _configManager.Save(_configSettings);
 
             _logger.Trace("End MainForm.OnClosing()");
             base.OnClosing(e);

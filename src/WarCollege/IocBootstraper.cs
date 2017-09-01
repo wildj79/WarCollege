@@ -132,7 +132,7 @@ namespace WarCollege
             builder.RegisterType<Program>()
                    .As<Eto.Forms.Application>()
                    .SingleInstance()
-                   .OnActivated(x => x.Instance.Run(x.Context.Resolve<Eto.Forms.Form>()));
+                   .OnActivated(e => e.Instance.Run());
 
             builder.RegisterType<MainForm>()
                    .As<Eto.Forms.Form>();
@@ -142,7 +142,7 @@ namespace WarCollege
             RegisterCommands(builder);
             RegisterDialogs(builder);
 
-            builder.RegisterBuildCallback(x => x.Resolve<Eto.Forms.Application>());
+            builder.RegisterBuildCallback(container => container.Resolve<Eto.Forms.Application>());
 
             return builder.Build();
         }

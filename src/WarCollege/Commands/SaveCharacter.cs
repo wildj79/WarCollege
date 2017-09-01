@@ -54,6 +54,23 @@ namespace WarCollege.Commands
 
             _logger.Debug(_configSettings.UserPreferences.LastSaveLocation);
 
+            using (var saveDialog = new SaveFileDialog())
+            {
+                if (!string.IsNullOrWhiteSpace(_configSettings.UserPreferences.LastSaveLocation))
+                    saveDialog.Directory = new Uri(_configSettings.UserPreferences.LastSaveLocation);
+
+                saveDialog.Filters.Add(new FileDialogFilter("Text Files", new string[] { "txt" }));
+                
+                var result = saveDialog.ShowDialog(Application.Instance.MainForm);
+
+                if (result == DialogResult.Ok)
+                {
+                    _logger.Debug(saveDialog.Directory.AbsolutePath);
+                    _configSettings.UserPreferences.LastSaveLocation = saveDialog.Directory.AbsolutePath;
+                }
+            }
+
+
             _logger.Trace("End SaveCharacter.OnExecuted()");
         }
     }

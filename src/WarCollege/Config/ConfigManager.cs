@@ -19,6 +19,7 @@
 
 using System.IO;
 using System.Xml.Serialization;
+using Eto;
 
 namespace WarCollege.Config
 {
@@ -28,7 +29,7 @@ namespace WarCollege.Config
     public class ConfigManager : IConfigManager
     {
         private const string settingsFileName = "settings.xml";
-        private string appDataFolder = ""; //EtoEnvironment.GetFolderPath(EtoSpecialFolder.ApplicationSettings);
+        private string appDataFolder = EtoEnvironment.GetFolderPath(EtoSpecialFolder.ApplicationSettings);
 
         /// <summary>
         /// Gets the config file path.
@@ -49,14 +50,14 @@ namespace WarCollege.Config
         /// </param>
         protected FileStream OpenConfigFile(bool isWrite = false)
         {
-            FileStream fs;
+            //FileStream fs;
 
-            if (isWrite)
-                fs = new FileStream(ConfigFilePath, FileMode.Create, FileAccess.Write, FileShare.Write);
-            else
-                fs = new FileStream(ConfigFilePath, FileMode.Open, FileAccess.Read, FileShare.None);
+            //if (isWrite)
+            //    fs = new FileStream(ConfigFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
+            //else
+                //fs = new FileStream(ConfigFilePath, FileMode.Open, FileAccess.Read, FileShare.None);
 
-            return fs;
+            return new FileStream(ConfigFilePath, FileMode.OpenOrCreate, FileAccess.ReadWrite, FileShare.ReadWrite);
         }
 
         /// <summary>
@@ -75,7 +76,15 @@ namespace WarCollege.Config
             {
                 var xml = new XmlSerializer(typeof(ConfigSettings));
 
-                settings = xml.Deserialize(fs) as ConfigSettings;
+                try
+                {
+                    settings = xml.Deserialize(fs) as ConfigSettings;
+                }
+                catch (System.Exception)
+                {
+                    settings = new ConfigSettings();
+                    xml.Serialize(fs, settings);
+                }
             }
 
             return settings;

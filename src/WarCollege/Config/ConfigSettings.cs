@@ -31,7 +31,10 @@ namespace WarCollege.Config
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Config.ConfigSettings"/> class.
         /// </summary>
-        public ConfigSettings() { }
+        public ConfigSettings() 
+        {
+            UserPreferences = new UserPreferences();
+        }
 
         /// <summary>
         /// Gets or sets the user preferences.
