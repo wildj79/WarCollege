@@ -29,7 +29,7 @@ namespace WarCollege.Config
     public class ConfigManager : IConfigManager
     {
         private const string settingsFileName = "settings.xml";
-        private string appDataFolder = EtoEnvironment.GetFolderPath(EtoSpecialFolder.ApplicationSettings);
+        private string appDataFolder = Path.Combine(EtoEnvironment.GetFolderPath(EtoSpecialFolder.ApplicationSettings), "WarCollege");
 
         /// <summary>
         /// Gets the config file path.
