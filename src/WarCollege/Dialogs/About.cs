@@ -38,6 +38,8 @@ namespace WarCollege.Dialogs
             MinimumSize = new Size(300, 0);
             Resizable = false;
 
+            Icon = Icon.FromResource("WarCollege.Resources.information.png");
+
             var imageView = new ImageView()
             {
                 Size = new Size(128, 128)

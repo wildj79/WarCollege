@@ -25,6 +25,7 @@
 // THE SOFTWARE.
 
 using System;
+using System.IO;
 using Eto.Forms;
 using Eto.Drawing;
 using Autofac.Extras.NLog;
@@ -65,8 +66,10 @@ namespace WarCollege.Commands
 
                 if (result == DialogResult.Ok)
                 {
-                    _logger.Debug(saveDialog.Directory.AbsolutePath);
-                    _configSettings.UserPreferences.LastSaveLocation = saveDialog.Directory.AbsolutePath;
+                    //_logger.Debug(saveDialog.Directory.AbsolutePath);
+                    //_configSettings.UserPreferences.LastSaveLocation = saveDialog.Directory.AbsolutePath;
+                    _logger.Debug(Path.GetDirectoryName(saveDialog.FileName));
+                    _configSettings.UserPreferences.LastSaveLocation = Path.GetDirectoryName(saveDialog.FileName);
                 }
             }
 

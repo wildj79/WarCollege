@@ -51,7 +51,7 @@ namespace WarCollege.Commands
 
             MenuText = Resources.Strings.OpenMenuText;
             ToolBarText = Resources.Strings.OpenToolBarText;
-            Image = Icon.FromResource("WarCollege.Resources.folder.png");
+            Image = Icon.FromResource("WarCollege.Resources.folder_page_white.png");
             Shortcut = Application.Instance.CommonModifier | Keys.O;
         }
 
