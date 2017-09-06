@@ -46,6 +46,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\SaveAllCharacters.cs" />
+    <Compile Include="Model\Character.cs" />
+    <Compile Include="Model\CharacterAttribute.cs" />
+    <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="Commands\Quit.cs" />
