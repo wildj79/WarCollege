@@ -1085,9 +1085,6 @@
     <EmbeddedResource Include="Resources\zoom.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="settings.xml">
-      <SubType>Designer</SubType>
-    </Content>
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
