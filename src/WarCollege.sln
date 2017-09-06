@@ -15,6 +15,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarCollege.Windows", "WarCollege.Windows\WarCollege.Windows.csproj", "{F68496B0-A7B0-4397-83CE-DEF3E25C7BD0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WarCollege.Tests", "WarCollege.Tests\WarCollege.Tests.csproj", "{541369F3-DB26-4B3E-9572-588825AF2858}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{F68496B0-A7B0-4397-83CE-DEF3E25C7BD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F68496B0-A7B0-4397-83CE-DEF3E25C7BD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F68496B0-A7B0-4397-83CE-DEF3E25C7BD0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{541369F3-DB26-4B3E-9572-588825AF2858}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{541369F3-DB26-4B3E-9572-588825AF2858}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{541369F3-DB26-4B3E-9572-588825AF2858}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{541369F3-DB26-4B3E-9572-588825AF2858}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
