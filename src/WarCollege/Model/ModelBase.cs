@@ -47,7 +47,9 @@ namespace WarCollege.Model
         /// when the model is created, so it shouldn't be necessary to raise the PropertyChanged
         /// event for the property.
         /// </remarks>
-        public Guid Id { get; set; }
+        public virtual Guid Id { get; set; }
+
+        public abstract string Name { get; set; }
 
         #region INotifyPropertyChanged implementation
 

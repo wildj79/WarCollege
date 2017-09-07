@@ -1,4 +1,4 @@
-﻿// Character.cs
+﻿// CharacterTrait.cs
 //
 // Author:
 //       James Allred <wildj79@gmail.com>
@@ -25,41 +25,27 @@
 
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WarCollege.Model
 {
-    /// <summary>
-    /// Represents an A Time of War character.
-    /// </summary>
-    /// <remarks>
-    /// This is the main model for the program.
-    /// </remarks>
-    public class Character : ModelBase
+    public class CharacterTrait : ModelBase
     {
         #region Fields
 
         private string _name;
-        private string _playerName;
-        private string _hairColor;
-        private string _eyeColor;
-        private float _weight;
-        private float _height;
-        private readonly IList<CharacterAttribute> _attributes = new List<CharacterAttribute>(8);
+        private int _traitPoints;
+        private string _pageReference;
+        private int _experience;
+        private string _description;
+        private CharacterTraitType _traitType;
 
         #endregion
 
         #region Properties
 
-        // The following properties represent character fluff more than hard data about the character
-
-        /// <summary>
-        /// The characters name
-        /// </summary>
         public override string Name
         {
             get { return _name; }
@@ -73,106 +59,70 @@ namespace WarCollege.Model
             }
         }
 
-        /// <summary>
-        /// The name of the player who is playing the character
-        /// </summary>
-        public string PlayerName
+        public int TraitPoints
         {
-            get { return _playerName; }
+            get { return _traitPoints; }
             set
             {
-                if (!_playerName.Equals(value))
+                if (_traitPoints != value)
                 {
-                    _playerName = value;
+                    _traitPoints = value;
                     RaisePropertyChanged();
                 }
             }
         }
 
-        /// <summary>
-        /// The characters hair color
-        /// </summary>
-        public string HairColor
+        public string PageReference
         {
-            get { return _hairColor; }
+            get { return _pageReference; }
             set
             {
-                if (!_hairColor.Equals(value))
+                if (!_pageReference.Equals(value))
                 {
-                    _hairColor = value;
+                    _pageReference = value;
                     RaisePropertyChanged();
                 }
             }
         }
 
-        /// <summary>
-        /// The characters eye color
-        /// </summary>
-        public string EyeColor
+        public int Experience
         {
-            get { return _eyeColor; }
+            get { return _experience; }
             set
             {
-                if (!_eyeColor.Equals(value))
+                if (_experience != value)
                 {
-                    _eyeColor = value;
+                    _experience = value;
                     RaisePropertyChanged();
                 }
             }
         }
 
-        /// <summary>
-        /// The weight of the character in kilograms
-        /// </summary>
-        public float Weight
+        public string Description
         {
-            get { return _weight; }
+            get { return _description; }
             set
             {
-                if (_weight != value)
+                if (!_description.Equals(value))
                 {
-                    _weight = value;
+                    _description = value;
                     RaisePropertyChanged();
                 }
             }
         }
 
-        /// <summary>
-        /// The height of the character in centimeters
-        /// </summary>
-        public float Height
+        public CharacterTraitType TraitType
         {
-            get { return _height; }
+            get { return _traitType; }
             set
             {
-                if (_height != value)
+                if (_traitType != value)
                 {
-                    _height = value;
+                    _traitType = value;
                     RaisePropertyChanged();
                 }
             }
         }
-
-        // These properites represent actuall game data for a character
-
-        public IList<CharacterAttribute> Attributes
-        {
-            get { return _attributes; }
-        }
-
-        #endregion
-
-        #region Events
-
-        #endregion
-
-        #region Ctor
-        #endregion
-
-        #region Methods
-        #endregion
-
-        #region Utilities
 
         #endregion
     }
