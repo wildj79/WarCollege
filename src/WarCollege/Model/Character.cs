@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -49,11 +50,12 @@ namespace WarCollege.Model
         private string _eyeColor;
         private float _weight;
         private float _height;
+        private int _age;
         private int _currentExperience;
         private int _initialExperience;
-        private readonly IList<CharacterAttribute> _attributes = new List<CharacterAttribute>(8);
-        private readonly IList<Trait> _traits = new List<Trait>();
-        private readonly IList<Skill> _skills = new List<Skill>();
+        private ObservableCollection<CharacterAttribute> _attributes;
+        private ObservableCollection<Trait> _traits;
+        private ObservableCollection<Skill> _skills;
 
         #endregion
 
@@ -157,6 +159,22 @@ namespace WarCollege.Model
             }
         }
 
+        /// <summary>
+        /// The age of the character.
+        /// </summary>
+        public int Age
+        {
+            get { return _age; }
+            set
+            {
+                if (_age != value)
+                {
+                    _age = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         // These properites represent actuall game data for a character
 
         /// <summary>
@@ -198,30 +216,53 @@ namespace WarCollege.Model
         /// </summary>
         /// <value>The attributes.</value>
         /// <remarks>
-        /// A character has exactaly eight attributes, so the collection is
-        /// initialized with an inital count of 8.
+        /// A character has exactaly eight attributes.
         /// </remarks>
-        public IList<CharacterAttribute> Attributes
+        public ObservableCollection<CharacterAttribute> Attributes
         {
             get { return _attributes; }
+            set
+            {
+                if (_attributes != value)
+                {
+                    _attributes = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
 
         /// <summary>
         /// List of the characters traits.
         /// </summary>
         /// <value>The traits.</value>
-        public IList<Trait> Traits
+        public ObservableCollection<Trait> Traits
         {
             get { return _traits; }
+            set
+            {
+                if (_traits != value)
+                {
+                    _traits = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
 
         /// <summary>
         /// List of the characters skills.
         /// </summary>
         /// <value>The skills.</value>
-        public IList<Skill> Skills
+        public ObservableCollection<Skill> Skills
         {
             get { return _skills; }
+            set
+            {
+                if (_skills != value)
+                {
+                    _skills = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
 
         #endregion

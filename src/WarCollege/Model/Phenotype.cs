@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,9 +56,9 @@ namespace WarCollege.Model
         #region Fields
 
         private string _name;
-        private readonly IDictionary<string, int> _attributeModifiers = new Dictionary<string, int>();
-        private readonly IDictionary<string, int> _attributeMaximums = new Dictionary<string, int>();
-        private readonly IList<Trait> _bonusTraits = new List<Trait>();
+        private IDictionary<string, int> _attributeModifiers = new Dictionary<string, int>();
+        private IDictionary<string, int> _attributeMaximums = new Dictionary<string, int>();
+        private ObservableCollection<Trait> _bonusTraits;
         private string _fieldAptitude;
 
         #endregion
@@ -96,6 +97,14 @@ namespace WarCollege.Model
         public IDictionary<string, int> AttributeModifiers
         {
             get { return _attributeModifiers; }
+            set
+            {
+                if (_attributeModifiers != value)
+                {
+                    _attributeModifiers = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
 
         /// <summary>
@@ -105,15 +114,31 @@ namespace WarCollege.Model
         public IDictionary<string, int> AttributeMaximums
         {
             get { return _attributeMaximums; }
+            set
+            {
+                if (_attributeMaximums != value)
+                {
+                    _attributeMaximums = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
 
         /// <summary>
         /// List of bonus character traits assigned to a character with this
         /// phenotype.
         /// </summary>
-        public IList<Trait> BounusTraits
+        public ObservableCollection<Trait> BounusTraits
         {
             get { return _bonusTraits; }
+            set
+            {
+                if (_bonusTraits != value)
+                {
+                    _bonusTraits = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
 
         /// <summary>

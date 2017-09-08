@@ -171,7 +171,7 @@ namespace WarCollege.Model
         /// CharacterTrait myTrait = new CharacterTrait();
         /// myTrait.TraitType = CharacterTraitType.Positive | CharacterTraitType.Character | CharacterTraitType.Identity;
         /// </code>
-        /// You can then tell if a variable is of a trait type by using the <c>Enum.HasFlag</c> method on the variable.
+        /// You can then tell if a variable is of a trait type by using the <see cref="Enum.HasFlag(Enum)"/> method on the variable.
         /// <code>
         /// if (myTrait.TraitType.HasFlag(CharacterTraitType.Positive))
         /// {

@@ -25,6 +25,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,7 +57,7 @@ namespace WarCollege.Model
         private int _targetNumber;
         private string _complexityRating;
         private int _experience;
-        private readonly IList<CharacterAttribute> _linkedAttributes = new List<CharacterAttribute>(2);
+        private ObservableCollection<CharacterAttribute> _linkedAttributes;
         private string _specialty;
         private string _subSkill;
         private bool _isTiered;
@@ -178,9 +179,17 @@ namespace WarCollege.Model
         /// or negative modifer to the skill check roll, depending on how exceptionally good or bad
         /// the attribute is.
         /// </remarks>
-        public IList<CharacterAttribute> LinkedAttributes
+        public ObservableCollection<CharacterAttribute> LinkedAttributes
         {
             get { return _linkedAttributes; }
+            set
+            {
+                if (_linkedAttributes != value)
+                {
+                    _linkedAttributes = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
         
         /// <summary>
