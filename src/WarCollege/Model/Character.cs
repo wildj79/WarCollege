@@ -49,7 +49,11 @@ namespace WarCollege.Model
         private string _eyeColor;
         private float _weight;
         private float _height;
+        private int _currentExperience;
+        private int _initialExperience;
         private readonly IList<CharacterAttribute> _attributes = new List<CharacterAttribute>(8);
+        private readonly IList<Trait> _traits = new List<Trait>();
+        private readonly IList<Skill> _skills = new List<Skill>();
 
         #endregion
 
@@ -129,7 +133,7 @@ namespace WarCollege.Model
             get { return _weight; }
             set
             {
-                if (_weight != value)
+                if (Math.Abs(_height - value) > 0.000001f)
                 {
                     _weight = value;
                     RaisePropertyChanged();
@@ -145,7 +149,7 @@ namespace WarCollege.Model
             get { return _height; }
             set
             {
-                if (_height != value)
+                if (Math.Abs(_height - value) > 0.000001f)
                 {
                     _height = value;
                     RaisePropertyChanged();
@@ -155,9 +159,69 @@ namespace WarCollege.Model
 
         // These properites represent actuall game data for a character
 
+        /// <summary>
+        /// A characters currently available experience pool.
+        /// </summary>
+        /// <value>The current experience.</value>
+        public int CurrentExperience
+        {
+            get { return _currentExperience; }
+            set
+            {
+                if (_currentExperience != value)
+                {
+                    _currentExperience = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// The initial amount of experience points allocated to the character.
+        /// </summary>
+        /// <value>The initial experience.</value>
+        public int InitialExperience
+        {
+            get { return _initialExperience; }
+            set
+            {
+                if (_initialExperience != value)
+                {
+                    _initialExperience = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// List of the characters attributes.
+        /// </summary>
+        /// <value>The attributes.</value>
+        /// <remarks>
+        /// A character has exactaly eight attributes, so the collection is
+        /// initialized with an inital count of 8.
+        /// </remarks>
         public IList<CharacterAttribute> Attributes
         {
             get { return _attributes; }
+        }
+
+        /// <summary>
+        /// List of the characters traits.
+        /// </summary>
+        /// <value>The traits.</value>
+        public IList<Trait> Traits
+        {
+            get { return _traits; }
+        }
+
+        /// <summary>
+        /// List of the characters skills.
+        /// </summary>
+        /// <value>The skills.</value>
+        public IList<Skill> Skills
+        {
+            get { return _skills; }
         }
 
         #endregion

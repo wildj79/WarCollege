@@ -31,7 +31,17 @@ using System.Threading.Tasks;
 
 namespace WarCollege.Model
 {
-    public class CharacterTrait : ModelBase
+    /// <summary>
+    /// Represents a trait that a character can posses. These include traits associated
+    /// with any combat vehicles the charater might posses.
+    /// </summary>
+    /// <remarks>
+    /// Page Referneces:
+    /// <list type="bullet">
+    /// <item><description>Traits p. 106-135 AToW</description></item>
+    /// </list>
+    /// </remarks>
+    public class Trait : ModelBase
     {
         #region Fields
 
@@ -46,6 +56,10 @@ namespace WarCollege.Model
 
         #region Properties
 
+        /// <summary>
+        /// The name of the character trait
+        /// </summary>
+        /// <value>The name.</value>
         public override string Name
         {
             get { return _name; }
@@ -59,6 +73,10 @@ namespace WarCollege.Model
             }
         }
 
+        /// <summary>
+        /// The value of the trait.
+        /// </summary>
+        /// <value>The trait points.</value>
         public int TraitPoints
         {
             get { return _traitPoints; }
@@ -72,6 +90,10 @@ namespace WarCollege.Model
             }
         }
 
+        /// <summary>
+        /// The book and page number reference where the trait is listed.
+        /// </summary>
+        /// <value>The page reference.</value>
         public string PageReference
         {
             get { return _pageReference; }
@@ -85,6 +107,10 @@ namespace WarCollege.Model
             }
         }
 
+        /// <summary>
+        /// The number of experience points allocated to the trait.
+        /// </summary>
+        /// <value>The experience.</value>
         public int Experience
         {
             get { return _experience; }
@@ -98,6 +124,15 @@ namespace WarCollege.Model
             }
         }
 
+        /// <summary>
+        /// Brief description of the trait and what it does.
+        /// </summary>
+        /// <value>The description.</value>
+        /// <remarks>
+        /// Used mostly in tooltips and other informational screens. Not to interested in
+        /// all of the game rules, mostly just a quick sysnopsis of what the trait is
+        /// and what it does.
+        /// </remarks>
         public string Description
         {
             get { return _description; }
@@ -111,7 +146,41 @@ namespace WarCollege.Model
             }
         }
 
-        public CharacterTraitType TraitType
+		/// <summary>
+		/// The type of trait this is.
+		/// </summary>
+		/// <value>The type of the trait.</value>
+		/// <remarks>
+		/// <para>
+		/// A trait can be of multiple types. The possible types are:
+		/// <list type="bullet">
+		/// <item><description>Nuetral</description></item>
+		/// <item><description>Positive</description></item>
+		/// <item><description>Negative</description></item>
+		/// <item><description>Flexible</description></item>
+		/// <item><description>Character</description></item>
+		/// <item><description>Vehicle</description></item>
+		/// <item><description>Identity</description></item>
+		/// </list>
+		/// </para>
+        /// <para>
+        /// It is possible for a trait to be up to 3 of those at once. For instance,
+        /// a trait can be of type Positive, Character, and Identity. It is possible to
+        /// do this by ORing the values together, like this:
+        /// <code>
+        /// CharacterTrait myTrait = new CharacterTrait();
+        /// myTrait.TraitType = CharacterTraitType.Positive | CharacterTraitType.Character | CharacterTraitType.Identity;
+        /// </code>
+        /// You can then tell if a variable is of a trait type by using the <c>Enum.HasFlag</c> method on the variable.
+        /// <code>
+        /// if (myTrait.TraitType.HasFlag(CharacterTraitType.Positive))
+        /// {
+        ///     // Do something if it has this flag.
+        /// }
+        /// </code>
+        /// </para>
+		/// </remarks>
+		public CharacterTraitType TraitType
         {
             get { return _traitType; }
             set

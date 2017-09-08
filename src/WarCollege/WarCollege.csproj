@@ -49,7 +49,7 @@
     <Compile Include="Commands\SaveAllCharacters.cs" />
     <Compile Include="Model\Character.cs" />
     <Compile Include="Model\CharacterAttribute.cs" />
-    <Compile Include="Model\CharacterTrait.cs" />
+    <Compile Include="Model\Trait.cs" />
     <Compile Include="Model\ModelBase.cs" />
     <Compile Include="Model\Phenotype.cs" />
     <Compile Include="Model\Skill.cs" />

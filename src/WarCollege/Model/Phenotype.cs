@@ -57,7 +57,7 @@ namespace WarCollege.Model
         private string _name;
         private readonly IDictionary<string, int> _attributeModifiers = new Dictionary<string, int>();
         private readonly IDictionary<string, int> _attributeMaximums = new Dictionary<string, int>();
-        private readonly IList<CharacterTrait> _bonusTraits = new List<CharacterTrait>();
+        private readonly IList<Trait> _bonusTraits = new List<Trait>();
         private string _fieldAptitude;
 
         #endregion
@@ -111,7 +111,7 @@ namespace WarCollege.Model
         /// List of bonus character traits assigned to a character with this
         /// phenotype.
         /// </summary>
-        public IList<CharacterTrait> BounusTraits
+        public IList<Trait> BounusTraits
         {
             get { return _bonusTraits; }
         }
