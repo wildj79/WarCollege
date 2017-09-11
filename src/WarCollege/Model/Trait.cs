@@ -45,7 +45,6 @@ namespace WarCollege.Model
     {
         #region Fields
 
-        private string _name;
         private int _traitPoints;
         private string _pageReference;
         private int _experience;
@@ -55,23 +54,6 @@ namespace WarCollege.Model
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// The name of the character trait
-        /// </summary>
-        /// <value>The name.</value>
-        public override string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (!_name.Equals(value))
-                {
-                    _name = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
 
         /// <summary>
         /// The value of the trait.

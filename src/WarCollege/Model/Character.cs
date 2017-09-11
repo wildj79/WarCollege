@@ -44,7 +44,6 @@ namespace WarCollege.Model
     {
         #region Fields
 
-        private string _name;
         private string _playerName;
         private string _hairColor;
         private string _eyeColor;
@@ -53,31 +52,21 @@ namespace WarCollege.Model
         private int _age;
         private int _currentExperience;
         private int _initialExperience;
+        private string _description;
+        private string _notes;
+        private float _cbills;
+        private Affiliation _affiliation;
+
         private ObservableCollection<CharacterAttribute> _attributes;
         private ObservableCollection<Trait> _traits;
         private ObservableCollection<Skill> _skills;
+
 
         #endregion
 
         #region Properties
 
         // The following properties represent character fluff more than hard data about the character
-
-        /// <summary>
-        /// The characters name
-        /// </summary>
-        public override string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (!_name.Equals(value))
-                {
-                    _name = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
 
         /// <summary>
         /// The name of the player who is playing the character
@@ -175,7 +164,70 @@ namespace WarCollege.Model
             }
         }
 
+        /// <summary>
+        /// A description of the character.
+        /// </summary>
+        /// <value>The description.</value>
+        /// <remarks>
+        /// The player can put any biographical notes, physical description, etc, here.
+        /// </remarks>
+        public string Description
+        {
+            get { return _description; }
+            set
+            {
+                if (!_description.Equals(value))
+                {
+                    _description = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Any notes or comments about the character.
+        /// </summary>
+        /// <value>The notes.</value>
+        /// <remarks>
+        /// This is more of a general catch all for notation about the character.
+        /// Use this to describe design choices or just make general notes about
+        /// the process used to create the character.
+        /// </remarks>
+        public string Notes
+        {
+            get { return _notes; }
+            set
+            {
+                if(!_notes.Equals(value))
+                {
+                    _notes = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         // These properites represent actuall game data for a character
+
+        /// <summary>
+        /// The characters faction affiliation.
+        /// </summary>
+        /// <value>The affiliation.</value>
+        /// <remarks>
+        /// This is the faction that the player begins play with. 
+        /// See a list of affiliations starting on p. 53 of AToW.
+        /// </remarks>
+        public Affiliation Affiliation
+        {
+            get { return _affiliation; }
+            set
+            {
+                if (_affiliation != value)
+                {
+                    _affiliation = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// A characters currently available experience pool.
@@ -206,6 +258,27 @@ namespace WarCollege.Model
                 if (_initialExperience != value)
                 {
                     _initialExperience = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Amount of money the character possesses (in Comstar Bills)
+        /// </summary>
+        /// <value>The CBills.</value>
+        /// <remarks>
+        /// The various factions all have the own monetary systems, but for simplicity,
+        /// the system uses the Comstar bill as kind of a global currency.
+        /// </remarks>
+        public float CBills
+        {
+            get { return _cbills; }
+            set
+            {
+                if (Math.Abs(_cbills - value) > 0.000001f)
+                {
+                    _cbills = value;
                     RaisePropertyChanged();
                 }
             }

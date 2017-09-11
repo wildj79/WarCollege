@@ -38,18 +38,43 @@ namespace WarCollege.Model
     /// </remarks>
     public abstract class ModelBase : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Unique Id for the model.
-        /// </summary>
-        /// <remarks>
-        /// This will be used internally by the program to uniquely identify various 
-        /// models (Equipment, weapons, vehicles, etc...) This should only be set once,
-        /// when the model is created, so it shouldn't be necessary to raise the PropertyChanged
-        /// event for the property.
-        /// </remarks>
-        public virtual Guid Id { get; set; }
+        #region Fields
 
-        public abstract string Name { get; set; }
+        private string _name;
+        private Guid _id;
+
+		#endregion
+
+		#region Properties
+
+		/// <summary>
+		/// Unique Id for the model.
+		/// </summary>
+		/// <remarks>
+		/// This will be used internally by the program to uniquely identify various 
+		/// models (Equipment, weapons, vehicles, etc...) This should only be set once,
+		/// when the model is created.
+		/// </remarks>
+		public virtual Guid Id { get; set; }
+
+        /// <summary>
+        /// A name that identifies the model.
+        /// </summary>
+        /// <value>The name.</value>
+        public virtual string Name 
+        { 
+            get { return _name; }
+            set
+            {
+                if (!_name.Equals(value))
+                {
+                    _name = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        #endregion
 
         #region INotifyPropertyChanged implementation
 

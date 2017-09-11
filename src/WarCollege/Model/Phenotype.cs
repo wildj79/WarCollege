@@ -55,41 +55,14 @@ namespace WarCollege.Model
     {
         #region Fields
 
-        private string _name;
         private IDictionary<string, int> _attributeModifiers = new Dictionary<string, int>();
         private IDictionary<string, int> _attributeMaximums = new Dictionary<string, int>();
         private ObservableCollection<Trait> _bonusTraits;
         private string _fieldAptitude;
 
-        #endregion
+		#endregion
 
-        #region Properties
-
-        /// <summary>
-        /// The name of the phenotype
-        /// </summary>
-        /// <remarks>
-        /// Can be one of:
-        /// <list type="bullet">
-        /// <item><description>Normal Human</description></item>
-        /// <item><description>Aerospace</description></item>
-        /// <item><description>Elemental</description></item>
-        /// <item><description>MechWarrior</description></item>
-        /// </list>
-        /// Other supplements could potentially add more.
-        /// </remarks>
-        public override string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (!_name.Equals(value))
-                {
-                    _name = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
+		#region Properties
 
         /// <summary>
         /// Collection of key/value pairs used to map a modifier to a character attribute.

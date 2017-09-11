@@ -52,7 +52,6 @@ namespace WarCollege.Model
 
         #region Fields
 
-        private string _name;
         private int _level;
         private int _targetNumber;
         private string _complexityRating;
@@ -67,22 +66,6 @@ namespace WarCollege.Model
         #endregion
 
         #region Properties
-
-        /// <summary>
-        /// The name of the skill
-        /// </summary>
-        public override string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (!_name.Equals(value))
-                {
-                    _name = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
 
         /// <summary>
         /// The skills level.

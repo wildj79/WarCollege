@@ -75,7 +75,6 @@ namespace WarCollege.Model
         private int _score;
         private int _linkModifier;
         private int _experience;
-        private string _name;
         private string _description;
         private string _abbreviation;
         private int _maximumScoreAllowed;
@@ -139,22 +138,6 @@ namespace WarCollege.Model
                 if (_experience != value)
                 {
                     _experience = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// The name of the attribute.
-        /// </summary>
-        public override string Name
-        {
-            get { return _name; }
-            set
-            {
-                if (!_name.Equals(value))
-                {
-                    _name = value;
                     RaisePropertyChanged();
                 }
             }
