@@ -29,8 +29,8 @@ using System;
 namespace WarCollege.Domain
 {
     /// <summary>
-    /// A number of experience points that are allocated to a <see cref="T:WarCollege.Model.Skill"/> , 
-    /// <see cref="T:WarCollege.Model.Trait"/>, or <see cref="T:WarCollege.Model.CharacterAttribute"/> during character creation.
+    /// A number of experience points that are allocated to a <see cref="WarCollege.Model.Skill"/> , 
+    /// <see cref="WarCollege.Model.Trait"/>, or <see cref="WarCollege.Model.CharacterAttribute"/> during character creation.
     /// </summary>
     /// <remarks>
     /// These represent a strait allotment of points. These points can be 
@@ -67,7 +67,7 @@ namespace WarCollege.Domain
         #region Ctor
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Domain.ExperienceAllotment"/> class.
+        /// Initializes a new instance of the <see cref="WarCollege.Domain.ExperienceAllotment"/> class.
         /// </summary>
         /// <param name="type">
         /// Whether these points are for a <c>Skill</c>, <c>Trait</c>, or <c>CharacterAttribute</c>.

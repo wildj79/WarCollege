@@ -55,15 +55,26 @@ namespace WarCollege.Model
 		/// models (Equipment, weapons, vehicles, etc...) This should only be set once,
 		/// when the model is created.
 		/// </remarks>
-		public virtual Guid Id { get; set; }
+		public virtual Guid Id
+        {
+            get => _id;
+            set
+            {
+                if (_id != value)
+                {
+                    _id = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// A name that identifies the model.
         /// </summary>
         /// <value>The name.</value>
         public virtual string Name 
-        { 
-            get { return _name; }
+        {
+            get => _name;
             set
             {
                 if (!_name.Equals(value))
