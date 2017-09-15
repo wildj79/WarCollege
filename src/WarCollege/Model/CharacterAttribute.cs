@@ -72,13 +72,13 @@ namespace WarCollege.Model
     {
         #region Fields
 
-        private int _score;
         private int _linkModifier;
         private int _experience;
         private string _description;
         private string _abbreviation;
         private int _maximumScoreAllowed;
         private int _phenotypeModifier;
+        private bool _isExceptionalAttribute;
 
         #endregion
 
@@ -88,21 +88,16 @@ namespace WarCollege.Model
         /// The value used in gameplay for this attribute.
         /// </summary>
         /// <remarks>
+        /// <para>
         /// Derived from the XP alloted to the attribute. Can also be modified by character
         /// phenotype and aging affects.
+        /// </para>
+        /// <para>
+        /// This is a calculated field, based on the amount of experiance allocated to the attribute.
+        /// The calculation is: <c>Math.Min(MaximumScoreAllowed, (int)Math.Floor(Experience / 100.0D));</c>
+        /// </para>
         /// </remarks>
-        public int Score
-        {
-            get { return _score; }
-            set
-            {
-                if (_score != value)
-                {
-                    _score = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
+        public int Score => Math.Min(MaximumScoreAllowed, (int)Math.Floor(Experience / 100D));
 
         /// <summary>
         /// Modifier added to skills linked to this attribute.
@@ -112,7 +107,7 @@ namespace WarCollege.Model
         /// </remarks>
         public int LinkModifier
         {
-            get { return _linkModifier; }
+            get => _linkModifier;
             set
             {
                 if (_linkModifier != value)
@@ -132,13 +127,14 @@ namespace WarCollege.Model
         /// </remarks>
         public int Experience
         {
-            get { return _experience; }
+            get => _experience;
             set
             {
                 if (_experience != value)
                 {
                     _experience = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(Score));
                 }
             }
         }
@@ -151,7 +147,7 @@ namespace WarCollege.Model
         /// </remarks>
         public string Description
         {
-            get { return _description; }
+            get => _description;
             set
             {
                 if (!_description.Equals(value))
@@ -167,7 +163,7 @@ namespace WarCollege.Model
         /// </summary>
         public string Abbreviation
         {
-            get { return _abbreviation; }
+            get => _abbreviation;
             set
             {
                 if (!_abbreviation.Equals(value))
@@ -187,7 +183,7 @@ namespace WarCollege.Model
         /// </remarks>
         public int MaximumScoreAllowed
         {
-            get { return _maximumScoreAllowed; }
+            get => _maximumScoreAllowed;
             set
             {
                 if (_maximumScoreAllowed != value)
@@ -207,12 +203,29 @@ namespace WarCollege.Model
         /// </remarks>
         public int PhenotypeModifier
         {
-            get { return _phenotypeModifier; }
+            get => _phenotypeModifier;
             set
             {
                 if (_phenotypeModifier != value)
                 {
                     _phenotypeModifier = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// Determines if this trait is affected by an Exeptional Attribute Trait (p. 116, AToW).
+        /// </summary>
+        /// <value>Returns true if this attribute is linked to an Exceptional Attribute Trait.</value>
+        public bool IsExceptionalAttribute
+        {
+            get => _isExceptionalAttribute;
+            set
+            {
+                if (_isExceptionalAttribute != value)
+                {
+                    _isExceptionalAttribute = value;
                     RaisePropertyChanged();
                 }
             }

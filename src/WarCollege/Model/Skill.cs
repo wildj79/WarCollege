@@ -72,7 +72,9 @@ namespace WarCollege.Model
         /// </summary>
         /// <remarks>
         /// This value is added to a roll made for a skill check. Higher
-        /// values are better than lower.
+        /// values are better than lower. Seems to follow this equation:
+        /// <c>y = 5x^2 + 5x + 20</c> where x is the skill level and y is
+        /// the experience points.
         /// </remarks>
         public int Level
         {
