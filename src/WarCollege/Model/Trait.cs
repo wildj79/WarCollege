@@ -45,9 +45,9 @@ namespace WarCollege.Model
     {
         #region Fields
 
-        private int _traitPoints;
         private string _pageReference;
-        private int _experience;
+        private int _totalExperience;
+        private int _currentExperience;
         private string _description;
         private CharacterTraitType _traitType;
 
@@ -58,18 +58,13 @@ namespace WarCollege.Model
         /// <summary>
         /// The value of the trait.
         /// </summary>
+        /// <remarks>
+        /// This value is derived form the total alloted experinece points.
+        /// </remarks>
         /// <value>The trait points.</value>
         public int TraitPoints
         {
-            get { return _traitPoints; }
-            set
-            {
-                if (_traitPoints != value)
-                {
-                    _traitPoints = value;
-                    RaisePropertyChanged();
-                }
-            }
+            get => TotalExperience.IsNegative() ? (int)Math.Ceiling(TotalExperience / 100D) : (int)Math.Floor(TotalExperience / 100D);
         }
 
         /// <summary>
@@ -90,17 +85,34 @@ namespace WarCollege.Model
         }
 
         /// <summary>
-        /// The number of experience points allocated to the trait.
+        /// The total number of experience points allocated to the trait.
         /// </summary>
         /// <value>The experience.</value>
-        public int Experience
+        public int TotalExperience
         {
-            get { return _experience; }
+            get { return _totalExperience; }
             set
             {
-                if (_experience != value)
+                if (_totalExperience != value)
                 {
-                    _experience = value;
+                    _totalExperience = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// The current left over experience points allocated to this trait after
+        /// calculating the trait points.
+        /// </summary>
+        public int CurrentExperience
+        {
+            get => _currentExperience;
+            set
+            {
+                if (_currentExperience != value)
+                {
+                    _currentExperience = value;
                     RaisePropertyChanged();
                 }
             }

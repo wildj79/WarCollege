@@ -348,6 +348,9 @@ namespace WarCollege.Model
         #endregion
 
         #region Methods
+
+        public bool HasTrait(string name) => Traits.Any(x => x.Name == name);
+
         #endregion
 
         #region Utilities

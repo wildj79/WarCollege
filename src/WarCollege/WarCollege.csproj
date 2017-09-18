@@ -77,6 +77,7 @@
     <Compile Include="Commands\SaveCharacterAs.cs" />
     <Compile Include="Model\Affiliation.cs" />
     <Compile Include="Domain\ExperienceAllotment.cs" />
+    <Compile Include="Utility\Number.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -85,7 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Logging\" />
-    <Folder Include="Domain\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Strings.resx">
