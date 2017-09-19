@@ -97,6 +97,7 @@ namespace WarCollege.Model
                 {
                     _totalExperience = value;
                     RaisePropertyChanged();
+                    RaisePropertyChanged(nameof(TraitPoints));
                 }
             }
         }
@@ -162,7 +163,7 @@ namespace WarCollege.Model
         /// a trait can be of type Positive, Character, and Identity. It is possible to
         /// do this by ORing the values together, like this:
         /// <code>
-        /// CharacterTrait myTrait = new CharacterTrait();
+        /// Trait myTrait = new Trait();
         /// myTrait.TraitType = CharacterTraitType.Positive | CharacterTraitType.Character | CharacterTraitType.Identity;
         /// </code>
         /// You can then tell if a variable is of a trait type by using the <see cref="Enum.HasFlag(Enum)"/> method on the variable.
@@ -172,6 +173,7 @@ namespace WarCollege.Model
         ///     // Do something if it has this flag.
         /// }
         /// </code>
+        /// <seealso cref="CharacterTraitType"/>
         /// </para>
 		/// </remarks>
 		public CharacterTraitType TraitType
@@ -185,6 +187,36 @@ namespace WarCollege.Model
                     RaisePropertyChanged();
                 }
             }
+        }
+
+        #endregion
+
+        #region Methods
+
+        private int CalcualteCurrentTraitPoints()
+        {
+            int retval = 0;
+
+            if (TotalExperience.IsNegative())
+            {
+                if (TotalExperience.IsMultipleOf(100))
+                {
+                    CurrentExperience = TotalExperience + 100;
+                }
+
+                retval = (int)Math.Ceiling(TotalExperience / 100D);
+            }
+            else
+            {
+                if (TotalExperience.IsMultipleOf(100))
+                {
+                    CurrentExperience = TotalExperience - 100;
+                }
+
+                retval = (int)Math.Floor(TotalExperience / 100D);
+            }
+
+            return retval;
         }
 
         #endregion
