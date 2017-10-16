@@ -124,7 +124,7 @@ namespace WarCollege.Model
             get { return _weight; }
             set
             {
-                if (Math.Abs(_height - value) > 0.000001f)
+                if (Math.Abs(_height - value) > Number.EPSILON)
                 {
                     _weight = value;
                     RaisePropertyChanged();
@@ -140,7 +140,7 @@ namespace WarCollege.Model
             get { return _height; }
             set
             {
-                if (Math.Abs(_height - value) > 0.000001f)
+                if (Math.Abs(_height - value) > Number.EPSILON)
                 {
                     _height = value;
                     RaisePropertyChanged();
@@ -276,7 +276,7 @@ namespace WarCollege.Model
             get { return _cbills; }
             set
             {
-                if (Math.Abs(_cbills - value) > 0.000001f)
+                if (Math.Abs(_cbills - value) > Number.EPSILON)
                 {
                     _cbills = value;
                     RaisePropertyChanged();
