@@ -48,6 +48,7 @@ namespace WarCollege.Model
         private string _pageReference;
         private int _totalExperience;
         private int _currentExperience;
+        private int _traitPoints;
         private string _description;
         private CharacterTraitType _traitType;
 
@@ -64,7 +65,7 @@ namespace WarCollege.Model
         /// <value>The trait points.</value>
         public int TraitPoints
         {
-            get => TotalExperience.IsNegative() ? (int)Math.Ceiling(TotalExperience / 100D) : (int)Math.Floor(TotalExperience / 100D);
+            get => _traitPoints;
         }
 
         /// <summary>
@@ -96,6 +97,7 @@ namespace WarCollege.Model
                 if (_totalExperience != value)
                 {
                     _totalExperience = value;
+                    _traitPoints = CalcualteCurrentTraitPoints();
                     RaisePropertyChanged();
                     RaisePropertyChanged(nameof(TraitPoints));
                 }
@@ -193,6 +195,10 @@ namespace WarCollege.Model
 
         #region Methods
 
+        /// <summary>
+        /// Calculates the current trait point total.
+        /// </summary>
+        /// <returns>The current trait point value as an integer.</returns>
         private int CalcualteCurrentTraitPoints()
         {
             int retval = 0;

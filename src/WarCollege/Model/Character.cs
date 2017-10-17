@@ -124,7 +124,7 @@ namespace WarCollege.Model
             get { return _weight; }
             set
             {
-                if (Math.Abs(_height - value) > Number.EPSILON)
+                if (!_weight.NearlyEqual(value))
                 {
                     _weight = value;
                     RaisePropertyChanged();
@@ -140,7 +140,7 @@ namespace WarCollege.Model
             get { return _height; }
             set
             {
-                if (Math.Abs(_height - value) > Number.EPSILON)
+                if (!_height.NearlyEqual(value))
                 {
                     _height = value;
                     RaisePropertyChanged();
@@ -269,14 +269,14 @@ namespace WarCollege.Model
         /// <value>The CBills.</value>
         /// <remarks>
         /// The various factions all have the own monetary systems, but for simplicity,
-        /// the system uses the Comstar bill as kind of a global currency.
+        /// War College uses the Comstar bill as kind of a global currency.
         /// </remarks>
         public float CBills
         {
             get { return _cbills; }
             set
             {
-                if (Math.Abs(_cbills - value) > Number.EPSILON)
+                if (!_cbills.NearlyEqual(value))
                 {
                     _cbills = value;
                     RaisePropertyChanged();
@@ -349,7 +349,19 @@ namespace WarCollege.Model
 
         #region Methods
 
+        /// <summary>
+        /// Determines if a character has a particular trait.
+        /// </summary>
+        /// <param name="name">Name of the trait to test.</param>
+        /// <returns><c>True</c> if the character has the named trait.</returns>
         public bool HasTrait(string name) => Traits.Any(x => x.Name == name);
+
+        /// <summary>
+        /// Determines if a character has a particular skill.
+        /// </summary>
+        /// <param name="name">Name of the skill to test.</param>
+        /// <returns><c>True</c> if the character has the named skill.</returns>
+        public bool HasSkill(string name) => Skills.Any(x => x.Name == name);
 
         #endregion
 
