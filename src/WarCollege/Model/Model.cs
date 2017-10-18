@@ -33,15 +33,43 @@ namespace WarCollege.Model
     /// Base class for all models.
     /// </summary>
     /// <remarks>
-    /// Provides a base set of properties for the model as well as handling 
-    /// all of the <see cref="INotifyPropertyChanged" /> events for the model.
+    /// Simple abstract class that defines an implementation for the 
+    /// <c>INotifyPropertyChanged</c> interface.
     /// </remarks>
-    public abstract class ModelBase : INotifyPropertyChanged
+    public abstract class Model : INotifyPropertyChanged
+    {
+        #region INotifyPropertyChanged implementation
+
+        /// <summary>
+        /// See <see cref="INotifyPropertyChanged" />.
+        /// </summary>
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        /// <summary>
+        /// Raises the <c>PropertyChanged</c> event for the model.
+        /// </summary>
+        /// <param name="memberName">The name of the property being changed.</param>
+        protected virtual void RaisePropertyChanged([CallerMemberName] string memberName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(memberName));
+        }
+
+        #endregion
+    }
+
+    /// <summary>
+    /// Base class for models that use an unique id.
+    /// </summary>
+    /// <typeparam name="TKey"><c>Type</c> used to uniquly identify the model.</typeparam>
+    /// <remarks>
+    /// Provides a base set of properties for the model.
+    /// </remarks>
+    public abstract class Model<TKey> : Model
     {
         #region Fields
 
         private string _name;
-        private Guid _id;
+        private TKey _id;
 
 		#endregion
 
@@ -55,12 +83,12 @@ namespace WarCollege.Model
 		/// models (Equipment, weapons, vehicles, etc...) This should only be set once,
 		/// when the model is created.
 		/// </remarks>
-		public virtual Guid Id
+		public virtual TKey Id
         {
             get => _id;
             set
             {
-                if (_id != value)
+                if (!_id.Equals(value))
                 {
                     _id = value;
                     RaisePropertyChanged();
@@ -77,30 +105,12 @@ namespace WarCollege.Model
             get => _name;
             set
             {
-                if (!_name.Equals(value))
+                if (_name != value)
                 {
                     _name = value;
                     RaisePropertyChanged();
                 }
             }
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged implementation
-
-        /// <summary>
-        /// See <see cref="INotifyPropertyChanged" />.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Raises the <c>PropertyChanged</c> event for the model.
-        /// </summary>
-        /// <param name="memberName">The name of the property being changed.</param>
-        protected virtual void RaisePropertyChanged([CallerMemberName] string memberName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(memberName));
         }
 
         #endregion

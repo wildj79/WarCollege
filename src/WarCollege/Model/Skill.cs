@@ -39,7 +39,7 @@ namespace WarCollege.Model
     /// Page References:
     /// Skills p. 140 - 159
     /// </remarks>
-    public class Skill : ModelBase
+    public class Skill : Model<Guid>
     {
         #region Constants
 
@@ -51,8 +51,7 @@ namespace WarCollege.Model
         #endregion
 
         #region Fields
-
-        private int _level;
+        
         private int _targetNumber;
         private string _complexityRating;
         private int _totalExperience;
@@ -74,9 +73,9 @@ namespace WarCollege.Model
         /// </summary>
         /// <remarks>
         /// This value is added to a roll made for a skill check. Higher
-        /// values are better than lower. Seems to follow this equation:
-        /// <c>y = 5x^2 + 5x + 20</c> where x is the skill level and y is
-        /// the experience points.
+        /// values are better than lower. The calculation of the value seems
+        /// to follow this equation: <c>y = 5x^2 + 5x + 20</c> where x is 
+        /// the skill level and y is the experience points.
         /// </remarks>
         public int Level
         {

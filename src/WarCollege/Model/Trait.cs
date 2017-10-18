@@ -41,7 +41,7 @@ namespace WarCollege.Model
     /// <item><description>Traits p. 106-135 AToW</description></item>
     /// </list>
     /// </remarks>
-    public class Trait : ModelBase
+    public class Trait : Model<Guid>
     {
         #region Fields
 

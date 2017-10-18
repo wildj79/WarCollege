@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WarCollege.Model
+﻿namespace WarCollege.Model
 {
-    public class ExperiencePoints : INotifyPropertyChanged
+    public class ExperiencePoints : Model
     {
+        #region Fields
+
         private int _totalExperience;
         private int _currentExperience;
+
+        #endregion
+
+        #region Properties
 
         public int TotalExperience
         {
@@ -21,7 +19,7 @@ namespace WarCollege.Model
                 if (_totalExperience != value)
                 {
                     _totalExperience = value;
-                    RaisePropertyChagned();
+                    RaisePropertyChanged();
                 }
             }
         }
@@ -34,10 +32,14 @@ namespace WarCollege.Model
                 if (_currentExperience != value)
                 {
                     _currentExperience = value;
-                    RaisePropertyChagned();
+                    RaisePropertyChanged();
                 }
             }
         }
+
+        #endregion
+
+        #region Methods
 
         public void AddExperience(int value)
         {
@@ -45,11 +47,6 @@ namespace WarCollege.Model
             CurrentExperience += value;
         }
 
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public void RaisePropertyChagned([CallerMemberName] string propertyName = null)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
+        #endregion
     }
 }

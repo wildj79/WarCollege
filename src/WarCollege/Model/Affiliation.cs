@@ -29,7 +29,10 @@ using WarCollege.Domain;
 
 namespace WarCollege.Model
 {
-    public class Affiliation : ModelBase, IEquatable<Affiliation>, IComparable<Affiliation>
+    /// <summary>
+    /// Represents a Battletech affiliation.
+    /// </summary>
+    public class Affiliation : Model<Guid>, IEquatable<Affiliation>, IComparable<Affiliation>
     {
         #region Fields
 
@@ -53,7 +56,7 @@ namespace WarCollege.Model
             get => _description;
             set
             {
-                if (!_description.Equals(value))
+                if (_description != value)
                 {
                     _description = value;
                     RaisePropertyChanged();
@@ -114,7 +117,7 @@ namespace WarCollege.Model
             get => _primaryLanguage;
             set
             {
-                if (!_primaryLanguage.Equals(value))
+                if (_primaryLanguage != value)
                 {
                     _primaryLanguage = value;
                     RaisePropertyChanged();
@@ -176,6 +179,17 @@ namespace WarCollege.Model
                     RaisePropertyChanged();
                 }
             }
+        }
+
+        #endregion
+
+        #region Ctor
+
+        public Affiliation()
+        {
+            SecondaryLanguages = new ObservableCollection<string>();
+            FixedExperiencePoints = new ObservableCollection<ExperienceAllotment>();
+            FlexibleExperiencePoints = new ObservableCollection<ExperienceAllotment>();
         }
 
         #endregion
@@ -260,10 +274,8 @@ namespace WarCollege.Model
         /// <remarks>Operator override.</remarks>
         public static bool operator == (Affiliation aff1, Affiliation aff2)
         {
-            if (aff1 == null || aff2 == null)
-            {
+            if (ReferenceEquals(aff1, null) || ReferenceEquals(aff2, null))
                 return false;
-            }
 
             return aff1.Equals(aff2);
         }
@@ -277,12 +289,7 @@ namespace WarCollege.Model
         /// <remarks>Operator override.</remarks>
         public static bool operator != (Affiliation aff1, Affiliation aff2)
         {
-            if (aff1 == null || aff2 == null)
-            {
-                return false;
-            }
-
-            return !aff1.Equals(aff2);
+            return !(aff1 == aff2);
         }
 
         #endregion

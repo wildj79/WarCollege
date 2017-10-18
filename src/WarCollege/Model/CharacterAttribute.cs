@@ -68,7 +68,7 @@ namespace WarCollege.Model
     /// instead.
     /// </para>
     /// </remarks>
-    public class CharacterAttribute : ModelBase
+    public class CharacterAttribute : Model<Guid>
     {
         #region Fields
 

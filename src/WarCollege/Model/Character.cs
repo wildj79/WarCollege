@@ -24,13 +24,8 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WarCollege.Model
 {
@@ -40,7 +35,7 @@ namespace WarCollege.Model
     /// <remarks>
     /// This is the main model for the program.
     /// </remarks>
-    public class Character : ModelBase
+    public class Character : Model<Guid>
     {
         #region Fields
 
@@ -337,10 +332,6 @@ namespace WarCollege.Model
                 }
             }
         }
-
-        #endregion
-
-        #region Events
 
         #endregion
 

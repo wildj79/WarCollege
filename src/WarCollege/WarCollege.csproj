@@ -51,7 +51,7 @@
     <Compile Include="Model\CharacterAttribute.cs" />
     <Compile Include="Model\Experience.cs" />
     <Compile Include="Model\Trait.cs" />
-    <Compile Include="Model\ModelBase.cs" />
+    <Compile Include="Model\Model.cs" />
     <Compile Include="Model\Phenotype.cs" />
     <Compile Include="Model\Skill.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

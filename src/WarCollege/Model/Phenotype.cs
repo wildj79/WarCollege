@@ -51,7 +51,7 @@ namespace WarCollege.Model
     /// Phenotype Trait p.122, AToW
     /// </para>
     /// </remarks>
-    public class Phenotype : ModelBase
+    public class Phenotype : Model<Guid>
     {
         #region Fields
 
