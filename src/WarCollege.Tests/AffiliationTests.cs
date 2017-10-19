@@ -60,6 +60,7 @@ namespace WarCollege.Tests
             aff2.Id = aff2Id;
 
             Assert.Equal(aff1, aff2);
+            Assert.Equal(aff2, aff1);
         }
 
         [Theory]
@@ -91,6 +92,27 @@ namespace WarCollege.Tests
             };
 
             Assert.Equal(string.Compare(aff1.Name, name, StringComparison.CurrentCulture), aff1.CompareTo(aff2));
+        }
+
+        [Theory]
+        [InlineData("This is a test", 125, "Spanish")]
+        public void IsRaisePropertyChanged(string description, 
+            int experienceCost, 
+            string primaryLanguage)
+        {
+            var aff = new Affiliation()
+            {
+                Id = Guid.NewGuid(),
+                Description = "",
+                ExperienceCost = 150,
+                Name = "Marik Commonwealth",
+                Parent = SetupParent(),
+                PrimaryLanguage = "English"
+            };
+
+            Assert.PropertyChanged(aff, "Description", () => aff.Description = description);
+            Assert.PropertyChanged(aff, "ExperienceCost", () => aff.ExperienceCost = experienceCost);
+            Assert.PropertyChanged(aff, "PrimaryLanguage", () => aff.PrimaryLanguage = primaryLanguage);
         }
     }
 }

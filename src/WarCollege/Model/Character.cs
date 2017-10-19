@@ -45,12 +45,12 @@ namespace WarCollege.Model
         private float _weight;
         private float _height;
         private int _age;
-        private int _currentExperience;
-        private int _initialExperience;
+        private ExperiencePoints _experience;
         private string _description;
         private string _notes;
         private float _cbills;
         private Affiliation _affiliation;
+        private Phenotype _phenotype;
 
         private ObservableCollection<CharacterAttribute> _attributes;
         private ObservableCollection<Trait> _traits;
@@ -71,7 +71,7 @@ namespace WarCollege.Model
             get { return _playerName; }
             set
             {
-                if (!_playerName.Equals(value))
+                if (_playerName != value)
                 {
                     _playerName = value;
                     RaisePropertyChanged();
@@ -87,7 +87,7 @@ namespace WarCollege.Model
             get { return _hairColor; }
             set
             {
-                if (!_hairColor.Equals(value))
+                if (_hairColor != value)
                 {
                     _hairColor = value;
                     RaisePropertyChanged();
@@ -103,7 +103,7 @@ namespace WarCollege.Model
             get { return _eyeColor; }
             set
             {
-                if (!_eyeColor.Equals(value))
+                if (_eyeColor != value)
                 {
                     _eyeColor = value;
                     RaisePropertyChanged();
@@ -171,7 +171,7 @@ namespace WarCollege.Model
             get { return _description; }
             set
             {
-                if (!_description.Equals(value))
+                if (_description != value)
                 {
                     _description = value;
                     RaisePropertyChanged();
@@ -193,7 +193,7 @@ namespace WarCollege.Model
             get { return _notes; }
             set
             {
-                if(!_notes.Equals(value))
+                if(_notes != value)
                 {
                     _notes = value;
                     RaisePropertyChanged();
@@ -225,34 +225,16 @@ namespace WarCollege.Model
         }
 
         /// <summary>
-        /// A characters currently available experience pool.
+        /// The characters experience points.
         /// </summary>
-        /// <value>The current experience.</value>
-        public int CurrentExperience
+        public ExperiencePoints Experience
         {
-            get { return _currentExperience; }
+            get => _experience;
             set
             {
-                if (_currentExperience != value)
+                if (_experience != value)
                 {
-                    _currentExperience = value;
-                    RaisePropertyChanged();
-                }
-            }
-        }
-
-        /// <summary>
-        /// The initial amount of experience points allocated to the character.
-        /// </summary>
-        /// <value>The initial experience.</value>
-        public int InitialExperience
-        {
-            get { return _initialExperience; }
-            set
-            {
-                if (_initialExperience != value)
-                {
-                    _initialExperience = value;
+                    _experience = value;
                     RaisePropertyChanged();
                 }
             }
@@ -274,6 +256,22 @@ namespace WarCollege.Model
                 if (!_cbills.NearlyEqual(value))
                 {
                     _cbills = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        /// <summary>
+        /// The characters Phenotype.
+        /// </summary>
+        public Phenotype Phenotype
+        {
+            get => _phenotype;
+            set
+            {
+                if (_phenotype != value)
+                {
+                    _phenotype = value;
                     RaisePropertyChanged();
                 }
             }
@@ -336,6 +334,20 @@ namespace WarCollege.Model
         #endregion
 
         #region Ctor
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="Character"/>.
+        /// </summary>
+        /// <param name="initialExperience">The initial experience points allocated to the characater</param>
+        public Character(int initialExperience = 5000)
+        {
+            Experience = new ExperiencePoints(initialExperience);
+
+            Attributes = new ObservableCollection<CharacterAttribute>();
+            Traits = new ObservableCollection<Trait>();
+            Skills = new ObservableCollection<Skill>();
+        }
+
         #endregion
 
         #region Methods
@@ -353,6 +365,24 @@ namespace WarCollege.Model
         /// <param name="name">Name of the skill to test.</param>
         /// <returns><c>True</c> if the character has the named skill.</returns>
         public bool HasSkill(string name) => Skills.Any(x => x.Name == name);
+
+        /// <summary>
+        /// Determines if a character is in an <see cref="WarCollege.Model.Affiliation"/> or not.
+        /// </summary>
+        /// <param name="name">Name of the <see cref="WarCollege.Model.Affiliation"/> to test.</param>
+        /// <returns><c>True</c> if the character belongs to the named faction.</returns>
+        public bool IsInAffiliation(string name)
+        {
+            if (Affiliation == null)
+                return false;
+
+            if (Affiliation.Parent != null && Affiliation.Parent.Name == name)
+            {
+                return true;
+            }
+
+            return Affiliation.Name == name;
+        }
 
         #endregion
 

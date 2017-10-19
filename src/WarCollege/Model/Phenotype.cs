@@ -26,9 +26,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WarCollege.Model
 {
@@ -127,12 +124,24 @@ namespace WarCollege.Model
             get { return _fieldAptitude; }
             set
             {
-                if (!_fieldAptitude.Equals(value))
+                if (_fieldAptitude != value)
                 {
                     _fieldAptitude = value;
                     RaisePropertyChanged();
                 }
             }
+        }
+
+        #endregion
+
+        #region Ctor
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="Phenotype"/>
+        /// </summary>
+        public Phenotype()
+        {
+            BounusTraits = new ObservableCollection<Trait>();
         }
 
         #endregion

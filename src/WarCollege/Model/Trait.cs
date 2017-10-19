@@ -1,4 +1,4 @@
-﻿// CharacterTrait.cs
+﻿// Trait.cs
 //
 // Author:
 //       James Allred <wildj79@gmail.com>
@@ -24,10 +24,6 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WarCollege.Model
 {
@@ -46,8 +42,7 @@ namespace WarCollege.Model
         #region Fields
 
         private string _pageReference;
-        private int _totalExperience;
-        private int _currentExperience;
+        private ExperiencePoints _experience;
         private int _traitPoints;
         private string _description;
         private CharacterTraitType _traitType;
@@ -77,7 +72,7 @@ namespace WarCollege.Model
             get { return _pageReference; }
             set
             {
-                if (!_pageReference.Equals(value))
+                if (_pageReference != value)
                 {
                     _pageReference = value;
                     RaisePropertyChanged();
@@ -86,36 +81,16 @@ namespace WarCollege.Model
         }
 
         /// <summary>
-        /// The total number of experience points allocated to the trait.
+        /// Experience points allocated to this trait.
         /// </summary>
-        /// <value>The experience.</value>
-        public int TotalExperience
+        public ExperiencePoints Experience
         {
-            get { return _totalExperience; }
+            get => _experience;
             set
             {
-                if (_totalExperience != value)
+                if (_experience != value)
                 {
-                    _totalExperience = value;
-                    _traitPoints = CalcualteCurrentTraitPoints();
-                    RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(TraitPoints));
-                }
-            }
-        }
-
-        /// <summary>
-        /// The current left over experience points allocated to this trait after
-        /// calculating the trait points.
-        /// </summary>
-        public int CurrentExperience
-        {
-            get => _currentExperience;
-            set
-            {
-                if (_currentExperience != value)
-                {
-                    _currentExperience = value;
+                    _experience = value;
                     RaisePropertyChanged();
                 }
             }
@@ -135,7 +110,7 @@ namespace WarCollege.Model
             get { return _description; }
             set
             {
-                if (!_description.Equals(value))
+                if (_description != value)
                 {
                     _description = value;
                     RaisePropertyChanged();
@@ -193,6 +168,15 @@ namespace WarCollege.Model
 
         #endregion
 
+        #region Ctor
+
+        public Trait()
+        {
+            Experience = new ExperiencePoints();
+        }
+
+        #endregion
+
         #region Methods
 
         /// <summary>
@@ -203,23 +187,23 @@ namespace WarCollege.Model
         {
             int retval = 0;
 
-            if (TotalExperience.IsNegative())
+            if (Experience.TotalExperience.IsNegative())
             {
-                if (TotalExperience.IsMultipleOf(100))
+                if (Experience.TotalExperience.IsMultipleOf(100))
                 {
-                    CurrentExperience = TotalExperience + 100;
+                    Experience.CurrentExperience = Experience.TotalExperience + 100;
                 }
 
-                retval = (int)Math.Ceiling(TotalExperience / 100D);
+                retval = (int)Math.Ceiling(Experience.TotalExperience / 100D);
             }
             else
             {
-                if (TotalExperience.IsMultipleOf(100))
+                if (Experience.TotalExperience.IsMultipleOf(100))
                 {
-                    CurrentExperience = TotalExperience - 100;
+                    Experience.CurrentExperience = Experience.TotalExperience - 100;
                 }
 
-                retval = (int)Math.Floor(TotalExperience / 100D);
+                retval = (int)Math.Floor(Experience.TotalExperience / 100D);
             }
 
             return retval;

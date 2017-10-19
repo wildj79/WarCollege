@@ -1,4 +1,4 @@
-﻿// ModelBase.cs
+﻿// Model.cs
 //
 // Author:
 //       James Allred <wildj79@gmail.com>

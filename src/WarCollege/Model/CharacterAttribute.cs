@@ -24,10 +24,7 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace WarCollege.Model
 {
@@ -73,7 +70,7 @@ namespace WarCollege.Model
         #region Fields
 
         private int _linkModifier;
-        private int _experience;
+        private ExperiencePoints _experience;
         private string _description;
         private string _abbreviation;
         private int _maximumScoreAllowed;
@@ -97,7 +94,7 @@ namespace WarCollege.Model
         /// The calculation is: <c>Math.Min(MaximumScoreAllowed, (int)Math.Floor(Experience / 100.0D));</c>
         /// </para>
         /// </remarks>
-        public int Score => Math.Min(MaximumScoreAllowed, (int)Math.Floor(Experience / 100D));
+        public int Score => CalculateScore();
 
         /// <summary>
         /// Modifier added to skills linked to this attribute.
@@ -119,13 +116,13 @@ namespace WarCollege.Model
         }
 
         /// <summary>
-        /// Current unapplied experience points allocated to this attribute.
+        /// Experience points allocated to this attribute.
         /// </summary>
         /// <remarks>
         /// Experience points are spent to increase the attributes score.
         /// 100 xp increases an attributes score by 1.
         /// </remarks>
-        public int Experience
+        public ExperiencePoints Experience
         {
             get => _experience;
             set
@@ -134,7 +131,6 @@ namespace WarCollege.Model
                 {
                     _experience = value;
                     RaisePropertyChanged();
-                    RaisePropertyChanged(nameof(Score));
                 }
             }
         }
@@ -150,7 +146,7 @@ namespace WarCollege.Model
             get => _description;
             set
             {
-                if (!_description.Equals(value))
+                if (_description != value)
                 {
                     _description = value;
                     RaisePropertyChanged();
@@ -166,7 +162,7 @@ namespace WarCollege.Model
             get => _abbreviation;
             set
             {
-                if (!_abbreviation.Equals(value))
+                if (_abbreviation != value)
                 {
                     _abbreviation = value;
                     RaisePropertyChanged();
@@ -229,6 +225,43 @@ namespace WarCollege.Model
                     RaisePropertyChanged();
                 }
             }
+        }
+
+        #endregion
+
+        #region Ctor
+
+        /// <summary>
+        /// Initializes a new instance of <see cref="CharacterAttribute"/>.
+        /// </summary>
+        public CharacterAttribute()
+        {
+            Experience = new ExperiencePoints();
+
+            Experience.PropertyChanged += OnExperienceChanged;
+        }
+
+        #endregion
+
+        #region Methods
+
+        /// <summary>
+        /// Calculates the current score for this attribute.
+        /// </summary>
+        /// <returns>The current attribute score as an <c>integer</c></returns>
+        private int CalculateScore()
+        {
+            if (Experience.TotalExperience.IsMultipleOf(100))
+            {
+                Experience.CurrentExperience = Experience.TotalExperience - 100;
+            }
+
+            return Math.Min(MaximumScoreAllowed, (int)Math.Floor(Experience.TotalExperience / 100D));
+        }
+
+        private void OnExperienceChanged(object sender, PropertyChangedEventArgs e)
+        {
+            RaisePropertyChanged(nameof(Score));
         }
 
         #endregion

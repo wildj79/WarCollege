@@ -172,7 +172,6 @@ namespace WarCollege
         /// </remarks>
         /// <param name="a">Value we are testing</param>
         /// <param name="b">Value we are testing against</param>
-        /// <param name="epsilon">A small floating point number used to determine the percision of the comparison.</param>
         /// <returns><c>True</c> if the two numbers are close enough to be considered equal</returns>
         public static bool NearlyEqual(this float a, float b) => NearlyEqual(a, b, 0.00001f);
 
