@@ -17,8 +17,6 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
 // OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using System.Reflection;
 using Eto.Drawing;
 using Eto.Forms;
 
@@ -27,7 +25,7 @@ namespace WarCollege.Dialogs
     /// <summary>
     /// User preferences modal dialog
     /// </summary>
-    public class Preferences : Dialog
+    public class Preferences : Dialog, IPreferencesDialog
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Dialogs.Preferences"/> class.

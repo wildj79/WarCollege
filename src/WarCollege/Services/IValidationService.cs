@@ -1,5 +1,4 @@
-﻿//
-// Open.cs
+﻿// IValidationService.cs
 //
 // Author:
 //       James Allred <wildj79@gmail.com>
@@ -24,43 +23,21 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using NLog;
-using Eto.Drawing;
-using Eto.Forms;
+using FluentValidation.Results;
 
-namespace WarCollege.Commands
+namespace WarCollege.Services
 {
     /// <summary>
-    /// Open character command.
+    /// Used to validate models.
     /// </summary>
-    public class OpenCharacter : Command, IOpenCharacterCommand
+    public interface IValidationService
     {
-        private readonly ILogger _logger;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Open"/> class.
+        /// Validates the given model.
         /// </summary>
-        /// <param name="logger">General logging</param>
-        /// <remarks>
-        /// This is the command used to open a previously created character.
-        /// </remarks>
-        public OpenCharacter(ILogger logger)
-        {
-            _logger = logger;
-
-            MenuText = Resources.Strings.OpenMenuText;
-            ToolBarText = Resources.Strings.OpenToolBarText;
-            Image = Icon.FromResource("WarCollege.Resources.folder_page_white.png");
-            Shortcut = Application.Instance.CommonModifier | Keys.O;
-        }
-
-        protected override void OnExecuted(EventArgs e)
-        {
-            _logger.Trace("Start OpenCharacter.OnExecuted()");
-            base.OnExecuted(e);
-
-            _logger.Trace("End OpenCharacter.OnExecuted()");
-        }
+        /// <typeparam name="T">The model <c>Type</c> to validate.</typeparam>
+        /// <param name="entity">The model to validate.</param>
+        /// <returns>The <c>ValidationResult</c> for the model.</returns>
+        ValidationResult Validate<T>(T entity) where T : class;
     }
 }

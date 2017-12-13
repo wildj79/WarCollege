@@ -24,14 +24,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
 using Eto.Forms;
-using Eto.Drawing;
-using Autofac.Extras.NLog;
+using NLog;
+using System;
 
 namespace WarCollege.Commands
 {
-    public class SaveCharacterAs : Command
+    public class SaveCharacterAs : Command, ISaveCharacterAsCommand
     {
         private readonly ILogger _logger;
         private readonly Config.IConfigSettings _configSettings;

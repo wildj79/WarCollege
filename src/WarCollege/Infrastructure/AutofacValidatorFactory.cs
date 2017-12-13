@@ -1,5 +1,4 @@
-﻿//
-// Open.cs
+﻿// AutofacValidatorFactory.cs
 //
 // Author:
 //       James Allred <wildj79@gmail.com>
@@ -24,43 +23,43 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
+using Autofac;
+using FluentValidation;
 using System;
-using NLog;
-using Eto.Drawing;
-using Eto.Forms;
 
-namespace WarCollege.Commands
+namespace WarCollege.Infrastructure
 {
     /// <summary>
-    /// Open character command.
+    /// Utility that returns a validator for a model.
     /// </summary>
-    public class OpenCharacter : Command, IOpenCharacterCommand
+    public  class AutofacValidatorFactory : ValidatorFactoryBase
     {
-        private readonly ILogger _logger;
+        private readonly IComponentContext _context;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Open"/> class.
+        /// Initializes an instance of the <see cref="AutofacValidatorFactory"/> class.
         /// </summary>
-        /// <param name="logger">General logging</param>
-        /// <remarks>
-        /// This is the command used to open a previously created character.
-        /// </remarks>
-        public OpenCharacter(ILogger logger)
+        /// <param name="context">The <see cref="IComponentContext"/> for the application.</param>
+        public AutofacValidatorFactory(IComponentContext context)
         {
-            _logger = logger;
-
-            MenuText = Resources.Strings.OpenMenuText;
-            ToolBarText = Resources.Strings.OpenToolBarText;
-            Image = Icon.FromResource("WarCollege.Resources.folder_page_white.png");
-            Shortcut = Application.Instance.CommonModifier | Keys.O;
+            _context = context;
         }
 
-        protected override void OnExecuted(EventArgs e)
+        /// <summary>
+        /// Creates a validator for a model.
+        /// </summary>
+        /// <param name="validatorType">The <c>Type</c> that a validator needs to be created for.</param>
+        /// <returns>A <see cref="IValidator"/> for the given type.</returns>
+        public override IValidator CreateInstance(Type validatorType)
         {
-            _logger.Trace("Start OpenCharacter.OnExecuted()");
-            base.OnExecuted(e);
+            if (_context.TryResolve(validatorType, out object instance))
+            {
+                var validator = instance as IValidator;
 
-            _logger.Trace("End OpenCharacter.OnExecuted()");
+                return validator;
+            }
+
+            return null;
         }
     }
 }

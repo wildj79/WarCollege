@@ -27,7 +27,7 @@ namespace WarCollege.Dialogs
     /// <summary>
     /// The about dailog.
     /// </summary>
-    public class About : Dialog
+    public class About : Dialog, IAboutDialog
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Dialogs.About"/> class.

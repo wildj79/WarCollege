@@ -17,34 +17,34 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
 // OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using Autofac.Extras.NLog;
-using Autofac.Features.OwnedInstances;
-using Eto.Forms;
-using Autofac.Features.AttributeFilters;
+using Autofac;
+using NLog;
 using Eto.Drawing;
+using Eto.Forms;
+using System;
+using WarCollege.Dialogs;
 
 namespace WarCollege.Commands
 {
     /// <summary>
     /// About menu item command.
     /// </summary>
-    public class About : Command
+    public class About : Command, IAboutCommand
     {
         private readonly ILogger _logger;
-        private readonly Func<Owned<Dialog>> _dialogFactory;
+        private readonly ILifetimeScope _unitOfWork;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Commands.About"/> class.
         /// </summary>
         /// <param name="logger">General logging</param>
-        /// <param name="dialogFactory">Factory method for creating the about dailog</param>
-        public About(ILogger logger, 
-                     [KeyFilter("aboutDialog")] Func<Owned<Dialog>> dialogFactory)
+        /// <param name="unitOfWork"><see cref="ILifetimeScope"/> for the application.</param>
+        public About(ILogger logger,
+            ILifetimeScope unitOfWork)
         {
             _logger = logger;
-            _dialogFactory = dialogFactory;
-            
+            _unitOfWork = unitOfWork;
+
             MenuText = Resources.Strings.AboutMenuText;
             ToolBarText = Resources.Strings.AboutToolBarText;
             Image = Icon.FromResource("WarCollege.Resources.information.png");
@@ -64,8 +64,11 @@ namespace WarCollege.Commands
             _logger.Trace("Start Commands.About.OnExecuted()");
             base.OnExecuted(e);
 
-            using (var about = _dialogFactory().Value)
+            using (var scope = _unitOfWork.BeginLifetimeScope())
+            {
+                var about = scope.Resolve<IAboutDialog>();
                 about.ShowModal(Application.Instance.MainForm);
+            }
 
             _logger.Trace("End Commands.About.OnExecuted()");
         }

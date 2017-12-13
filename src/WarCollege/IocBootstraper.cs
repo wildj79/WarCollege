@@ -18,9 +18,6 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using Autofac;
-using Autofac.Extras.NLog;
-using System;
-using Autofac.Features.AttributeFilters;
 
 namespace WarCollege
 {
@@ -28,26 +25,23 @@ namespace WarCollege
     /// Convience class used to contian all of the Inversion of Control 
     /// container initialization.
     /// </summary>
-    public class IocBootstraper
+    public static class IocBootstraper
     {
         /// <summary>
-        /// Registers NLog for use in the application.
+        /// Registers the custom <see cref="Module"/>'s for the application.
         /// </summary>
         /// <param name="builder">The Autofac <see cref="T:Autofac.ContainerBuilder" /></param>
-        protected virtual void RegisterLogging(ContainerBuilder builder)
+        private static void RegisterModules(ContainerBuilder builder)
         {
-            builder.RegisterModule<NLogModule>();
-
-            //builder.RegisterType<Logging.NLogStartup>()
-            //       .As<IStartable>()
-            //       .SingleInstance();
+            builder.RegisterModule<Modules.NLogModule>();
+            builder.RegisterModule<Modules.ValidationModule>();
         }
 
         /// <summary>
         /// Registers the configuration management and settings mechanisms.
         /// </summary>
         /// <param name="builder">The Autofac <c>ContainerBuilder</c></param>
-        protected virtual void RegisterConfig(ContainerBuilder builder)
+        private static void RegisterConfig(ContainerBuilder builder)
         {
             builder
                 .RegisterType<Config.ConfigManager>()
@@ -64,68 +58,71 @@ namespace WarCollege
         /// Registers menu and tool bar commands used by the forms.
         /// </summary>
         /// <param name="builder">The Autofac <c>ContainerBuilder</c></param>
-        protected virtual void RegisterCommands(ContainerBuilder builder)
+        private static void RegisterCommands(ContainerBuilder builder)
         {
             builder
                 .RegisterType<Commands.About>()
-                .Keyed<Eto.Forms.Command>("aboutCommand")
-                .WithAttributeFiltering();
-            
+                .As<Commands.IAboutCommand>()
+                .InstancePerLifetimeScope();
+
             builder
                 .RegisterType<Commands.Quit>()
-                .Keyed<Eto.Forms.Command>("quitCommand");
-            
+                .As<Commands.IQuitCommand>()
+                .InstancePerLifetimeScope();
+
             builder
                 .RegisterType<Commands.Preferences>()
-                .Keyed<Eto.Forms.Command>("preferencesCommand")
-                .WithAttributeFiltering();
+                .As<Commands.IPreferencesCommand>()
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<Commands.NewCharacter>()
-                .Keyed<Eto.Forms.Command>("newCharacterCommand")
-                .WithAttributeFiltering();
+                .As<Commands.INewCharacterCommand>()
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<Commands.OpenCharacter>()
-                .Keyed<Eto.Forms.Command>("openCharacterCommand")
-                .WithAttributeFiltering();
+                .As<Commands.IOpenCharacterCommand>()
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<Commands.SaveCharacter>()
-                .Keyed<Eto.Forms.Command>("saveCharacterCommand")
-                .WithAttributeFiltering();
+                .As<Commands.ISaveCharacterCommand>()
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<Commands.SaveCharacterAs>()
-                .Keyed<Eto.Forms.Command>("saveCharacterAsCommand")
-                .WithAttributeFiltering();
+                .As<Commands.ISaveCharacterAsCommand>()
+                .InstancePerLifetimeScope();
 
             builder
                 .RegisterType<Commands.SaveAllCharacters>()
-                .Keyed<Eto.Forms.Command>("saveAllCharactersCommand")
-                .WithAttributeFiltering();
+                .As<Commands.ISaveAllCharactersCommand>()
+                .InstancePerLifetimeScope();
         }
 
         /// <summary>
         /// Registers the modal dialogs.
         /// </summary>
         /// <param name="builder">The Autofac <c>ContainerBuilder</c></param>
-        protected virtual void RegisterDialogs(ContainerBuilder builder)
+        private static void RegisterDialogs(ContainerBuilder builder)
         {
             builder
                 .RegisterType<Dialogs.About>()
-                .Keyed<Eto.Forms.Dialog>("aboutDialog");
-            
+                .As<Dialogs.IAboutDialog>()
+                .InstancePerLifetimeScope();
+
             builder
                 .RegisterType<Dialogs.Preferences>()
-                .Keyed<Eto.Forms.Dialog>("preferencesDialog");
+                .As<Dialogs.IPreferencesDialog>()
+                .InstancePerLifetimeScope();
         }
 
         /// <summary>
         /// Builds the IoC container.
         /// </summary>
         /// <returns>An <c>IContainer</c></returns>
-        public IContainer Build()
+        public static IContainer InitializeContainer()
         {
             var builder = new ContainerBuilder();
 
@@ -137,7 +134,7 @@ namespace WarCollege
             builder.RegisterType<MainForm>()
                    .As<Eto.Forms.Form>();
 
-            RegisterLogging(builder);
+            RegisterModules(builder);
             RegisterConfig(builder);
             RegisterCommands(builder);
             RegisterDialogs(builder);

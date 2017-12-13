@@ -25,7 +25,7 @@
 // THE SOFTWARE.
 
 using System;
-using Autofac.Extras.NLog;
+using NLog;
 using Eto.Drawing;
 using Eto.Forms;
 
@@ -34,7 +34,7 @@ namespace WarCollege.Commands
 	/// <summary>
 	/// New character command.
 	/// </summary>
-	public class NewCharacter : Command
+	public class NewCharacter : Command, INewCharacterCommand
     {
         private readonly ILogger _logger;
 

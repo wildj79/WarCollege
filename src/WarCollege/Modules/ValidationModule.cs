@@ -1,5 +1,4 @@
-﻿//
-// Open.cs
+﻿// ValidationModule.cs
 //
 // Author:
 //       James Allred <wildj79@gmail.com>
@@ -24,43 +23,34 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using NLog;
-using Eto.Drawing;
-using Eto.Forms;
+using Autofac;
+using FluentValidation;
+using System.Linq;
+using WarCollege.Infrastructure;
+using WarCollege.Services;
 
-namespace WarCollege.Commands
+namespace WarCollege.Modules
 {
     /// <summary>
-    /// Open character command.
+    /// Module that registers various validation services.
     /// </summary>
-    public class OpenCharacter : Command, IOpenCharacterCommand
+    public class ValidationModule : Module
     {
-        private readonly ILogger _logger;
-
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Open"/> class.
+        /// Loads the necessary <c>Type</c>'s into the contianer.
         /// </summary>
-        /// <param name="logger">General logging</param>
-        /// <remarks>
-        /// This is the command used to open a previously created character.
-        /// </remarks>
-        public OpenCharacter(ILogger logger)
+        /// <param name="builder">The builder for the applications service container.</param>
+        protected override void Load(ContainerBuilder builder)
         {
-            _logger = logger;
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .Where(t => t.Name.EndsWith("Validator"))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
 
-            MenuText = Resources.Strings.OpenMenuText;
-            ToolBarText = Resources.Strings.OpenToolBarText;
-            Image = Icon.FromResource("WarCollege.Resources.folder_page_white.png");
-            Shortcut = Application.Instance.CommonModifier | Keys.O;
-        }
+            builder.RegisterType<AutofacValidatorFactory>().As<IValidatorFactory>().SingleInstance();
+            builder.RegisterType<FluentValidationService>().As<IValidationService>().SingleInstance();
 
-        protected override void OnExecuted(EventArgs e)
-        {
-            _logger.Trace("Start OpenCharacter.OnExecuted()");
-            base.OnExecuted(e);
-
-            _logger.Trace("End OpenCharacter.OnExecuted()");
+            base.Load(builder);
         }
     }
 }

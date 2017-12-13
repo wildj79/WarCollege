@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using WarCollege;
 using WarCollege.Model;
+using Xunit;
 
 namespace WarCollege.Tests
 {
@@ -42,7 +37,7 @@ namespace WarCollege.Tests
             return parent;
         }
 
-        [Theory]
+        [Theory(DisplayName = "Are Affilations Equal")]
         [InlineData("96261710-C26B-444D-81AB-ABF0C44A0F46")]
         [InlineData("C527F3B1-8328-48D3-B657-5C6629720741")]
         public void AreAffiliationsEqual(string id)
@@ -63,7 +58,7 @@ namespace WarCollege.Tests
             Assert.Equal(aff2, aff1);
         }
 
-        [Theory]
+        [Theory(DisplayName = "Compare Affiliations")]
         [InlineData("Marik Commonwealth")]
         [InlineData("Principality of Regulus")]
         [InlineData("Duchy of Oriente")]
@@ -94,7 +89,7 @@ namespace WarCollege.Tests
             Assert.Equal(string.Compare(aff1.Name, name, StringComparison.CurrentCulture), aff1.CompareTo(aff2));
         }
 
-        [Theory]
+        [Theory(DisplayName = "Is RaisePropertyChagned Called")]
         [InlineData("This is a test", 125, "Spanish")]
         public void IsRaisePropertyChanged(string description, 
             int experienceCost, 

@@ -18,12 +18,12 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-using System;
-using Eto.Forms;
 using Eto.Drawing;
-using Autofac.Extras.NLog;
-using Autofac.Features.Indexed;
+using Eto.Forms;
+using NLog;
+using System;
 using System.ComponentModel;
+using WarCollege.Commands;
 
 namespace WarCollege
 {
@@ -39,28 +39,58 @@ namespace WarCollege
         #region Fields
 
         private readonly ILogger _logger;
-        private readonly IIndex<string, Command> _commandFactory;
         private readonly Config.IConfigSettings _configSettings;
         private readonly Config.IConfigManager _configManager;
+        private readonly IAboutCommand _aboutComand;
+        private readonly IQuitCommand _quitCommand;
+        private readonly INewCharacterCommand _newCharacterCommand;
+        private readonly IOpenCharacterCommand _openCharacterCommand;
+        private readonly ISaveCharacterCommand _saveCharacterCommand;
+        private readonly ISaveCharacterAsCommand _saveCharacterAsCommand;
+        private readonly ISaveAllCharactersCommand _saveAllCharactersCommand;
+        private readonly IPreferencesCommand _preferencesCommand;
 
         #endregion // Fields
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.MainForm"/> class.
+        /// Initializes a new instance of the <see cref="MainForm"/> class.
         /// </summary>
-        /// <param name="logger">General logging aparatus</param>
-        /// <param name="commandFactory">Factory method for creating menu commands</param>
+        /// <param name="logger">Application logger instacne</param>
+        /// <param name="configSettings">Configuration settings for the application.</param>
+        /// <param name="configManager">The configuration manager for the application.</param>
+        /// <param name="aboutCommand">Command that controls the "About" dialog box.</param>
+        /// <param name="quitCommand">Command that exit's the application.</param>
+        /// <param name="newCharacterCommand">Command the creates a new character.</param>
+        /// <param name="openCharacterCommand">Command that opens a character.</param>
+        /// <param name="saveCharacterCommand">Command that save's the current character.</param>
+        /// <param name="saveCharacterAsCommand">Command that save's the current character with a specific name.</param>
+        /// <param name="saveAllCharactersCommand">Command that save's all open characters.(I might remove this.)</param>
+        /// <param name="preferencesCommand">Command that handles the preferneces dialog.</param>
         public MainForm(ILogger logger,
-                        IIndex<string, Command> commandFactory,
                         Config.IConfigSettings configSettings,
-                        Config.IConfigManager configManager)
+                        Config.IConfigManager configManager,
+                        IAboutCommand aboutCommand,
+                        IQuitCommand quitCommand,
+                        INewCharacterCommand newCharacterCommand,
+                        IOpenCharacterCommand openCharacterCommand,
+                        ISaveCharacterCommand saveCharacterCommand,
+                        ISaveCharacterAsCommand saveCharacterAsCommand,
+                        ISaveAllCharactersCommand saveAllCharactersCommand,
+                        IPreferencesCommand preferencesCommand)
         {
             _logger = logger;
-            _commandFactory = commandFactory;
             _configSettings = configSettings;
             _configManager = configManager;
+            _aboutComand = aboutCommand;
+            _quitCommand = quitCommand;
+            _newCharacterCommand = newCharacterCommand;
+            _openCharacterCommand = openCharacterCommand;
+            _saveCharacterCommand = saveCharacterCommand;
+            _saveCharacterAsCommand = saveCharacterAsCommand;
+            _saveAllCharactersCommand = saveAllCharactersCommand;
+            _preferencesCommand = preferencesCommand;
 
             Title = Resources.Strings.AppTitle;
             ClientSize = new Size(800, 600);
@@ -79,28 +109,28 @@ namespace WarCollege
         /// </summary>
         private void GenerateMenu()
         {
-            _logger.Trace("Starting MainForm.GenerateMenu()");
+            _logger.Trace($"Starting {nameof(GenerateMenu)}");
 
             _logger.Debug("Building menu bar and the tool bar.");
 
             var menu = new MenuBar
             {
-                AboutItem = _commandFactory["aboutCommand"],
-                QuitItem = _commandFactory["quitCommand"]
+                AboutItem = _aboutComand as Command,
+                QuitItem = _quitCommand as Command
             };
 
             var file = menu.Items.GetSubmenu("&File");
-            file.Items.Add(_commandFactory["newCharacterCommand"]);
-            file.Items.Add(_commandFactory["openCharacterCommand"]);
-            file.Items.Add(_commandFactory["saveCharacterCommand"]);
-            file.Items.Add(_commandFactory["saveCharacterAsCommand"]);
-            file.Items.Add(_commandFactory["saveAllCharactersCommand"]);
+            file.Items.Add(_newCharacterCommand as Command);
+            file.Items.Add(_openCharacterCommand as Command);
+            file.Items.Add(_saveCharacterCommand as Command);
+            file.Items.Add(_saveCharacterAsCommand as Command);
+            file.Items.Add(_saveAllCharactersCommand as Command);
 
-            menu.ApplicationItems.Add(_commandFactory["preferencesCommand"], 900);
+            menu.ApplicationItems.Add(_preferencesCommand as Command, 900);
 
             Menu = menu;
 
-            _logger.Trace("End MainForm.GenerateMenu()");
+            _logger.Trace($"End {nameof(GenerateMenu)}");
         }
 
         #endregion // Utilities

@@ -16,28 +16,29 @@
 // OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
 // OTHER DEALINGS IN THE SOFTWARE.
-using System;
-using Autofac.Extras.NLog;
-using Autofac.Features.AttributeFilters;
-using Autofac.Features.OwnedInstances;
+
+using Autofac;
 using Eto;
-using Eto.Forms;
-using WarCollege.Config;
 using Eto.Drawing;
+using Eto.Forms;
+using NLog;
+using System;
+using WarCollege.Config;
+using WarCollege.Dialogs;
 
 namespace WarCollege.Commands
 {
     /// <summary>
     /// User preferences command setup.
     /// </summary>
-    public class Preferences : Command
+    public class Preferences : Command, IPreferencesCommand
     {
         #region Fields
 
         private readonly IConfigSettings _configSettings;
         private readonly IConfigManager _configManager;
         private readonly ILogger _logger;
-        private readonly Func<Owned<Dialog>> _dialogFactory;
+        private readonly ILifetimeScope _unitOfWork;
 
         #endregion //Fields
 
@@ -49,17 +50,17 @@ namespace WarCollege.Commands
         /// <param name="logger">General logging instance</param>
         /// <param name="configSettings">Application settings</param>
         /// <param name="configManager">Application configuration manager</param>
-        /// <param name="dialogFactory">Factory method for creating the preferences dialog</param>
+        /// <param name="unitOfWork"><see cref="ILifetimeScope"/> for the application.</param>
         public Preferences(ILogger logger, 
                            IConfigSettings configSettings, 
                            IConfigManager configManager,
-                           [KeyFilter("preferencesDialog")] Func<Owned<Dialog>> dialogFactory
+                           ILifetimeScope unitOfWork
                           )
         {
             _logger = logger;
             _configSettings = configSettings;
             _configManager = configManager;
-            _dialogFactory = dialogFactory;
+            _unitOfWork = unitOfWork;
 
             MenuText = Resources.Strings.PreferencesMenuText;
             ToolBarText = Resources.Strings.PreferencesToolBarText;
@@ -86,8 +87,11 @@ namespace WarCollege.Commands
             _logger.Trace("Start Commands.Preferences.OnExecuted()");
             base.OnExecuted(e);
 
-            using (var preferences = _dialogFactory().Value)
-                preferences.ShowModal(Application.Instance.MainForm);
+            using (var scope = _unitOfWork.BeginLifetimeScope())
+            {
+                var dialog = scope.Resolve<IPreferencesDialog>();
+                dialog.ShowModal(Application.Instance.MainForm);
+            }
 
             _logger.Trace("End Commands.Preferences.OnExecuted()");
         }

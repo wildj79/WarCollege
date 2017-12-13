@@ -1,5 +1,4 @@
-﻿//
-// Open.cs
+﻿// IAboutCommand.cs
 //
 // Author:
 //       James Allred <wildj79@gmail.com>
@@ -24,43 +23,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using NLog;
-using Eto.Drawing;
-using Eto.Forms;
+using System.Windows.Input;
 
 namespace WarCollege.Commands
 {
     /// <summary>
-    /// Open character command.
+    /// The command used to open the "About" dialog box.
     /// </summary>
-    public class OpenCharacter : Command, IOpenCharacterCommand
+    /// <remarks>
+    /// Mostly a decrative interface used to seperate out the commands so that
+    /// <c>Autofac</c> can tell the difference between all of the commands.
+    /// </remarks>
+    public interface IAboutCommand : ICommand
     {
-        private readonly ILogger _logger;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Open"/> class.
-        /// </summary>
-        /// <param name="logger">General logging</param>
-        /// <remarks>
-        /// This is the command used to open a previously created character.
-        /// </remarks>
-        public OpenCharacter(ILogger logger)
-        {
-            _logger = logger;
-
-            MenuText = Resources.Strings.OpenMenuText;
-            ToolBarText = Resources.Strings.OpenToolBarText;
-            Image = Icon.FromResource("WarCollege.Resources.folder_page_white.png");
-            Shortcut = Application.Instance.CommonModifier | Keys.O;
-        }
-
-        protected override void OnExecuted(EventArgs e)
-        {
-            _logger.Trace("Start OpenCharacter.OnExecuted()");
-            base.OnExecuted(e);
-
-            _logger.Trace("End OpenCharacter.OnExecuted()");
-        }
     }
 }

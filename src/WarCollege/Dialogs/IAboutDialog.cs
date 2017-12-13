@@ -1,5 +1,4 @@
-﻿//
-// Open.cs
+﻿// IAboutDialog.cs
 //
 // Author:
 //       James Allred <wildj79@gmail.com>
@@ -24,43 +23,27 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using NLog;
-using Eto.Drawing;
 using Eto.Forms;
+using System.Threading.Tasks;
 
-namespace WarCollege.Commands
+namespace WarCollege.Dialogs
 {
     /// <summary>
-    /// Open character command.
+    /// Interface that describes the about dialog.
     /// </summary>
-    public class OpenCharacter : Command, IOpenCharacterCommand
+    public interface IAboutDialog
     {
-        private readonly ILogger _logger;
+        /// <summary>
+        /// Show the modal.
+        /// </summary>
+        /// <param name="parent">The parent <c>Control</c> for this dialog.</param>
+        void ShowModal(Control parent = null);
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Open"/> class.
+        /// Show the modal asyncronously.
         /// </summary>
-        /// <param name="logger">General logging</param>
-        /// <remarks>
-        /// This is the command used to open a previously created character.
-        /// </remarks>
-        public OpenCharacter(ILogger logger)
-        {
-            _logger = logger;
-
-            MenuText = Resources.Strings.OpenMenuText;
-            ToolBarText = Resources.Strings.OpenToolBarText;
-            Image = Icon.FromResource("WarCollege.Resources.folder_page_white.png");
-            Shortcut = Application.Instance.CommonModifier | Keys.O;
-        }
-
-        protected override void OnExecuted(EventArgs e)
-        {
-            _logger.Trace("Start OpenCharacter.OnExecuted()");
-            base.OnExecuted(e);
-
-            _logger.Trace("End OpenCharacter.OnExecuted()");
-        }
+        /// <param name="parent">The parent <c>Control</c> for this dialog.</param>
+        /// <returns>An awaitable <see cref="Task"/>.</returns>
+        Task ShowModalAsync(Control parent = null);
     }
 }

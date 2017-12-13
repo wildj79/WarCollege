@@ -17,16 +17,15 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
 // OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
-using Autofac.Extras.NLog;
 using Eto.Forms;
+using System;
 
 namespace WarCollege.Commands
 {
     /// <summary>
     /// Quit menu itme command.
     /// </summary>
-    public class Quit : Command
+    public class Quit : Command, IQuitCommand
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Quit"/> class.

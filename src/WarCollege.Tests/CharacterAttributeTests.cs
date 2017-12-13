@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
 using WarCollege.Model;
+using Xunit;
 
 namespace WarCollege.Tests
 {
     public class CharacterAttributeTests
     {
-        [Theory]
+        [Theory(DisplayName = "Calculate Score Correctly")]
         [InlineData(20)]
         [InlineData(100)]
         [InlineData(-125)]
@@ -39,7 +35,7 @@ namespace WarCollege.Tests
             Assert.Equal(testScore, att.Score);
         }
 
-        [Theory]
+        [Theory(DisplayName = "Calculate Experience Correctly")]
         [InlineData(20)]
         [InlineData(100)]
         [InlineData(-125)]

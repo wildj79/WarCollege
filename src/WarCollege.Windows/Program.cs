@@ -8,8 +8,7 @@ namespace WarCollege.Windows
         [STAThread]
         static void Main(string[] args)
         {
-            var bootstrapper = new IocBootstraper();
-            var container = bootstrapper.Build();
+            var container = IocBootstraper.InitializeContainer();
 
             using (var scope = container.BeginLifetimeScope())
             {

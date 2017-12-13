@@ -49,9 +49,8 @@ namespace WarCollege.XamMac
             {
                 handler.ShowImage = true;
             });
-
-            var bootstrapper = new IocBootstraper();
-            var container = bootstrapper.Build();
+            
+            var container = IocBootstraper.InitializeContianer();
 
             using (var scope = container.BeginLifetimeScope())
             {

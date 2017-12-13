@@ -1,15 +1,11 @@
-﻿using Autofac.Extras.NLog;
+﻿using Eto.Drawing;
 using Eto.Forms;
-using Eto.Drawing;
+using NLog;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WarCollege.Commands
 {
-    public class SaveAllCharacters : Command
+    public class SaveAllCharacters : Command, ISaveAllCharactersCommand
     {
         #region Fields
 

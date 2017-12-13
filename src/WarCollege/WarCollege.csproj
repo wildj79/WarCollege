@@ -29,14 +29,14 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.3.0\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="Eto">
       <HintPath>..\packages\Eto.Forms.2.3.0\lib\net45\Eto.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml" />
-    <Reference Include="Autofac.Extras.NLog">
-      <HintPath>..\packages\Autofac.Extras.NLog.1.3.0\lib\net45\Autofac.Extras.NLog.dll</HintPath>
-    </Reference>
     <Reference Include="Autofac">
       <HintPath>..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
@@ -46,7 +46,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CharacterTraitType.cs" />
+    <Compile Include="Commands\IAboutCommand.cs" />
+    <Compile Include="Commands\INewCharacterCommand.cs" />
+    <Compile Include="Commands\IOpenCharacterCommand.cs" />
+    <Compile Include="Commands\IPreferencesCommand.cs" />
+    <Compile Include="Commands\IQuitCommand.cs" />
+    <Compile Include="Commands\ISaveAllCharactersCommand.cs" />
+    <Compile Include="Commands\ISaveCharacterAsCommand.cs" />
+    <Compile Include="Commands\ISaveCharacterCommand.cs" />
     <Compile Include="Commands\SaveAllCharacters.cs" />
+    <Compile Include="Dialogs\IAboutDialog.cs" />
+    <Compile Include="Dialogs\IPreferencesDialog.cs" />
+    <Compile Include="Infrastructure\AutofacValidatorFactory.cs" />
     <Compile Include="Model\Character.cs" />
     <Compile Include="Model\CharacterAttribute.cs" />
     <Compile Include="Model\Experience.cs" />
@@ -54,12 +65,16 @@
     <Compile Include="Model\Model.cs" />
     <Compile Include="Model\Phenotype.cs" />
     <Compile Include="Model\Skill.cs" />
+    <Compile Include="Modules\NLogModule.cs" />
+    <Compile Include="Modules\ValidationModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="MainForm.cs" />
     <Compile Include="Commands\Quit.cs" />
     <Compile Include="Commands\About.cs" />
     <Compile Include="Dialogs\About.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Services\FluentValidationService.cs" />
+    <Compile Include="Services\IValidationService.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
       <DependentUpon>Strings.resx</DependentUpon>

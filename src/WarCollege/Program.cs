@@ -22,7 +22,7 @@ using System.ComponentModel;
 using System.IO;
 // using System.Threading;
 // using System.Threading.Tasks;
-using Autofac.Extras.NLog;
+using NLog;
 using Eto;
 using Eto.Forms;
 
@@ -119,10 +119,10 @@ namespace WarCollege
                 // already configured. (On Windows and Linux, the 
                 // EtoSpecialFolder.ApplicationResources enum will point to the 
                 // executables folder, where the NLog.config file should already be present.)
-                if (NLog.LogManager.Configuration == null)
-                    NLog.LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(Path.Combine(EtoEnvironment.GetFolderPath(EtoSpecialFolder.ApplicationResources), "NLog.config"));
+                if (LogManager.Configuration == null)
+                    LogManager.Configuration = new NLog.Config.XmlLoggingConfiguration(Path.Combine(EtoEnvironment.GetFolderPath(EtoSpecialFolder.ApplicationResources), "NLog.config"));
 
-                NLog.LogManager.Configuration.Variables["logRootDir"] = Path.Combine(EtoEnvironment.GetFolderPath(EtoSpecialFolder.ApplicationSettings), "WarCollege");
+                LogManager.Configuration.Variables["logRootDir"] = Path.Combine(EtoEnvironment.GetFolderPath(EtoSpecialFolder.ApplicationSettings), "WarCollege");
             }
             catch (Exception ex)
             {

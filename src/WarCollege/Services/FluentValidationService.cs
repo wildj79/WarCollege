@@ -1,5 +1,4 @@
-﻿//
-// Open.cs
+﻿// FluentValidationService.cs
 //
 // Author:
 //       James Allred <wildj79@gmail.com>
@@ -24,43 +23,39 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-using System;
-using NLog;
-using Eto.Drawing;
-using Eto.Forms;
+using FluentValidation;
+using FluentValidation.Results;
 
-namespace WarCollege.Commands
+namespace WarCollege.Services
 {
     /// <summary>
-    /// Open character command.
+    /// Service used to validate a model.
     /// </summary>
-    public class OpenCharacter : Command, IOpenCharacterCommand
+    public class FluentValidationService : IValidationService
     {
-        private readonly ILogger _logger;
+        private readonly IValidatorFactory _validatorFactory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Open"/> class.
+        /// Intializes an instance of the <see cref="FluentValidationService"/> class.
         /// </summary>
-        /// <param name="logger">General logging</param>
-        /// <remarks>
-        /// This is the command used to open a previously created character.
-        /// </remarks>
-        public OpenCharacter(ILogger logger)
+        /// <param name="validatorFactory">The factory class used to build the validator.</param>
+        public FluentValidationService(IValidatorFactory validatorFactory)
         {
-            _logger = logger;
-
-            MenuText = Resources.Strings.OpenMenuText;
-            ToolBarText = Resources.Strings.OpenToolBarText;
-            Image = Icon.FromResource("WarCollege.Resources.folder_page_white.png");
-            Shortcut = Application.Instance.CommonModifier | Keys.O;
+            _validatorFactory = validatorFactory;
         }
 
-        protected override void OnExecuted(EventArgs e)
+        /// <summary>
+        /// Validates a model.
+        /// </summary>
+        /// <typeparam name="T">The model <c>Type</c>.</typeparam>
+        /// <param name="entity">The model to validate.</param>
+        /// <returns>A <c>ValidationResult</c> for the given model.</returns>
+        public ValidationResult Validate<T>(T entity) where T : class
         {
-            _logger.Trace("Start OpenCharacter.OnExecuted()");
-            base.OnExecuted(e);
+            var validator = _validatorFactory.GetValidator(entity.GetType());
+            var result = validator.Validate(entity);
 
-            _logger.Trace("End OpenCharacter.OnExecuted()");
+            return result;
         }
     }
 }

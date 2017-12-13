@@ -24,14 +24,8 @@
 // THE SOFTWARE.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using WarCollege;
 using WarCollege.Model;
-using Moq;
+using Xunit;
 
 namespace WarCollege.Tests
 {
@@ -272,44 +266,44 @@ namespace WarCollege.Tests
             character.Phenotype.AttributeModifiers.Add("EDG", 0);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Does Have Trait")]
         public void DoesHaveTrait()
         {
             Assert.True(character.HasTrait("Fit"));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Does Not Have Trait")]
         public void DoesNotHaveTrait()
         {
             Assert.False(character.HasTrait("Poor Vision"));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Does Have Skill")]
         public void DoesHaveSkill()
         {
             Assert.True(character.HasSkill("Archery"));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Does Not Have Skill")]
         public void DoesNotHaveSkill()
         {
             Assert.False(character.HasSkill("Running"));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Is In Affiliation")]
         public void IsInAffiliation()
         {
             Assert.True(character.IsInAffiliation("Free Worlds League"));
             Assert.True(character.IsInAffiliation("Marik Commonwealth"));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Is Not In Affiliation")]
         public void IsNotInAffiliation()
         {
             Assert.False(character.IsInAffiliation("Lyran Alliance"));
         }
 
-        [Fact]
+        [Fact(DisplayName = "Is RaisePropertyChagned Called")]
         public void IsPropertyChagnedRaised()
         {
             Assert.PropertyChanged(character, nameof(Character.Age), () => character.Age = 22);
