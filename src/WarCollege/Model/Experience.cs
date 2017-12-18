@@ -102,6 +102,11 @@ namespace WarCollege.Model
             CurrentExperience += value;
         }
 
+        public override string ToString()
+        {
+            return $"Current Experience: {CurrentExperience}; Total Experience: {TotalExperience};";
+        }
+
         #endregion
     }
 }

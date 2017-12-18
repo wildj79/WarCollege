@@ -118,6 +118,14 @@ namespace WarCollege
                 .InstancePerLifetimeScope();
         }
 
+        private static void RegisterServices(ContainerBuilder builder)
+        {
+            builder
+                .RegisterType<Services.CharacterInitializationService>()
+                .As<Services.ICharacterInitializationService>()
+                .SingleInstance();
+        }
+
         /// <summary>
         /// Builds the IoC container.
         /// </summary>
@@ -138,6 +146,7 @@ namespace WarCollege
             RegisterConfig(builder);
             RegisterCommands(builder);
             RegisterDialogs(builder);
+            RegisterServices(builder);
 
             builder.RegisterBuildCallback(container => container.Resolve<Eto.Forms.Application>());
 

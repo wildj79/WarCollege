@@ -258,6 +258,11 @@ namespace WarCollege.Model
             RaisePropertyChanged(nameof(Score));
         }
 
+        public override string ToString()
+        {
+            return $"{Abbreviation} -> {Name}";
+        }
+
         #endregion
     }
 }

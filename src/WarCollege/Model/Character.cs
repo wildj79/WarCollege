@@ -378,6 +378,16 @@ namespace WarCollege.Model
             return Affiliation.Name == name;
         }
 
+        public override string ToString()
+        {
+            var name = "<UNNAMED>";
+
+            if (!string.IsNullOrWhiteSpace(Name))
+                name = $"{Name}";
+
+            return $"{name} -> Current XP: {Experience.CurrentExperience}";
+        }
+
         #endregion
 
         #region Utilities

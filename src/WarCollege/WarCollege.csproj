@@ -73,7 +73,9 @@
     <Compile Include="Commands\About.cs" />
     <Compile Include="Dialogs\About.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Services\CharacterInitializationService.cs" />
     <Compile Include="Services\FluentValidationService.cs" />
+    <Compile Include="Services\ICharacterInitializationService.cs" />
     <Compile Include="Services\IValidationService.cs" />
     <Compile Include="SplashScreen.cs" />
     <Compile Include="Resources\Strings.Designer.cs">
@@ -1112,6 +1114,7 @@
     <Content Include="NLog.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="Resources\megamek_splash_spooky_hd.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

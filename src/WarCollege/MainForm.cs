@@ -23,6 +23,8 @@ using NLog;
 using System;
 using System.ComponentModel;
 using WarCollege.Commands;
+using WarCollege.Model;
+using WarCollege.Services;
 
 namespace WarCollege
 {
@@ -48,8 +50,16 @@ namespace WarCollege
         private readonly ISaveCharacterAsCommand _saveCharacterAsCommand;
         private readonly ISaveAllCharactersCommand _saveAllCharactersCommand;
         private readonly IPreferencesCommand _preferencesCommand;
+        private readonly ICharacterInitializationService _characterInitializationService;
 
         #endregion // Fields
+
+        #region Properties
+
+        public Character Character { get; set; }
+
+        #endregion // Properties
+
 
         #region Constructors
 
@@ -77,7 +87,8 @@ namespace WarCollege
                         ISaveCharacterCommand saveCharacterCommand,
                         ISaveCharacterAsCommand saveCharacterAsCommand,
                         ISaveAllCharactersCommand saveAllCharactersCommand,
-                        IPreferencesCommand preferencesCommand)
+                        IPreferencesCommand preferencesCommand,
+                        ICharacterInitializationService characterInitializationService)
         {
             _logger = logger;
             _configSettings = configSettings;
@@ -90,8 +101,13 @@ namespace WarCollege
             _saveCharacterAsCommand = saveCharacterAsCommand;
             _saveAllCharactersCommand = saveAllCharactersCommand;
             _preferencesCommand = preferencesCommand;
+            _characterInitializationService = characterInitializationService;
 
-            Title = Resources.Strings.AppTitle;
+            Character = _characterInitializationService.IntializeCharacter();
+
+            Character.Experience.AddExperience(-100);
+
+            Title = $"{Resources.Strings.AppTitle}: {Character}";
             ClientSize = new Size(800, 600);
             Content = new Label { Text = Resources.Strings.HelloWorld };
             Style = "MainWindow";

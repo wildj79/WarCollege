@@ -255,6 +255,11 @@ namespace WarCollege.Model
             return Id.GetHashCode();
         }
 
+        public override string ToString()
+        {
+            return $"{Name} -> {Parent?.Name}";
+        }
+
         #endregion
 
         #region Operator overloads

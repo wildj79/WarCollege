@@ -17,24 +17,20 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
 // OTHER DEALINGS IN THE SOFTWARE.
 
-using System;
+using WarCollege.Model;
 
-namespace WarCollege
+namespace WarCollege.Services
 {
     /// <summary>
-    /// An enumeration of the various types that a trait can be.
+    /// Service that initializes a character.
     /// </summary>
-    [Flags]
-    public enum CharacterTraitType
+    public interface ICharacterInitializationService
     {
-        None,
-        Neutral = (1 << 0),
-        Positive = (1 << 1),
-        Negative = (1 << 2),
-        Flexible = (1 << 3),
-        Character = (1 << 4),
-        Vehicle = (1 << 5),
-        Identity = (1 << 6),
-        Opposed = (1 << 7),
+        /// <summary>
+        /// Initialize a character.
+        /// </summary>
+        /// <param name="initialExperiencePoints">Initial experience points for the character.</param>
+        /// <returns>A <see cref="Character"/> object.</returns>
+        Character IntializeCharacter(int initialExperiencePoints = 5000);
     }
 }

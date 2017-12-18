@@ -282,6 +282,23 @@ namespace WarCollege.Model
 
         #region Methods
 
+        public override string ToString()
+        {
+            var name = $"{Name}";
+
+            if (!string.IsNullOrWhiteSpace(SubSkill))
+                name += $"/{SubSkill}";
+
+            var specialty = "";
+
+            if (!string.IsNullOrWhiteSpace(Specialty))
+                specialty = $"; Speciality: {Specialty}";
+
+            var level = $"{GetCurrentLevel()}";
+
+            return $"{name} -> Level: {level}{specialty}";
+        }
+
         private int GetCurrentLevel()
         {
             if (Character.HasTrait("Fast Learner"))

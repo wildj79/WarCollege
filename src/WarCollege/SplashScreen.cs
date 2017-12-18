@@ -30,12 +30,20 @@ namespace WarCollege
     /// Application splash screen
     /// </summary>
     /// <remarks>
+    /// <para>
+    /// Derived from this project on Code Project: 
+    /// <a href="https://www.codeproject.com/Articles/5454/A-Pretty-Good-Splash-Screen-in-C">A Pretty Good Splash Screen in C#</a>
+    /// by Tom Clement. This has been heavily modified to work better with an async/await methodology instead of using <see cref="System.Threading.Thread"/>
+    /// as well as modifications for it to work with the <see cref="Eto"/> GUI framework.
+    /// </para>
+    /// <para>
     /// I had played around with this, but at this time I don't think it is necessary.
     /// I will revisit this later if the need arises.
+    /// </para>
     /// </remarks>
     public class SplashScreen : Form
     {
-        const int TIMER_INTERVAL = 50;
+        const int TimerInterval = 50;
         double opacityIncrement = .05;
         double opacityDecrement = .08;
         string status;
@@ -47,8 +55,8 @@ namespace WarCollege
 
         int index = 1;
         int actualTicks;
-        List<double> previousCompletionFraction;
-        List<double> actualTimes = new List<double>();
+        IList<double> previousCompletionFraction;
+        IList<double> actualTimes = new List<double>();
         DateTime start;
         bool firstLaunch;
         bool DTSet;
@@ -180,9 +188,8 @@ namespace WarCollege
         void ReadIncrements()
         {
             string sPBIncrementPerTimerInterval = SplashScreenXMLStorage.Interval;
-            double result;
 
-            if (double.TryParse(sPBIncrementPerTimerInterval, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out result) == true)
+            if (double.TryParse(sPBIncrementPerTimerInterval, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out double result) == true)
                 PBIncrementPerTimerInterval = result;
             else
                 PBIncrementPerTimerInterval = .0015;
@@ -196,8 +203,7 @@ namespace WarCollege
 
                 for (int i = 0; i < times.Length; i++)
                 {
-                    double val;
-                    if (double.TryParse(times[i], System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out val) == true)
+                    if (double.TryParse(times[i], System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out double val) == true)
                         previousCompletionFraction.Add(val);
                     else
                         previousCompletionFraction.Add(1.0);
@@ -243,21 +249,30 @@ namespace WarCollege
             ProgressBar = new ProgressBar
             {
                 MaxValue = 1000,
-                Width = 800,
+                Width = 650,
                 Style = "ProgressBar"
             };
 
-            Background = new ImageView();
-            Background.Image = Bitmap.FromResource("WarCollege.Resources.splash.jpg");
-            ClientSize = new Size(800, 675);
+            Background = new ImageView
+            {
+                // I am borrowing this image from MegaMek for now.
+                // TODO: update this image when we get a custom splash for WarCollege
+                Image = Bitmap.FromResource("WarCollege.Resources.megamek_splash_spooky_hd.png"),
+                Size = new Size(650, 375)
+            };
+
+            ClientSize = new Size(650, 425);
             WindowStyle = WindowStyle.None;
             Resizable = false;
             BackgroundColor = Colors.White;
             //Content = background;
             Opacity = .0;
-            UpdateTimer = new UITimer();
-            UpdateTimer.Interval = (double)TIMER_INTERVAL / 1000;
-            UpdateTimer.Elapsed += UpdateTimer_Tick;
+            UpdateTimer = new UITimer
+            {
+                Interval = (double)TimerInterval / 1000
+            };
+
+            UpdateTimer.Elapsed += UpdateTimer_Elapsed;
             UpdateTimer.Start();
 
             var top = (int)(Screen.WorkingArea.Height / 2) - (ClientSize.Height / 2);
@@ -267,9 +282,9 @@ namespace WarCollege
 
             var layout = new TableLayout
             {
-                Rows = 
+                Rows =
                 {
-                    new TableRow(Background),
+                    Background,
                     new TableRow(ProgressBar),
                     new TableRow(Status),
                     new TableRow(TimeRemaining),
@@ -289,7 +304,7 @@ namespace WarCollege
             CloseForm();
         }
 
-        void UpdateTimer_Tick(object sender, EventArgs e)
+        void UpdateTimer_Elapsed(object sender, EventArgs e)
         {
             Status.Text = status;
 
@@ -318,7 +333,7 @@ namespace WarCollege
 
                 ProgressBar.Value = (int)Math.Round(Math.Min(lastCompletionFraction, 1f) * 1000f);
 
-                int secondsLeft = 1 + (int)(TIMER_INTERVAL * ((1.0 - lastCompletionFraction) / PBIncrementPerTimerInterval)) / 1000;
+                int secondsLeft = 1 + (int)(TimerInterval * ((1.0 - lastCompletionFraction) / PBIncrementPerTimerInterval)) / 1000;
                 timeRemaining = (secondsLeft == 1) ? string.Format("1 second remaining") : string.Format("{0} seconds remaining", secondsLeft);
             }
             else

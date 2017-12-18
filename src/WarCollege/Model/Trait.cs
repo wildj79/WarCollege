@@ -173,6 +173,11 @@ namespace WarCollege.Model
 
         #region Methods
 
+        public override string ToString()
+        {
+            return $"{Name} -> Level: {CalcualteCurrentTraitPoints()}";
+        }
+
         /// <summary>
         /// Calculates the current trait point total.
         /// </summary>
