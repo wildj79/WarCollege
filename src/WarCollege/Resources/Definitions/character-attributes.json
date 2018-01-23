@@ -1,0 +1,74 @@
+﻿[
+  {
+    "id": "BED4C4A3-4E58-4D7B-86BE-F95A5C1D1221",
+    "name": "Strength",
+    "description": "How physically strong a character is.",
+    "linkModifier": 0,
+    "abbreviation": "STR",
+    "maximumScoreAllowed": 8,
+    "phenotypeModifier": 0
+  },
+  {
+    "id": "08343B49-5F88-46B2-ADB5-A9F03731A1E7",
+    "name": "Body",
+    "description": "How durable and \"In shape\" a character is.",
+    "linkModifier": 0,
+    "abbreviation": "BOD",
+    "maximumScoreAllowed": 8,
+    "phenotypeModifier": 0
+  },
+  {
+    "id": "FAA5FE4F-CC49-44CC-9707-5592559381F0",
+    "name": "Reflexes",
+    "description": "How quick a character can respond to situations.",
+    "linkModifier": 0,
+    "abbreviation": "RFL",
+    "maximumScoreAllowed": 8,
+    "phenotypeModifier": 0
+  },
+  {
+    "id": "2676C429-C8FD-4628-8C55-3B631754A0A0",
+    "name": "Dexterity",
+    "description": "How well a character can manipulate and handle objects.",
+    "linkModifier": 0,
+    "abbreviation": "DEX",
+    "maximumScoreAllowed": 8,
+    "phenotypeModifier": 0
+  },
+  {
+    "id": "A017CB33-C3E6-462F-A455-2A73C32B705A",
+    "name": "Intelligence",
+    "description": "How intelligent a character is.",
+    "linkModifier": 0,
+    "abbreviation": "INT",
+    "maximumScoreAllowed": 8,
+    "phenotypeModifier": 0
+  },
+  {
+    "id": "9A2E2457-E4D0-4571-9C35-8A4418216646",
+    "name": "Willpower",
+    "description": "How decisive a characte is.",
+    "linkModifier": 0,
+    "abbreviation": "WIL",
+    "maximumScoreAllowed": 8,
+    "phenotypeModifier": 0
+  },
+  {
+    "id": "55AA1A51-0781-4E27-9887-2B0FF6353949",
+    "name": "Charisam",
+    "description": "How inspiring a character is.",
+    "linkModifier": 0,
+    "abbreviation": "CHA",
+    "maximumScoreAllowed": 9,
+    "phenotypeModifier": 0
+  },
+  {
+    "id": "68022D5E-FB18-403B-9A4F-53F3BA760DB4",
+    "name": "Edge",
+    "description": "How lucky a character is.",
+    "linkModifier": 0,
+    "abbreviation": "EDG",
+    "maximumScoreAllowed": 9,
+    "phenotypeModifier": 0
+  }
+]

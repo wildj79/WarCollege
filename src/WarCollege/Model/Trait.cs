@@ -18,6 +18,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 
 namespace WarCollege.Model
 {
@@ -37,13 +38,31 @@ namespace WarCollege.Model
 
         private string _pageReference;
         private ExperiencePoints _experience;
-        private int _traitPoints;
+        private int _currentTraitScore;
         private string _description;
         private CharacterTraitType _traitType;
+        private bool _isVariable;
+        private IList<int> _allowedTraitPoints;
 
         #endregion
 
         #region Properties
+
+        /// <summary>
+        /// Is this trait a variable-level trait?
+        /// </summary>
+        public bool IsVariable
+        {
+            get => _isVariable;
+            set
+            {
+                if (_isVariable != value)
+                {
+                    _isVariable = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// The value of the trait.
@@ -52,9 +71,22 @@ namespace WarCollege.Model
         /// This value is derived form the total alloted experinece points.
         /// </remarks>
         /// <value>The trait points.</value>
-        public int TraitPoints
+        public int CurrentTraitScore
         {
-            get => _traitPoints;
+            get => _currentTraitScore;
+        }
+
+        public IList<int> AllowedTriatPoints
+        {
+            get => _allowedTraitPoints;
+            set
+            {
+                if (_allowedTraitPoints != value)
+                {
+                    _allowedTraitPoints = value;
+                    RaisePropertyChanged();
+                }
+            }
         }
 
         /// <summary>

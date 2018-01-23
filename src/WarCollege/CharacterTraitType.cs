@@ -17,6 +17,8 @@
 // ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
 // OTHER DEALINGS IN THE SOFTWARE.
 
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 
 namespace WarCollege
@@ -25,6 +27,7 @@ namespace WarCollege
     /// An enumeration of the various types that a trait can be.
     /// </summary>
     [Flags]
+    [JsonConverter(typeof(StringEnumConverter))]
     public enum CharacterTraitType
     {
         None,
@@ -36,5 +39,6 @@ namespace WarCollege
         Vehicle = (1 << 5),
         Identity = (1 << 6),
         Opposed = (1 << 7),
+        Multiple = (1 << 8),
     }
 }

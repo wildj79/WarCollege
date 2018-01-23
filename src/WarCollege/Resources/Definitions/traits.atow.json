@@ -1,0 +1,524 @@
+﻿[
+  {
+    "id": "5CFFC1D0-BE6E-494A-935A-8EB67527C8D4",
+    "name": "Alternate ID",
+    "descrition": "An alias that the character may go by.",
+    "allowedTraitPoints": [ 2 ],
+    "traitType": "Positive,Character,Identity",
+    "pageReference": "AToW p. 108",
+    "isVariable": false
+  },
+  {
+    "id": "46CB8D2A-12D1-496C-84E6-2F000EDA64D4",
+    "name": "Ambidextrous",
+    "descrition": "Can use both hands equally well",
+    "allowedTraitPoints": [ 2 ],
+    "traitType": "Positive,Character",
+    "pageReference": "AToW p. 108",
+    "isVariable": false
+  },
+  {
+    "id": "39D8BF10-7C82-46DA-9B6C-980B8B47661C",
+    "name": "Animal Empathy",
+    "descrition": "Has a natural gift with animals.",
+    "allowedTraitPoints": [ 1 ],
+    "traitType": "Positive,Opposed,Charater",
+    "pageReference": "AToW p. 108",
+    "isVariable": false
+  },
+  {
+    "id": "0373DB01-5DB5-43E3-8084-37C799F1004E",
+    "name": "Attractive",
+    "descrition": "This character is more appealing to the oppisite sex.",
+    "allowedTraitPoints": [ 2 ],
+    "traitType": "Character,Identity,Positive,Opposed",
+    "pageReference": "AToW p. 108",
+    "isVariable": false
+  },
+  {
+    "id": "E5A1362A-DA64-4070-9E16-8F44A8F7C3C1",
+    "name": "Citizenship",
+    "descrition": "This character is a citizen of their affiliation.",
+    "allowedTraitPoints": [ 2 ],
+    "traitType": "Character,Identity,Positive",
+    "pageReference": "AToW p. 109",
+    "isVariable": false
+  },
+  {
+    "id": "B1337C82-0B31-41AC-ADF2-10D1B1C257D0",
+    "name": "Trueborn",
+    "descrition": "Character is amongst the Trueborn of the clans.",
+    "allowedTraitPoints": [ 2 ],
+    "traitType": "Character,Identity,Positive",
+    "pageReference": "AToW p. 109",
+    "isVariable": false
+  },
+  {
+    "id": "658FBA4C-9215-4D47-B78A-B62DAF8A566B",
+    "name": "Combat Sense",
+    "descrition": "Character can handle themselves in stressfull situations",
+    "allowedTraitPoints": [ 4 ],
+    "traitType": "Character,Positive,Opposed",
+    "pageReference": "AToW p. 110",
+    "isVariable": false
+  },
+  {
+    "id": "563462D4-DA45-4280-AE6B-EB3408C7D715",
+    "name": "Connections",
+    "descrition": "This character know's people.",
+    "allowedTraitPoints": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+    "traitType": "Character,Identity,Positive,Multiple",
+    "pageReference": "AToW p. 111",
+    "isVariable": true
+  },
+  {
+    "id": "D053550A-CFD8-42C6-9127-D21950169FD7",
+    "name": "Exceptional Attribute",
+    "descrition": "Allows a single attribute to excede the maximum score.",
+    "allowedTraitPoints": [ 2 ],
+    "traitType": "Character,Positive,Multiple",
+    "pageReference": "AToW p. 116",
+    "isVariable": false
+  },
+  {
+    "id": "23483AAF-8548-42A3-BF14-043197E8F2A3",
+    "name": "Fast Learner",
+    "descrition": "This character learns new skills and abilities faster",
+    "allowedTraitPoints": [ 3 ],
+    "traitType": "Positive,Opposed,Character",
+    "pageReference": "AToW p. 117",
+    "isVariable": false
+  },
+  {
+    "id": "DEE7DA2E-687A-46C6-AD6E-ED7CB776509E",
+    "name": "Fit",
+    "descrition": "Charater is physically fit.",
+    "allowedTraitPoints": [ 2 ],
+    "traitType": "Character,Positive,Opposed",
+    "pageReference": "AToW p. 117",
+    "isVariable": false
+  },
+  {
+    "id": "7206514B-F752-4765-B9BB-6CF99AE0C15A",
+    "name": "G-Tolerance",
+    "descrition": "Character can withstand the rigors of zero gravity better than usual.",
+    "allowedTraitPoints": [ 1 ],
+    "traitType": "Character,Positive",
+    "pageReference": "AToW p. 118",
+    "isVariable": false
+  },
+  {
+    "id": "C08F2EBD-C177-45C4-8ECB-36849719FC66",
+    "name": "Good Hearing",
+    "descrition": "Has better than average hearing.",
+    "allowedTraitPoints": [ 1 ],
+    "traitType": "Character,Positive",
+    "pageReference": "AToW p. 118",
+    "isVariable": false
+  },
+  {
+    "id": "55AA1355-F3AE-44FF-9903-175F3430432E",
+    "name": "Good Vision",
+    "descrition": "Character has better than average vision.",
+    "allowedTraitPoints": [ 1 ],
+    "traitType": "Character,Flexible,Opposed",
+    "pageReference": "AToW p. 118",
+    "isVariable": false
+  },
+  {
+    "id": "6850EC5A-136F-449B-8472-EAFBBB6C3B52",
+    "name": "Gregarious",
+    "descrition": "",
+    "allowedTraitPoints": [ 1 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "D7A2B0FD-A3E1-4811-8590-B2024E30A0F8",
+    "name": "Implant",
+    "descrition": "",
+    "allowedTraitPoints": [ 1, 2, 3, 4, 5, 6 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "D9B4E51A-4EED-4A03-9D49-5B720C410CA9",
+    "name": "Prosthetic",
+    "descrition": "",
+    "allowedTraitPoints": [ 1, 2, 3, 4, 5, 6 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "F4974653-3C2F-4CBD-AF9D-9FCE5264D66A",
+    "name": "Natural Aptitude",
+    "descrition": "",
+    "allowedTraitPoints": [ 3, 5 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "7ABECF7B-375D-4A3B-A194-433034C33471",
+    "name": "Pain Resistance",
+    "descrition": "",
+    "allowedTraitPoints": [ 3 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "ECF12033-B0FA-4AF9-8B34-10409A06B975",
+    "name": "Patient",
+    "descrition": "",
+    "allowedTraitPoints": [ 3 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "005B8E43-0E37-4D6F-AF1E-01507209DC59",
+    "name": "Poison Resistance",
+    "descrition": "",
+    "allowedTraitPoints": [ 2 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "FDBAC25E-730F-4AEA-B6AC-2BEA099AFBC6",
+    "name": "Property",
+    "descrition": "",
+    "allowedTraitPoints": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "BF3CB02A-8F36-4795-8BF4-238B3D7C4EA0",
+    "name": "Rank",
+    "descrition": "",
+    "allowedTraitPoints": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "6C338786-D9D6-480D-92BE-1602FA521B67",
+    "name": "Sixth Sense",
+    "descrition": "",
+    "allowedTraitPoints": [ 4 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "27FAC78D-7C42-4494-8F14-B8CEFCA4D459",
+    "name": "Tech Empathy",
+    "descrition": "",
+    "allowedTraitPoints": [ 3 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "DB58AFC5-67C3-4C69-9F6C-68000D0900C8",
+    "name": "Thick-Skinned",
+    "descrition": "",
+    "allowedTraitPoints": [ 3 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "EB4BB601-2399-4E4C-BA26-0244739AB215",
+    "name": "Title",
+    "descrition": "",
+    "allowedTraitPoints": [ 3, 4, 5, 6, 7, 8, 9, 10 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "2316804E-37DA-416E-B1DB-DFCBC2D4E3E7",
+    "name": "Bloodname",
+    "descrition": "",
+    "allowedTraitPoints": [ 3, 4, 5, 6, 7, 8, 9, 10 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "AC76969B-303D-4666-80F8-C7B74232ACE5",
+    "name": "Toughness",
+    "descrition": "",
+    "allowedTraitPoints": [ 3 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "0D0AF3E9-B76B-48BB-A08A-441469491E74",
+    "name": "Animal Antipathy",
+    "descrition": "",
+    "allowedTraitPoints": [ -1 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "E4834316-7561-49CD-B4DA-1BF768F96B1C",
+    "name": "Bloodmark",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2, -3, -4, -5 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "4CC08AAB-6367-450F-9021-5F9EB1765AD3",
+    "name": "Combat Paralysis",
+    "descrition": "",
+    "allowedTraitPoints": [ -4 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "B4B02644-4766-4CE4-A471-BB6F0CD3A832",
+    "name": "Compulsion",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2, -3, -4, -5 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "C573E191-D84B-4143-AEE9-9539A9FF8A27",
+    "name": "Dark Secret",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2, -3, -4, -5 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "1F5B670A-EE9C-42D3-A832-17D7E8693246",
+    "name": "Dependent",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "EF1FB381-A283-4C1A-93FE-9B8E850C6C6A",
+    "name": "Enemy",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2, -3, -4, -5, -6, -7, -8, -9, -10 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "4371F43D-592D-461E-9D16-A5C7A9DA901F",
+    "name": "Glass Jaw",
+    "descrition": "",
+    "allowedTraitPoints": [ -3 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "9ABA5FED-A0FD-4252-AAFA-AB687FD1089B",
+    "name": "Gremlins",
+    "descrition": "",
+    "allowedTraitPoints": [ -3 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "F9864AF6-1F6E-4FC3-9007-AAD80A9FDD35",
+    "name": "Handicap",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2, -3, -4, -5 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "AE577DA8-43F2-4526-B405-850C7CCF4CCC",
+    "name": "Illiterate",
+    "descrition": "",
+    "allowedTraitPoints": [ -1 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "70DA74EE-78A0-4C3B-A48E-657224BF3DC1",
+    "name": "Impatient",
+    "descrition": "",
+    "allowedTraitPoints": [ -1 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "5B649B0E-6F0F-4352-A27D-0E258DD13FDF",
+    "name": "In For Life",
+    "descrition": "",
+    "allowedTraitPoints": [ -3 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "78AFB434-613C-4BBC-B77D-EBF8B51D0A0C",
+    "name": "Introvert",
+    "descrition": "",
+    "allowedTraitPoints": [ -1 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "7DB59117-5D78-48FD-B4F8-3EC73ADA36CA",
+    "name": "Lost Limb",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2, -3, -4, -5 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "FE504EFE-D6DC-45F4-A1A6-2CBED1ADEF76",
+    "name": "Poor Hearing",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2, -3, -4, -5 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "1B76E19E-07EB-4FB0-B52D-FDA57724B608",
+    "name": "Poor Vision",
+    "descrition": "",
+    "allowedTraitPoints": [ -2, -3, -4, -5, -6, -7, -8, -9 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "EEB76201-F671-41BC-A425-8F455346FCF6",
+    "name": "Slow Learner",
+    "descrition": "",
+    "allowedTraitPoints": [ -3 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "20ED683C-844D-498D-AE32-97997207A45F",
+    "name": "Thin-Skinned",
+    "descrition": "",
+    "allowedTraitPoints": [ -1 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "5CED01F3-FF79-4CB7-89E1-C7F1D9C2C21F",
+    "name": "TDS",
+    "descrition": "",
+    "allowedTraitPoints": [ -1 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "6AB226D4-EF70-43F5-82C1-35FEF29BA367",
+    "name": "Unattractive",
+    "descrition": "",
+    "allowedTraitPoints": [ -1 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": false
+  },
+  {
+    "id": "CF65F3A7-5CDB-431E-9825-EA9D050C439B",
+    "name": "Unlucky",
+    "descrition": "",
+    "allowedTraitPoints": [ -2, -3, -4, -5, -6, -7, -8, -9, -10 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "558DBDB3-4518-4F58-AAEF-2A4420408536",
+    "name": "Equipped",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, 1, 2, 3, 4, 5, 6, 7, 8 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "AE0208CE-C942-4A22-B101-7F896D05F082",
+    "name": "Extra Income",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2, -3, -4, -5, -6, -7, -8, -9, -10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "B65547EE-3527-4F96-A58D-7C89383753D7",
+    "name": "Reputation",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2, -3, -4, -5, 1, 2, 3, 4, 5 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "3328BDB1-8585-41FA-8058-766540698136",
+    "name": "Wealth",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "8DF17F58-846F-4784-9E7E-4E4F1B381842",
+    "name": "Custom Vehicle",
+    "descrition": "",
+    "allowedTraitPoints": [ 1, 2, 3, 4, 5, 6 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "328CB51A-AEB6-41CA-AAA7-9C2B19DC8A18",
+    "name": "Design Quirk",
+    "descrition": "",
+    "allowedTraitPoints": [ -1, -2, -3, -4, -5, 1, 2, 3, 4, 5 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  },
+  {
+    "id": "314A712F-982C-43FB-8E69-57A3597D701E",
+    "name": "Vehicle Level",
+    "descrition": "",
+    "allowedTraitPoints": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ],
+    "traitType": "",
+    "pageReference": "",
+    "isVariable": true
+  }
+]
