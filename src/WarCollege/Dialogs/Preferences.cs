@@ -19,6 +19,7 @@
 
 using Eto.Drawing;
 using Eto.Forms;
+using NGettext;
 
 namespace WarCollege.Dialogs
 {
@@ -27,18 +28,22 @@ namespace WarCollege.Dialogs
     /// </summary>
     public class Preferences : Dialog, IPreferencesDialog
     {
+        private readonly ICatalog _catalog;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Dialogs.Preferences"/> class.
         /// </summary>
-        public Preferences()
+        public Preferences(ICatalog catalog)
         {
-            Title = Resources.Strings.HelloWorld;
+            _catalog = catalog;
+
+            Title = _catalog.GetString("Hello World!");
             MinimumSize = new Size(300, 0);
             Resizable = false;
 
             var button = new Button
             {
-                Text = Resources.Strings.CloseButton
+                Text = _catalog.GetString("Close")
             };
 
             button.Click += (sender, e) => Close();
@@ -49,7 +54,7 @@ namespace WarCollege.Dialogs
                 Spacing = new Size(5, 5),
                 Rows =
                 {
-                    new Label { Text = Resources.Strings.HelloWorld },
+                    new Label { Text = _catalog.GetString("Hello World!") },
                     TableLayout.AutoSized(button, centered: true)
                 }
             };

@@ -18,6 +18,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using Autofac;
+using NGettext;
 
 namespace WarCollege
 {
@@ -141,6 +142,10 @@ namespace WarCollege
 
             builder.RegisterType<MainForm>()
                    .As<Eto.Forms.Form>();
+
+            builder.Register(context => new Catalog("WarCollege", "./locale"))
+                .As<ICatalog>()
+                .SingleInstance();
 
             RegisterModules(builder);
             RegisterConfig(builder);

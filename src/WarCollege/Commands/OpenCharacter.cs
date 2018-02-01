@@ -21,6 +21,7 @@ using System;
 using NLog;
 using Eto.Drawing;
 using Eto.Forms;
+using NGettext;
 
 namespace WarCollege.Commands
 {
@@ -30,20 +31,23 @@ namespace WarCollege.Commands
     public class OpenCharacter : Command, IOpenCharacterCommand
     {
         private readonly ILogger _logger;
+        private readonly ICatalog _catalog;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Open"/> class.
         /// </summary>
         /// <param name="logger">General logging</param>
+        /// <param name="catalog">Localization catalog</param>
         /// <remarks>
         /// This is the command used to open a previously created character.
         /// </remarks>
-        public OpenCharacter(ILogger logger)
+        public OpenCharacter(ILogger logger, ICatalog catalog)
         {
             _logger = logger;
+            _catalog = catalog;
 
-            MenuText = Resources.Strings.OpenMenuText;
-            ToolBarText = Resources.Strings.OpenToolBarText;
+            MenuText = _catalog.GetParticularString("Menu|File|", "&Open Character");
+            ToolBarText = _catalog.GetString("Open Character");
             Image = Icon.FromResource("WarCollege.Resources.folder_page_white.png");
             Shortcut = Application.Instance.CommonModifier | Keys.O;
         }

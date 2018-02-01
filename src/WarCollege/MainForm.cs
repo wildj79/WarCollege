@@ -19,6 +19,7 @@
 
 using Eto.Drawing;
 using Eto.Forms;
+using NGettext;
 using NLog;
 using System;
 using System.ComponentModel;
@@ -51,6 +52,7 @@ namespace WarCollege
         private readonly ISaveAllCharactersCommand _saveAllCharactersCommand;
         private readonly IPreferencesCommand _preferencesCommand;
         private readonly ICharacterInitializationService _characterInitializationService;
+        private readonly ICatalog _catalog;
 
         #endregion // Fields
 
@@ -88,7 +90,8 @@ namespace WarCollege
                         ISaveCharacterAsCommand saveCharacterAsCommand,
                         ISaveAllCharactersCommand saveAllCharactersCommand,
                         IPreferencesCommand preferencesCommand,
-                        ICharacterInitializationService characterInitializationService)
+                        ICharacterInitializationService characterInitializationService,
+                        ICatalog catalog)
         {
             _logger = logger;
             _configSettings = configSettings;
@@ -102,14 +105,15 @@ namespace WarCollege
             _saveAllCharactersCommand = saveAllCharactersCommand;
             _preferencesCommand = preferencesCommand;
             _characterInitializationService = characterInitializationService;
+            _catalog = catalog;
 
             Character = _characterInitializationService.IntializeCharacter();
 
             Character.Experience.AddExperience(-100);
 
-            Title = $"{Resources.Strings.AppTitle}: {Character}";
+            Title = $"{_catalog.GetString("War College")}: {Character}";
             ClientSize = new Size(800, 600);
-            Content = new Label { Text = Resources.Strings.HelloWorld };
+            Content = new Label { Text = _catalog.GetString("Hello World!") };
             Style = "MainWindow";
 
             GenerateMenu();
@@ -134,7 +138,7 @@ namespace WarCollege
                 QuitItem = _quitCommand as Command
             };
 
-            var file = menu.Items.GetSubmenu("&File");
+            var file = menu.Items.GetSubmenu(_catalog.GetParticularString("Menu|", "&File"));
             file.Items.Add(_newCharacterCommand as Command);
             file.Items.Add(_openCharacterCommand as Command);
             file.Items.Add(_saveCharacterCommand as Command);
@@ -196,7 +200,7 @@ namespace WarCollege
         {
             _logger.Trace("Start MainForm.PromptSave()");
 
-            var result = MessageBox.Show("You have unsaved changes, are you sure you want to quit?", "Are you sure...", MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes);
+            var result = MessageBox.Show(_catalog.GetString("You have unsaved changes, are you sure you want to quit?"), _catalog.GetString("Are you sure..."), MessageBoxButtons.YesNo, MessageBoxType.Question, MessageBoxDefaultButton.Yes);
 
             if (result == DialogResult.No || result == DialogResult.Cancel)
                 return false;

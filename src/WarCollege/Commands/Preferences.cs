@@ -21,6 +21,7 @@ using Autofac;
 using Eto;
 using Eto.Drawing;
 using Eto.Forms;
+using NGettext;
 using NLog;
 using System;
 using WarCollege.Config;
@@ -39,6 +40,7 @@ namespace WarCollege.Commands
         private readonly IConfigManager _configManager;
         private readonly ILogger _logger;
         private readonly ILifetimeScope _unitOfWork;
+        private readonly ICatalog _catalog;
 
         #endregion //Fields
 
@@ -54,16 +56,18 @@ namespace WarCollege.Commands
         public Preferences(ILogger logger, 
                            IConfigSettings configSettings, 
                            IConfigManager configManager,
-                           ILifetimeScope unitOfWork
+                           ILifetimeScope unitOfWork,
+                           ICatalog catalog
                           )
         {
             _logger = logger;
             _configSettings = configSettings;
             _configManager = configManager;
             _unitOfWork = unitOfWork;
+            _catalog = catalog;
 
-            MenuText = Resources.Strings.PreferencesMenuText;
-            ToolBarText = Resources.Strings.PreferencesToolBarText;
+            MenuText = _catalog.GetParticularString("Menu|File|", "Preferences...");
+            ToolBarText = _catalog.GetString("Preferences");
             if (Platform.Instance.IsMac)
                 Shortcut = Application.Instance.CommonModifier | Keys.Comma;
             Image = Icon.FromResource("WarCollege.Resources.cog.png");

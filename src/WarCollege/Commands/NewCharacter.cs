@@ -21,6 +21,7 @@ using System;
 using NLog;
 using Eto.Drawing;
 using Eto.Forms;
+using NGettext;
 
 namespace WarCollege.Commands
 {
@@ -30,6 +31,7 @@ namespace WarCollege.Commands
 	public class NewCharacter : Command, INewCharacterCommand
     {
         private readonly ILogger _logger;
+        private readonly ICatalog _catalog;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Commands.New"/> class.
@@ -38,12 +40,13 @@ namespace WarCollege.Commands
         /// <remarks>
         /// This class is the command used to start a new character. 
         /// </remarks>
-        public NewCharacter(ILogger logger)
+        public NewCharacter(ILogger logger, ICatalog catalog)
         {
             _logger = logger;
+            _catalog = catalog;
 
-            MenuText = Resources.Strings.NewMenuText;
-            ToolBarText = Resources.Strings.NewToolBarText;
+            MenuText = _catalog.GetParticularString("Menu|File|", "&New Character");
+            ToolBarText = _catalog.GetString("New Character");
             Image = Icon.FromResource("WarCollege.Resources.page_white_add.png");
             Shortcut = Application.Instance.CommonModifier | Keys.N;
         }

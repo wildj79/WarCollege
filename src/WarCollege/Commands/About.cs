@@ -23,6 +23,7 @@ using Eto.Drawing;
 using Eto.Forms;
 using System;
 using WarCollege.Dialogs;
+using NGettext;
 
 namespace WarCollege.Commands
 {
@@ -33,6 +34,7 @@ namespace WarCollege.Commands
     {
         private readonly ILogger _logger;
         private readonly ILifetimeScope _unitOfWork;
+        private readonly ICatalog _catalog;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Commands.About"/> class.
@@ -40,13 +42,15 @@ namespace WarCollege.Commands
         /// <param name="logger">General logging</param>
         /// <param name="unitOfWork"><see cref="ILifetimeScope"/> for the application.</param>
         public About(ILogger logger,
-            ILifetimeScope unitOfWork)
+            ILifetimeScope unitOfWork,
+            ICatalog catalog)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _catalog = catalog;
 
-            MenuText = Resources.Strings.AboutMenuText;
-            ToolBarText = Resources.Strings.AboutToolBarText;
+            MenuText = _catalog.GetString("About War College");
+            ToolBarText = _catalog.GetString("About");
             Image = Icon.FromResource("WarCollege.Resources.information.png");
             Shortcut = Keys.F1;
 

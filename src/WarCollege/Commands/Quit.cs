@@ -18,6 +18,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using Eto.Forms;
+using NGettext;
 using System;
 
 namespace WarCollege.Commands
@@ -27,13 +28,17 @@ namespace WarCollege.Commands
     /// </summary>
     public class Quit : Command, IQuitCommand
     {
+        private readonly ICatalog _catalog;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Commands.Quit"/> class.
         /// </summary>
-        public Quit()
+        public Quit(ICatalog catalog)
         {
-            MenuText = Resources.Strings.QuitMenuText;
-            ToolBarText = Resources.Strings.QuitToolBarText;
+            _catalog = catalog;
+
+            MenuText = _catalog.GetParticularString("Menu|File|", "&Quit");
+            ToolBarText = _catalog.GetString("Quit");
             Shortcut = Application.Instance.CommonModifier | Keys.Q;
         }
 

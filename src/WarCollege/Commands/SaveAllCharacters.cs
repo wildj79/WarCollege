@@ -19,6 +19,7 @@
 
 using Eto.Drawing;
 using Eto.Forms;
+using NGettext;
 using NLog;
 using System;
 
@@ -29,17 +30,19 @@ namespace WarCollege.Commands
         #region Fields
 
         private readonly ILogger _logger;
+        private readonly ICatalog _catalog;
 
         #endregion
 
         #region Constructors
 
-        public SaveAllCharacters(ILogger logger)
+        public SaveAllCharacters(ILogger logger, ICatalog catalog)
         {
             _logger = logger;
+            _catalog = catalog;
 
-            MenuText = "Save All";
-            ToolBarText = "Save All";
+            MenuText = _catalog.GetParticularString("Menu|File|", "Save All");
+            ToolBarText = _catalog.GetString("Save All");
             Image = Icon.FromResource("WarCollege.Resources.disk_multiple.png");
             Shortcut = Application.Instance.CommonModifier | Keys.Shift | Keys.S;
         }
@@ -55,7 +58,7 @@ namespace WarCollege.Commands
             base.OnExecuted(e);
             _logger.Trace("Start SaveAllCharacters.OnExecuted()");
 
-            MessageBox.Show("Saved all characters!");
+            MessageBox.Show(_catalog.GetString("Saved all characters!"), _catalog.GetString("Saved"), MessageBoxType.Information);
 
             _logger.Trace("End SaveAllCharacters.OnExecuted()");
         }

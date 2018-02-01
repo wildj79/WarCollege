@@ -21,6 +21,7 @@ using System;
 using System.Reflection;
 using Eto.Forms;
 using Eto.Drawing;
+using NGettext;
 
 namespace WarCollege.Dialogs
 {
@@ -29,12 +30,16 @@ namespace WarCollege.Dialogs
     /// </summary>
     public class About : Dialog, IAboutDialog
     {
+        private readonly ICatalog _catalog;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="T:WarCollege.Dialogs.About"/> class.
         /// </summary>
-        public About()
+        public About(ICatalog catalog)
         {
-            Title = Resources.Strings.AboutMenuText;
+            _catalog = catalog;
+
+            Title = _catalog.GetString("About War College");
             MinimumSize = new Size(300, 0);
             Resizable = false;
 
@@ -47,7 +52,7 @@ namespace WarCollege.Dialogs
 
             var labelTitle = new Label
             {
-                Text = Resources.Strings.AppTitle,
+                Text = _catalog.GetString("War College"),
                 Font = new Font(FontFamilies.Sans, 16),
                 TextAlignment = TextAlignment.Center
             };
@@ -55,19 +60,19 @@ namespace WarCollege.Dialogs
             var version = Assembly.GetExecutingAssembly().GetName().Version;
             var labelVersion = new Label
             {
-                Text = string.Format(Resources.Strings.VersionText, version),
+                Text = _catalog.GetString("Version: {0}", version),
                 TextAlignment = TextAlignment.Center
             };
 
             var labelCopyright = new Label
             {
-                Text = string.Format(Resources.Strings.CopyriteText, DateTime.Now.Year),
+                Text = _catalog.GetString("Copyright \u00A9 2017-{0} James Allred", DateTime.Now.Year),
                 TextAlignment = TextAlignment.Center
             };
 
             var button = new Button
             {
-                Text = Resources.Strings.CloseButton
+                Text = _catalog.GetString("Close")
             };
 
             button.Click += (sender, e) => Close();
