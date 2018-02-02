@@ -19,6 +19,7 @@
 
 using Eto.Drawing;
 using Eto.Forms;
+using NGettext;
 using NLog;
 using System;
 using System.IO;
@@ -29,14 +30,16 @@ namespace WarCollege.Commands
     {
         private readonly ILogger _logger;
         private readonly Config.IConfigSettings _configSettings;
+        private readonly ICatalog _catalog;
         
-        public SaveCharacter(ILogger logger, Config.IConfigSettings configSettings)
+        public SaveCharacter(ILogger logger, Config.IConfigSettings configSettings, ICatalog catalog)
         {
             _logger = logger;
             _configSettings = configSettings;
+            _catalog = catalog;
 
-            MenuText = Resources.Strings.SaveMenuText;
-            ToolBarText = Resources.Strings.SaveToolBarText;
+            MenuText = _catalog.GetParticularString("Menu|File|", "&Save Character");
+            ToolBarText = _catalog.GetString("Save Character");
             Image = Icon.FromResource("WarCollege.Resources.disk.png");
             Shortcut = Application.Instance.CommonModifier | Keys.S;
         }
@@ -53,7 +56,7 @@ namespace WarCollege.Commands
                 if (!string.IsNullOrWhiteSpace(_configSettings.UserPreferences.LastSaveLocation))
                     saveDialog.Directory = new Uri(_configSettings.UserPreferences.LastSaveLocation);
 
-                saveDialog.Filters.Add(new FileDialogFilter("Text Files", new string[] { "txt" }));
+                saveDialog.Filters.Add(new FileDialogFilter(_catalog.GetString("Text Files"), new string[] { "txt" }));
                 
                 var result = saveDialog.ShowDialog(Application.Instance.MainForm);
 

@@ -19,6 +19,8 @@
 
 using System;
 using System.ComponentModel;
+using System.Collections.Generic;
+using WarCollege.Domain;
 
 namespace WarCollege.Model
 {
@@ -70,6 +72,20 @@ namespace WarCollege.Model
         private int _maximumScoreAllowed;
         private int _phenotypeModifier;
         private bool _isExceptionalAttribute;
+        private IList<ExperienceAllotment> _experienceAllotments;
+
+        #endregion
+
+        #region Constants
+
+        public const string StrengthAbbreviation = "STR";
+        public const string BodyAbbreviation = "BOD";
+        public const string ReflexesAbbreviation = "RFL";
+        public const string DexterityAbbreviation = "DEX";
+        public const string IntelligenceAbbreviation = "INT";
+        public const string WillpowerAbbreviation = "WIL";
+        public const string CharismaAbbreviation = "CHA";
+        public const string EdgeAbbreviation = "EDG";
 
         #endregion
 

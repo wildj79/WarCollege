@@ -351,14 +351,14 @@ namespace WarCollege.Model
         /// </summary>
         /// <param name="name">Name of the trait to test.</param>
         /// <returns><c>True</c> if the character has the named trait.</returns>
-        public bool HasTrait(string name) => Traits.Any(x => x.Name == name);
+        public bool HasTrait(string name) => Traits.Any(x => x.Name == name && x.Level >= x.MinimumLevel);
 
         /// <summary>
         /// Determines if a character has a particular skill.
         /// </summary>
         /// <param name="name">Name of the skill to test.</param>
         /// <returns><c>True</c> if the character has the named skill.</returns>
-        public bool HasSkill(string name) => Skills.Any(x => x.Name == name);
+        public bool HasSkill(string name) => Skills.Any(x => x.Name == name && x.Level >= Skill.SkillLevelZero);
 
         /// <summary>
         /// Determines if a character is in an <see cref="WarCollege.Model.Affiliation"/> or not.

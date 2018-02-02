@@ -20,15 +20,19 @@
 using System;
 using WarCollege.Model;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace WarCollege.Tests
 {
     public class CharacterTests
     {
         Character character;
+        readonly ITestOutputHelper _output;
 
-        public CharacterTests()
+        public CharacterTests(ITestOutputHelper output)
         {
+            _output = output;
+
             character = new Character()
             {
                 PlayerName = "James",
@@ -210,7 +214,9 @@ namespace WarCollege.Tests
                 Name = "Fit",
                 PageReference = "AToW p. 117",
                 TraitType = CharacterTraitType.Character,
-                Experience = new ExperiencePoints(200)
+                Experience = new ExperiencePoints(200),
+                MinimumLevel = 2,
+                MaximumLevel = 2
             };
 
             character.Traits.Add(trait);
@@ -220,7 +226,6 @@ namespace WarCollege.Tests
                 Character = character,
                 ComplexityRating = "SB",
                 Description = "",
-                Experience = new ExperiencePoints(30),
                 Id = Guid.NewGuid(),
                 IsTiered = false,
                 Name = "Archery",
@@ -229,6 +234,8 @@ namespace WarCollege.Tests
                 SubSkill = "",
                 TargetNumber = 7,
             };
+
+            skill.History.Add(new Domain.ExperienceAllotment("Skill", "Archery", 30));
 
             skill.LinkedAttributes.Add(dex);
 
@@ -263,6 +270,11 @@ namespace WarCollege.Tests
         [Fact(DisplayName = "Does Have Trait")]
         public void DoesHaveTrait()
         {
+            foreach (var trait in character.Traits)
+            {
+                _output.WriteLine($"Trait: {trait}; Min Level: {trait.MinimumLevel}; Max Level: {trait.MaximumLevel}");
+            }
+
             Assert.True(character.HasTrait("Fit"));
         }
 

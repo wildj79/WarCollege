@@ -17,9 +17,9 @@ namespace WarCollege.Services
                 Phenotype = Phenotype.NormalHuman
             };
 
-            var strength = new CharacterAttribute()
+            var strength = new CharacterAttribute
             {
-                Abbreviation = "STR",
+                Abbreviation = CharacterAttribute.StrengthAbbreviation,
                 Description = "How physically strong a character is.",
                 Experience = new ExperiencePoints(0),
                 Id = Guid.NewGuid(),
@@ -32,7 +32,7 @@ namespace WarCollege.Services
 
             var body = new CharacterAttribute
             {
-                Abbreviation = "BOD",
+                Abbreviation = CharacterAttribute.BodyAbbreviation,
                 Description = "How durable and \"In shape\" a character is.",
                 Experience = new ExperiencePoints(0),
                 Id = Guid.NewGuid(),
@@ -45,7 +45,7 @@ namespace WarCollege.Services
 
             var reflexes = new CharacterAttribute
             {
-                Abbreviation = "RFL",
+                Abbreviation = CharacterAttribute.ReflexesAbbreviation,
                 Description = "How quick a character can respond to situations.",
                 Experience = new ExperiencePoints(0),
                 Id = Guid.NewGuid(),
@@ -58,7 +58,7 @@ namespace WarCollege.Services
 
             var dexterity = new CharacterAttribute
             {
-                Abbreviation = "DEX",
+                Abbreviation = CharacterAttribute.DexterityAbbreviation,
                 Description = "How well a character can manipulate and handle objects.",
                 Experience = new ExperiencePoints(0),
                 Id = Guid.NewGuid(),
@@ -71,7 +71,7 @@ namespace WarCollege.Services
 
             var intelligence = new CharacterAttribute
             {
-                Abbreviation = "INT",
+                Abbreviation = CharacterAttribute.IntelligenceAbbreviation,
                 Description = "How intelligent a character is.",
                 Experience = new ExperiencePoints(0),
                 Id = Guid.NewGuid(),
@@ -84,7 +84,7 @@ namespace WarCollege.Services
 
             var willpower = new CharacterAttribute
             {
-                Abbreviation = "WIL",
+                Abbreviation = CharacterAttribute.WillpowerAbbreviation,
                 Description = "How decisive a characte is.",
                 Experience = new ExperiencePoints(0),
                 Id = Guid.NewGuid(),
@@ -97,7 +97,7 @@ namespace WarCollege.Services
 
             var charisma = new CharacterAttribute
             {
-                Abbreviation = "CHA",
+                Abbreviation = CharacterAttribute.CharismaAbbreviation,
                 Description = "How inspiring a character is.",
                 Experience = new ExperiencePoints(0),
                 Id = Guid.NewGuid(),
@@ -110,7 +110,7 @@ namespace WarCollege.Services
 
             var edge = new CharacterAttribute
             {
-                Abbreviation = "EDG",
+                Abbreviation = CharacterAttribute.EdgeAbbreviation,
                 Description = "How lucky a character is.",
                 Experience = new ExperiencePoints(0),
                 Id = Guid.NewGuid(),
@@ -135,7 +135,6 @@ namespace WarCollege.Services
                 Character = character,
                 ComplexityRating = "SA",
                 Description = "The language you speak.",
-                Experience = new ExperiencePoints(20),
                 Id = Guid.Parse("DAB4BCD0-8C78-409A-B128-E93AC344591F"),
                 IsTiered = false,
                 LinkedAttributes =
@@ -150,12 +149,13 @@ namespace WarCollege.Services
                 TargetNumber = 8
             };
 
+            english.History.Add(new Domain.ExperienceAllotment("Skill", "Language/English", 20));
+
             var perception = new Skill
             {
                 Character = character,
                 ComplexityRating = "SB",
                 Description = "What you can see.",
-                Experience = new ExperiencePoints(10),
                 Id = Guid.Parse("83C2C195-74ED-43D1-821F-E2985687B8FE"),
                 IsTiered = false,
                 LinkedAttributes =
@@ -168,6 +168,8 @@ namespace WarCollege.Services
                 SubSkill = "",
                 TargetNumber = 7
             };
+
+            perception.History.Add(new Domain.ExperienceAllotment("Skill", "Perception", 10));
 
             character.Skills.Add(english);
             character.Skills.Add(perception);

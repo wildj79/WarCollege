@@ -18,6 +18,7 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using Eto.Forms;
+using NGettext;
 using NLog;
 using System;
 
@@ -27,14 +28,16 @@ namespace WarCollege.Commands
     {
         private readonly ILogger _logger;
         private readonly Config.IConfigSettings _configSettings;
+        private readonly ICatalog _catalog;
         
-        public SaveCharacterAs(ILogger logger, Config.IConfigSettings configSettings)
+        public SaveCharacterAs(ILogger logger, Config.IConfigSettings configSettings, ICatalog catalog)
         {
             _logger = logger;
             _configSettings = configSettings;
+            _catalog = catalog;
 
-            MenuText = Resources.Strings.SaveAsMenuText;
-            ToolBarText = Resources.Strings.SaveAsToolBarText;
+            MenuText = _catalog.GetString("Save Character As");
+            ToolBarText = _catalog.GetString("Save Character As");
         }
 
         protected override void OnExecuted(EventArgs e)
@@ -47,9 +50,12 @@ namespace WarCollege.Commands
                 _configSettings.UserPreferences.LastSaveLocation = Eto.EtoEnvironment.GetFolderPath(Eto.EtoSpecialFolder.Documents);
             }
 
-			var dialog = new SaveFileDialog();
-            dialog.Directory = new Uri(_configSettings.UserPreferences.LastSaveLocation);
-			var result = dialog.ShowDialog(null);
+            var dialog = new SaveFileDialog
+            {
+                Directory = new Uri(_configSettings.UserPreferences.LastSaveLocation)
+            };
+
+            var result = dialog.ShowDialog(null);
 
 			if (result == DialogResult.Ok)
 			{

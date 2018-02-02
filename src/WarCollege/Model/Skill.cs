@@ -18,7 +18,10 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using WarCollege.Domain;
 
 namespace WarCollege.Model
 {
@@ -34,9 +37,69 @@ namespace WarCollege.Model
         #region Constants
 
         /// <summary>
+        /// Lowest skill level.
+        /// </summary>
+        public const int SkillLevelZero = 0;
+
+        /// <summary>
+        /// Skill level one.
+        /// </summary>
+        public const int SkillLevelOne = 1;
+
+        /// <summary>
+        /// Skill level two.
+        /// </summary>
+        public const int SkillLevelTwo = 2;
+
+        /// <summary>
+        /// Skill level three.
+        /// </summary>
+        public const int SkillLevelThree = 3;
+
+        /// <summary>
+        /// Skill level four.
+        /// </summary>
+        public const int SkillLevelFour = 4;
+
+        /// <summary>
+        /// Skill level five.
+        /// </summary>
+        public const int SkillLevelFive = 5;
+
+        /// <summary>
+        /// Skill level six.
+        /// </summary>
+        public const int SkillLevelSix = 6;
+
+        /// <summary>
+        /// Skill level seven.
+        /// </summary>
+        public const int SkillLevelSeven = 7;
+
+        /// <summary>
+        /// Skill level eight.
+        /// </summary>
+        public const int SkillLevelEight = 8;
+
+        /// <summary>
+        /// Skill level nine.
+        /// </summary>
+        public const int SkillLevelNine = 9;
+
+        /// <summary>
+        /// Skill level ten.
+        /// </summary>
+        public const int SkillLevelTen = 10;
+
+        /// <summary>
         /// This is the maximum value a skill level can obtain.
         /// </summary>
-        public const int MAX_LEVEL = 10;
+        public const int MaxLevel = SkillLevelTen;
+
+        /// <summary>
+        /// Skill hasn't accumulated enough experience yet.
+        /// </summary>
+        public const int NoSkillLevel = -1;
 
         #endregion
 
@@ -44,7 +107,7 @@ namespace WarCollege.Model
         
         private int _targetNumber;
         private string _complexityRating;
-        private ExperiencePoints _experience;
+        private int _experience;
         private ObservableCollection<CharacterAttribute> _linkedAttributes;
         private string _specialty;
         private string _subSkill;
@@ -52,6 +115,7 @@ namespace WarCollege.Model
         private string _pageReference;
         private string _description;
         private Character _character;
+        private IList<ExperienceAllotment> _history;
 
         #endregion
 
@@ -124,16 +188,19 @@ namespace WarCollege.Model
         /// <summary>
         /// Experience allocated to this skill.
         /// </summary>
-        public ExperiencePoints Experience
+        public int Experience
         {
-            get => _experience;
-            set
+            get
             {
-                if (_experience != value)
+                var num = History.Sum(x => x.ExperiencePoints);
+
+                if (num > _experience || num < _experience)
                 {
-                    _experience = value;
+                    _experience = num;
                     RaisePropertyChanged();
                 }
+
+                return _experience;
             }
         }
 
@@ -255,6 +322,19 @@ namespace WarCollege.Model
             }
         }
 
+        public IList<ExperienceAllotment> History
+        {
+            get => _history;
+            set
+            {
+                if (_history != value)
+                {
+                    _history = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
         public Character Character
         {
             get => _character;
@@ -274,8 +354,8 @@ namespace WarCollege.Model
 
         public Skill()
         {
-            Experience = new ExperiencePoints();
             LinkedAttributes = new ObservableCollection<CharacterAttribute>();
+            History = new List<ExperienceAllotment>();
         }
 
         #endregion
@@ -301,196 +381,47 @@ namespace WarCollege.Model
 
         private int GetCurrentLevel()
         {
+            var scoreTable = GetScoreTable();
+
+            if (Experience >= scoreTable[0] && Experience <= scoreTable[scoreTable.Count - 1])
+            {
+                for (int i = 0; i < scoreTable.Count; i++)
+                {
+                    if (Experience == scoreTable[i] || (Experience > scoreTable[i] && Experience < scoreTable[i + 1]))
+                        return i;
+                }
+            }
+            else if (Experience > scoreTable[scoreTable.Count - 1])
+            {
+                return MaxLevel;
+            }
+
+            return NoSkillLevel;
+        }
+
+        private IList<int> GetScoreTable()
+        {
+            var table = new List<int>()
+            {
+                20, 30, 50 ,80, 120, 170, 230, 300, 380, 470, 570
+            };
+
+            var multiplier = 1D;
+
             if (Character.HasTrait("Fast Learner"))
+                multiplier -= 0.2;
+            if (Character.HasTrait("Slow Learner"))
+                multiplier += 0.2;
+
+            if (!multiplier.NearlyEqual(1D))
             {
-                if (Experience.TotalExperience >= 16 && Experience.TotalExperience < 24)
+                for (int i = 0; i < table.Count; i++)
                 {
-                    //Experience.CurrentExperience = Experience.CurrentExperience - (24 - 16);
-                    Experience.CurrentExperience = Experience.TotalExperience - 16;
-                    return 0;
-                }
-                else if (Experience.TotalExperience >= 24 && Experience.TotalExperience < 40)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 24;
-                    return 1;
-                }
-                else if (Experience.TotalExperience >= 40 && Experience.TotalExperience < 64)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 40;
-                    return 2;
-                }
-                else if (Experience.TotalExperience >= 64 && Experience.TotalExperience < 96)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 64;
-                    return 3;
-                }
-                else if (Experience.TotalExperience >= 96 && Experience.TotalExperience < 136)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 96;
-                    return 4;
-                }
-                else if (Experience.TotalExperience >= 136 && Experience.TotalExperience < 184)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 136;
-                    return 5;
-                }
-                else if (Experience.TotalExperience >= 184 && Experience.TotalExperience < 240)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 184;
-                    return 6;
-                }
-                else if (Experience.TotalExperience >= 240 && Experience.TotalExperience < 304)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 240;
-                    return 7;
-                }
-                else if (Experience.TotalExperience >= 304 && Experience.TotalExperience < 376)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 304;
-                    return 8;
-                }
-                else if (Experience.TotalExperience >= 376 && Experience.TotalExperience < 456)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 376;
-                    return 9;
-                }
-                else if (Experience.TotalExperience >= 456)
-                {
-                    // Skill is maxed out.
-                    Experience.CurrentExperience = 0;
-                    return 10;
-                }
-                else
-                {
-                    return -1;
+                    table[i] = (int)Math.Floor(table[i] * multiplier);
                 }
             }
-            else if (Character.HasTrait("Slow Learner"))
-            {
-                if (Experience.TotalExperience >= 24 && Experience.TotalExperience < 36)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 24;
-                    return 0;
-                }
-                else if (Experience.TotalExperience >= 36 && Experience.TotalExperience < 60)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 36;
-                    return 1;
-                }
-                else if (Experience.TotalExperience >= 60 && Experience.TotalExperience < 96)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 60;
-                    return 2;
-                }
-                else if (Experience.TotalExperience >= 96 && Experience.TotalExperience < 144)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 96;
-                    return 3;
-                }
-                else if (Experience.TotalExperience >= 144 && Experience.TotalExperience < 204)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 144;
-                    return 4;
-                }
-                else if (Experience.TotalExperience >= 204 && Experience.TotalExperience < 276)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 204;
-                    return 5;
-                }
-                else if (Experience.TotalExperience >= 276 && Experience.TotalExperience < 360)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 276;
-                    return 6;
-                }
-                else if (Experience.TotalExperience >= 360 && Experience.TotalExperience < 456)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 360;
-                    return 7;
-                }
-                else if (Experience.TotalExperience >= 456 && Experience.TotalExperience < 564)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 456;
-                    return 8;
-                }
-                else if (Experience.TotalExperience >= 564 && Experience.TotalExperience < 684)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 564;
-                    return 9;
-                }
-                else if (Experience.TotalExperience >= 684)
-                {
-                    // Skill is maxed out.
-                    Experience.CurrentExperience = 0;
-                    return 10;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
-            else
-            {
-                if (Experience.TotalExperience >= 20 && Experience.TotalExperience < 30)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 20;
-                    return 0;
-                }
-                else if (Experience.TotalExperience >= 30 && Experience.TotalExperience < 50)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 30;
-                    return 1;
-                }
-                else if (Experience.TotalExperience >= 50 && Experience.TotalExperience < 80)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 50;
-                    return 2;
-                }
-                else if (Experience.TotalExperience >= 80 && Experience.TotalExperience < 120)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 80;
-                    return 3;
-                }
-                else if (Experience.TotalExperience >= 120 && Experience.TotalExperience < 170)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 120;
-                    return 4;
-                }
-                else if (Experience.TotalExperience >= 170 && Experience.TotalExperience < 230)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 170;
-                    return 5;
-                }
-                else if (Experience.TotalExperience >= 230 && Experience.TotalExperience < 300)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 230;
-                    return 6;
-                }
-                else if (Experience.TotalExperience >= 300 && Experience.TotalExperience < 380)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 300;
-                    return 7;
-                }
-                else if (Experience.TotalExperience >= 380 && Experience.TotalExperience < 470)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 380;
-                    return 8;
-                }
-                else if (Experience.TotalExperience >= 470 && Experience.TotalExperience < 570)
-                {
-                    Experience.CurrentExperience = Experience.TotalExperience - 470;
-                    return 9;
-                }
-                else if (Experience.TotalExperience >= 570)
-                {
-                    // Skil is maxed out.
-                    Experience.CurrentExperience = 0;
-                    return 10;
-                }
-                else
-                {
-                    return -1;
-                }
-            }
+
+            return table;
         }
 
         #endregion

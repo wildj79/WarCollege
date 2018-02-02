@@ -38,15 +38,42 @@ namespace WarCollege.Model
 
         private string _pageReference;
         private ExperiencePoints _experience;
-        private int _currentTraitScore;
         private string _description;
         private CharacterTraitType _traitType;
         private bool _isVariable;
         private IList<int> _allowedTraitPoints;
+        private int _minimumLevel;
+        private int _maximumLevel;
 
         #endregion
 
         #region Properties
+
+        public int MinimumLevel
+        {
+            get => _minimumLevel;
+            set
+            {
+                if (_minimumLevel != value)
+                {
+                    _minimumLevel = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
+
+        public int MaximumLevel
+        {
+            get => _maximumLevel;
+            set
+            {
+                if (_maximumLevel != value)
+                {
+                    _maximumLevel = value;
+                    RaisePropertyChanged();
+                }
+            }
+        }
 
         /// <summary>
         /// Is this trait a variable-level trait?
@@ -71,9 +98,9 @@ namespace WarCollege.Model
         /// This value is derived form the total alloted experinece points.
         /// </remarks>
         /// <value>The trait points.</value>
-        public int CurrentTraitScore
+        public int Level
         {
-            get => _currentTraitScore;
+            get => CalcualteCurrentTraitPoints();
         }
 
         public IList<int> AllowedTriatPoints
@@ -236,6 +263,11 @@ namespace WarCollege.Model
 
                 retval = (int)Math.Floor(Experience.TotalExperience / 100D);
             }
+
+            if (retval < MinimumLevel)
+                return 0;
+            if (retval > MaximumLevel)
+                return MaximumLevel;
 
             return retval;
         }
