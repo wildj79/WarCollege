@@ -24,6 +24,7 @@ using Eto.Mac.Forms;
 using Eto.Mac.Forms.Controls;
 using Autofac;
 using Eto.Mac.Forms.Menu;
+using WarCollege;
 
 namespace WarCollege.XamMac
 {
@@ -50,7 +51,7 @@ namespace WarCollege.XamMac
                 handler.ShowImage = true;
             });
             
-            var container = IocBootstraper.InitializeContianer();
+            var container = IocBootstraper.InitializeContainer();
 
             using (var scope = container.BeginLifetimeScope())
             {
